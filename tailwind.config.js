@@ -18,6 +18,10 @@ export default {
                 "hulk" : "rgba(0, 130, 84, 1)",
                 "old-hulk": "#005637",
                 "gray" : "#69737D",
+                "birumuda" : "#EEF7FF",
+                "krem" : "#FFF7EA",
+                "hijau" : "#008254", 
+
             },
         },
     },

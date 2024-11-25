@@ -38,7 +38,7 @@ Route::prefix('nasabah')->group(function () {
 
     // Route untuk dashboard nasabah
     Route::get('/dashboard', function () {
-        return view('Akun.dashboard');
+        return view('Dashboard.dashboard');
     })->name('dashboard.nasabah');
 
     // Route untuk Kelola Sampah
@@ -51,10 +51,28 @@ Route::prefix('nasabah')->group(function () {
         return view('Kreasi.kreasi');
     })->name('kreasi');
 
+    Route::get('/deteksi', function () {
+        return view('Kreasi.deteksi');
+    })->name('deteksi');
+
+    Route::get('/unggah-kreasi', function () {
+        return view('Kreasi.unggahkreasi');
+    })->name('unggah.kreasi');
+
+    Route::get('/Kreasiku', function () {
+        return view('Kreasi.kreasiku');
+    })->name('kreasiku');
+
     // Route untuk Tentang Kami
     Route::get('/Tentang-Kami', function () {
-        return view('tentangkami');
+        return view('Dashboard.tentangkami');
     })->name('tentang.kami');
+
+    //Route Dashboard Nasabah
+    Route::get('/artikel', function () {
+        return view('Dashboard.artikel');
+    })->name('artikel');
+    
 });
 
 // Routes untuk login admin

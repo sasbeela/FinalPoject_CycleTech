@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cycle Tech</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script>
         function toggleExtraCards() {
             const moreButton = document.getElementById('moreButton');
@@ -22,6 +24,7 @@
         });
     </script>
 </head>
+
 <body>
     <!-- Header -->
     <nav class="bg-white border-b-4 border-purple-300 shadow-md">
@@ -34,11 +37,11 @@
             
            <!-- Navigation Links -->
             <ul class="hidden md:flex items-center space-x-6 font-medium text-gray-700">
-                <li><a href="{{ route('dashboard.nasabah') }}" class="hover:text-green-700">Beranda</a></li>
+                <li><a href="{{ route('dashboard.nasabah') }}" class="text-white bg-green-700 px-5 py-2 rounded-lg hover:bg-green-800">Beranda</a></li>
                 <li><a href="{{ route('kelola.sampah') }}" class="hover:text-green-700">Kelola Sampah</a></li>
                 <li>
                     <div class="relative inline-block text-left">
-                        <button id="dropdownButton" type="button" class="inline-flex justify-center w-full px-4 py-2 text-white bg-green-700 px-5 py-2 rounded-lg hover:bg-green-800">
+                        <button id="dropdownButton" type="button" class="inline-flex justify-center w-full px-4 py-2 hover:text-green-700">
                             Kreasi
                         </button>
                         <div id="dropdownMenu" class="absolute right-0 z-10 hidden mt-2 w-20 rounded-md bg-green-200 shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
@@ -64,72 +67,83 @@
         </div>
     </nav>
 
-    <!-- Kumpulan Kreasi -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto text-center px-32">
-            <h2 class="text-3xl font-bold text-gray-800">Kumpulan Kreasi</h2>
-            <p class="text-gray-600 mt-4">Dapatkan inspirasi dan pengetahuan tentang cara mendaur ulang sampah menjadi produk yang bermanfaat.</p>
-            <!-- Card Kreasi -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
+    <!-- Artikel & Informasi Section -->
+    <section class="bg-white py-16 px-32">
+        <nav class="text-sm text-gray-600 mb-4">
+                <a href="{{ route('dashboard.nasabah') }}" class="hover:underline">Beranda</a> > <span class="text-gray-800">Artikel</span>
+            </nav>
+            <header class="mb-6">
+                <h1 class="text-2xl font-semibold text-gray-800">Artikel</h1>
+                <p class="text-gray-600">Temukan tips dan trik serta informasi terbaru seputar lingkungan dan pengelolaan sampah.</p>
+            </header>
+        <div class="container mx-auto text-center">
+            <!-- Card 1 Artikel -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-8">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
+                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
+                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
+                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Extra Card -->
-            <div id="extraCards" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
+            <!-- Card 2 Artikel -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-8">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
+                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
+                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
+                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Extra Card Artikel -->
+            <div id="extraCards" class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-8 hidden">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
+                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
+                    </div>
+                </div>
+            </div>
+
             <button id="moreButton" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Lebih Banyak</button>
         </div>
     </section>
 
-    <!-- Unggah Kreasimu -->
-    <section class="bg-gray-50 py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold text-gray-800">Unggah Kreasimu</h2>
-            <p class="text-gray-600 mt-4 mb-8">Tunjukkan kreativitasmu! Unggah karya daur ulangmu dan bergabunglah dengan para pecinta lingkungan lainnya.</p>
-            <a href="{{ route('unggah.kreasi') }}" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Selengkapnya</a>
-        </div>
-    </section>
-
-    <!-- Deteksi Jenis Sampah -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold text-gray-800">Deteksi Jenis Sampahmu</h2>
-            <p class="text-gray-600 mt-4 mb-8">Penasaran ingin tahu jenis sampahmu? Coba fitur deteksi kami sekarang!</p>
-            <a href="{{ route('deteksi.sampah') }}" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Selengkapnya</a>
-        </div>
-    </section>
-
     <!-- Footer -->
-    <footer class="bg-gradient-to-b from-birumuda-800 via-white-100 to-krem-700 py-10">
+    <footer class="custom-footer-bg py-10">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-32">
             <div class="md:w-1/3 mb-6 md:mb-0">
                 <div class="flex items-center">

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cycle Tech</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script>
         function toggleExtraCards() {
             const moreButton = document.getElementById('moreButton');
@@ -17,11 +18,27 @@
             });
         }
 
+        function checkRowsVisibility() {
+            const itemsContainer = document.getElementById('itemsContainer');
+            const moreButton = document.getElementById('moreButton');
+            const items = itemsContainer.querySelectorAll('.item');
+            const itemsPerRow = 3; // Misalnya, 3 item per baris (sesuai grid Tailwind)
+
+            // Tampilkan tombol hanya jika ada lebih dari 2 baris
+            if (items.length > itemsPerRow * 2) {
+                moreButton.classList.remove('hidden');
+            } else {
+                moreButton.classList.add('hidden');
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
+            checkRowsVisibility();
             toggleExtraCards();
         });
     </script>
 </head>
+
 <body>
     <!-- Header -->
     <nav class="bg-white border-b-4 border-purple-300 shadow-md">
@@ -64,72 +81,28 @@
         </div>
     </nav>
 
-    <!-- Kumpulan Kreasi -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto text-center px-32">
-            <h2 class="text-3xl font-bold text-gray-800">Kumpulan Kreasi</h2>
-            <p class="text-gray-600 mt-4">Dapatkan inspirasi dan pengetahuan tentang cara mendaur ulang sampah menjadi produk yang bermanfaat.</p>
-            <!-- Card Kreasi -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
-                </div>
+    <!-- Kreasiku -->
+    <section class="bg-white py-16 px-32">
+        <header class="mb-6">
+            <h1 class="text-2xl font-semibold text-gray-800">Kreasiku</h1>
+            <p class="text-gray-600">Ini adalah galeri pribadi yang berisi semua karya yang telah kamu unggah.</p>
+        </header>
+        <div class="container mx-auto text-center">
+            <!-- Card 1 Artikel -->
+            <div id="itemsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-8">
+                <div class="item bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl w-[370px] h-[432px] overflow-hidden border border-black-100">
+                    <h3 class="text-xl font-bold text-black-800 mb-4 mt-6">Gantungan Kunci dari Botol Plastik Bekas</h3>
+                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-[330px] h-[231px] object-cover rounded-t-lg">
+                    <p class="text-black-400 text-xl text-left mt-4">Oleh Amanda Manopo</p>
             </div>
 
-            <!-- Extra Card -->
-            <div id="extraCards" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-48 object-cover rounded-t-lg">
-                    <p class="text-gray-600 mt-2">Oleh Amanda Manopo</p>
-                </div>
-            </div>
+            <!-- button muncul jika lebih dari 2 row -->
             <button id="moreButton" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Lebih Banyak</button>
         </div>
     </section>
 
-    <!-- Unggah Kreasimu -->
-    <section class="bg-gray-50 py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold text-gray-800">Unggah Kreasimu</h2>
-            <p class="text-gray-600 mt-4 mb-8">Tunjukkan kreativitasmu! Unggah karya daur ulangmu dan bergabunglah dengan para pecinta lingkungan lainnya.</p>
-            <a href="{{ route('unggah.kreasi') }}" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Selengkapnya</a>
-        </div>
-    </section>
-
-    <!-- Deteksi Jenis Sampah -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold text-gray-800">Deteksi Jenis Sampahmu</h2>
-            <p class="text-gray-600 mt-4 mb-8">Penasaran ingin tahu jenis sampahmu? Coba fitur deteksi kami sekarang!</p>
-            <a href="{{ route('deteksi.sampah') }}" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Selengkapnya</a>
-        </div>
-    </section>
-
     <!-- Footer -->
-    <footer class="bg-gradient-to-b from-birumuda-800 via-white-100 to-krem-700 py-10">
+    <footer class="custom-footer-bg py-10">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-32">
             <div class="md:w-1/3 mb-6 md:mb-0">
                 <div class="flex items-center">
