@@ -64,3 +64,28 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+GITHUB
+# Cloning : open vscode - Source control (ada di activity bar atau bar sebelah kiri)- Clone Repo from github - Pilih repo projek
+- cek branch : git branch -a (cek branch apa yang ada), git branch (cek branch saat ini atau bisa dilihat di pojok kiri bawah), pindah ke branch master (git checkout master) untuk update data : git pull origin master
+- pindah branch sendiri : git checkout namabranch (git checkout velizhask) 
+atau (DISARANKAN) berdasarkan issue: pilih git pull request pada activity bar (kalau nggak ada install extension git pull request) - pilih Issue yang akan dikerjakan kemudian pilih tanda panah sehingga Issue menjadi ceklis (branch akan otomatis berubah) - kerjakan tugas
+
+# Push : (CEK BRANCH, JANGAN PUSH LANGSUNG KE BRANCH MASTER / MAIN, HARUS DI BRANCH SENDIRI / SESUAI ISSUE) 
+- Source Control - copy message - Publish Branch - paste message - Sync - Create Pull Request
+- Merge pull request tugas PM kalau mau merge sendiri, konfirmasi terlebih dahulu
+
+# Pull : (PULL UNTUK NARIK DATA TERBARU DARI GITHUB SETELAH MERGE DILAKUKAN)
+- pindah ke branch master : git checkout master - git pull origin master, kemudian pindah ke branch sendiri untuk melakukan tugas selanjutnya (langkah sama seperti setelah cloning)
+
+# Running Project: (buka 2 terminal, 1 untuk backend dan 1 untuk frontend)
+composer install
+npm install
+npm run build
+Php artisan key:generate
+Php artisan Migrate
+Php artisan db:seed AdminSeeder
+Php artisan Storage:link
+npm run dev (terminal baru)
+Php artisan serve
