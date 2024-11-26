@@ -53,7 +53,7 @@ Route::prefix('nasabah')->group(function () {
 
     Route::get('/deteksi', function () {
         return view('Kreasi.deteksi');
-    })->name('deteksi');
+    })->name('deteksi.sampah');
 
     Route::get('/unggah-kreasi', function () {
         return view('Kreasi.unggahkreasi');
