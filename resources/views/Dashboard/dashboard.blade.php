@@ -12,48 +12,111 @@
 
 <body class="bg-blue-50">
     <!-- Header -->
-    <nav class="bg-white border-b-4 border-purple-300 shadow-md">
-        <div class="container mx-auto flex items-center justify-between px-6 py-3">
-            <!-- Logo -->
-            <div class="flex items-center space-x-3">
-                <img src="https://picsum.photos/40" alt="Logo" class="w-10 h-10 rounded-full">
-                <h1 class="text-xl font-semibold text-green-700">Cycle Tech</h1>
-            </div>
-            
-           <!-- Navigation Links -->
-            <ul class="hidden md:flex items-center space-x-6 font-medium text-gray-700">
-                <li><a href="{{ route('dashboard.nasabah') }}" class="text-white bg-green-700 px-5 py-2 rounded-lg hover:bg-green-800">Beranda</a></li>
-                <li><a href="{{ route('kelola.sampah') }}" class="hover:text-green-700">Kelola Sampah</a></li>
-                <li>
-                    <div class="relative inline-block text-left">
-                        <button id="dropdownButton" type="button" class="inline-flex justify-center w-full px-4 py-2 hover:text-green-700">
-                            Kreasi
-                        </button>
-                        <div id="dropdownMenu" class="absolute right-0 z-10 hidden mt-2 w-20 rounded-md bg-green-200 shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
-                            <div class="py-1" role="none">
-                            <a href="{{ route('kreasi') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-0">Kreasi</a>
-                            <a href="{{ route('kreasiku') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-2">Kreasiku</a>
-                            </div>
+   <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+            <img src="https://picsum.photos/40" alt="Logo" class="w-10 h-10 rounded-full">
+            <h1 class="text-xl font-semibold text-hulk">Cycle Tech</h1>
+        </div>
+
+        <!-- Hamburger Menu Icon (Visible on Mobile) -->
+        <div class="lg:hidden">
+            <button id="menu-toggle" class="text-black active:text-hulk focus:outline-none">
+                <i class="bi bi-list text-3xl"></i>
+            </button>
+        </div>
+
+        <!-- Centered Navigation Links for Desktop -->
+        <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
+            <li><a href="{{ route('dashboard.nasabah') }}" class="text-white bg-green-700 px-5 py-2 rounded-lg hover:bg-green-800">Beranda</a></li>
+            <li><a href="{{ route('kelola.sampah') }}" class="">Kelola Sampah</a></li>
+            <li>
+                <div class="relative inline-block text-left">
+                    <button id="dropdownButtonDesktop" type="button" class="inline-flex justify-center w-full px-4 py-2 hover:text-green-700">
+                        Kreasi
+                    </button>
+                    <div id="dropdownMenuDesktop" class="absolute right-0 z-10 hidden mt-2 w-20 rounded-md bg-green-200 shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
+                        <div class="py-1" role="none">
+                        <a href="{{ route('kreasi') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-0">Kreasi</a>
+                        <a href="{{ route('kreasiku') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-2">Kreasiku</a>
                         </div>
                     </div>
-                </li>
-                <li><a href="{{ route('tentang.kami') }}" class="hover:text-green-700">Tentang Kami</a></li>
-            </ul>
+                </div>
+            </li>
+            <li><a href="{{ route('tentang.kami') }}" class="hover:text-green-700">Tentang Kami</a></li>
+        </ul>
 
-            <!-- Notification & Profile Icons -->
-            <div class="flex items-center space-x-4">
-                <a href="#" class="text-gray-600 hover:text-green-700">
-                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
-                </a>
-                <a href="#">
-                    <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border border-gray-300">
-                </a>
+        <!-- Notification & Profile Icons -->
+        <div class="lg:flex items-center space-x-4 hidden">
+            <a href="#" class="text-gray-600 hover:text-green-700">
+                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
+            </a>
+            <a href="#">
+                <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border border-gray-300">
+            </a>
+        </div>
+    </div>
+
+    <!-- Dropdown Menu for Mobile (initially hidden) -->
+    <ul id="dropdown-menu" class="lg:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
+        <li><a href="{{ route('dashboard.nasabah') }}" class="hover:text-hulk">Beranda</a></li>
+        <li><a href="{{ route('kelola.sampah') }}" class="hover:text-hulk scroll-smooth">Kelola Sampah</a></li>
+        <button id="dropdownButton" type="button" class="inline-flex w-full py-2 hover:text-green-700">
+            Kreasi
+        </button>
+        <div id="dropdownMenu" class="relative left-0 hidden z-10 mt-2 w-20 rounded-md bg-green-200 shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
+            <div class="py-1" role="none">
+            <a href="{{ route('kreasi') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-0">Kreasi</a>
+            <a href="{{ route('kreasiku') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-2">Kreasiku</a>
             </div>
         </div>
-    </nav>
+        <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Kelola Sampah</a></li>
+    </ul>
+</nav>
+
+<!-- JavaScript for Toggle Menu -->
+<script>
+    const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        dropdownButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevents the event from closing the whole menu
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        // Close submenu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('#dropdownButton') && !event.target.closest('#dropdownMenu')) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        const dropdownButtonDesktop = document.getElementById('dropdownButtonDesktop');
+        const dropdownMenuDesktop = document.getElementById('dropdownMenuDesktop');
+
+        dropdownButtonDesktop.addEventListener('click', () => {
+            dropdownMenuDesktop.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
+            dropdownMenu.classList.add('hidden');
+            }
+        });
+        
+    document.getElementById("menu-toggle").addEventListener("click", function () {
+        var menu = document.getElementById("dropdown-menu");
+        if (menu.classList.contains("hidden")) {
+            menu.classList.remove("hidden");
+        } else {
+            menu.classList.add("hidden");
+        }
+    });
+</script>
 
     <!-- Hero Section -->
-    <section class="bg-white py-10">
+    <section class="bg-white py-10 mt-20">
         <div class="container mx-auto text-center px-4">
             <img src="https://picsum.photos/1200/400" alt="Recycle Bins" class="w-full max-w-5xl mx-auto rounded-lg shadow-lg">
             <h2 class="text-3xl font-bold text-gray-800 mt-8">Cycle Tech</h2>
@@ -97,10 +160,10 @@
 
     <!-- Mitra Kami Section -->
     <section class="bg-white py-16">
-        <div class="container mx-auto text-center px-56">
+        <div class="container mx-auto text-center">
             <h2 class="text-2xl font-bold text-center text-gray-800">Rekomendasi Pengelola Sampah</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-20 mt-12">
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
+            <div class="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 gap-6 mt-8 px-24 lg:px-8 md:px-32 ">
+                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden ">
                     <img src="https://picsum.photos/500/300" alt="" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>

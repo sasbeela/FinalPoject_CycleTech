@@ -86,7 +86,7 @@
                 <!-- Card 1 -->
                 <div class="relative bg-white p-4 md:p-6 rounded-lg shadow-lg text-center group">
                     <div class="flex justify-center mb-4">
-                        <div class="bg-hulk text-white p-4 rounded-full">
+                        <div class="bg-hulk text-white p-4 rounded-full w-14">
                             <i class="bi bi-file-earmark-text w-10 h-10 text-white"></i>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                 <!-- Card 2 -->
                 <div class="relative bg-white p-4 md:p-6 rounded-lg shadow-lg text-center group">
                     <div class="flex justify-center mb-4">
-                        <div class="bg-hulk text-white p-4 rounded-full">
+                        <div class="bg-hulk text-white p-4 rounded-full w-14">
                             <i class="bi bi-brush w-10 h-10 text-white"></i>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                 <!-- Card 3 -->
                 <div class="relative bg-white p-4 md:p-6 rounded-lg shadow-lg text-center group">
                     <div class="flex justify-center mb-4">
-                        <div class="bg-hulk text-white p-4 rounded-full">
+                        <div class="bg-hulk text-white p-4 rounded-full w-14">
                             <i class="bi bi-camera w-10 h-10 text-white"></i>
                         </div>
                     </div>

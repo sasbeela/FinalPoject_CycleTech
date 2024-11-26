@@ -71,7 +71,7 @@ Route::prefix('nasabah')->group(function () {
     //Route Dashboard Nasabah
     Route::get('/artikel', function () {
         return view('Dashboard.artikel');
-    })->name('artikel');
+    })->name('artikel.nasabah');
     
 });
 
