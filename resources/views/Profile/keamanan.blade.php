@@ -21,7 +21,7 @@
             
             <!-- Centered Navigation Links for Desktop -->
             <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
-                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black px-4 py-2 hover:text-old-hulk">Beranda</a></li>
+                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black  hover:text-old-hulk px-4 py-2">Beranda</a></li>
                 <li><a href="{{ route('kelola.sampah') }}" class=" hover:text-old-hulk">Kelola Sampah</a></li>
                 <li>
                     <div class="relative inline-block text-left">
@@ -58,7 +58,7 @@
                 <!-- Profile Icon (only visible on larger screens) -->
                 <li class="hidden lg:flex items-center">
                     <a href="{{ route('profile.nasabah') }}">
-                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border-4 border-hulk">
+                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border-4 border-green-500">
                     </a>
                 </li>
             </ul>
@@ -122,85 +122,91 @@
         });
     </script>
 
-    <!-- Hero Section -->
-    <section class="bg-white py-10 mt-16">
-        <div class="container mx-auto text-center px-4">
-            <img src="{{ asset('images/beranda 1.png') }}" alt="Recycle Bins" class="w-full max-w-5xl mx-auto rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-gray-800 mt-8">Cycle Tech</h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Solusi untuk manajemen sampah yang lebih baik. Kami menyediakan berbagai layanan untuk menjaga lingkungan tetap bersih dan sehat.</p>
-        </div>
-    </section>
+<section class="p-8 flex flex-col lg:flex-row gap-8 mt-16">
+    <!-- Sidebar -->
+    <div class="w-full h-64 lg:w-1/4 bg-white border border-hulk rounded-lg p-4">
+        <h2 class="font-semibold text-xl mb-4">Profil</h2>
+        <ul class="space-y-4">
+            <li>
+               <a href="{{ route('profile.nasabah')}}" class="text-black hover:text-old-hulk">Profil Saya</a>
+            </li>
+            <li>
+                <a href="{{ route('profile.keamanan')}}" class="text-hulk font-semibold">Keamanan</a>
+            </li>
+            <li>
+                <div class="mt-20">
+                    <a href="#" class="text-red-600 hover:font-medium hover:text-red-700">Hapus Akun</a>
+                </div>
+            </li>
+        </ul>
+    </div>
 
-    <!-- Artikel & Informasi Section -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto text-center px-32">
-            <h2 class="text-2xl font-bold text-center text-gray-800">Artikel & Informasi</h2>
-            <!-- Card Artikel -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
-                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
-                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="mx-auto items-center space-x-4 mt-8">
-                <a href="{{ route('artikel.nasabah') }}" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Lebih Banyak</a>
-            </div>
-        </div>
-    </section>
+    <!-- Account Detail Content -->
+    <div class="w-full lg:w-3/4 bg-white border border-old-hulk rounded-lg p-6">
+        <h3 class="font-semibold text-lg mb-4">Detail Akun</h3>
 
-    <!-- Mitra Kami Section -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-2xl font-bold text-center text-gray-800">Rekomendasi Pengelola Sampah</h2>
-            <div class="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 gap-6 mt-8 px-24 lg:px-8 md:px-32 ">
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden ">
-                    <img src="{{ asset('images/apsi.png') }}" alt="" class="w-[240px] h-[133px]">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/adupi.png') }}" alt="" class="w-[240px] h-[133px]">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/ibcsd.png') }}" alt="" class="w-[240px] h-[133px]">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/repurpose.png') }}" alt="" class="w-[240px] h-[133px]">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
+        <!-- Email Information -->
+        <div class="mb-6">
+            <label class="block text-gray-700 font-medium">Alamat Email</label>
+            <p class="text-gray-800">amandamanopo@gmail.com</p>
+        </div>
+
+        <!-- Password Section -->
+        <div class="mb-6">
+            <label class="block text-gray-700 font-medium">Kata Sandi</label>
+            <div class="flex items-center border border-old-hulk rounded-lg p-2 mt-2">
+                <span class="text-hulk mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <input type="password" class="w-full border-none focus:outline-none" value="xxxxxxxx" disabled>
+                <button class="text-gray-500 hover:text-hulk focus:outline-none ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M21 12c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z" />
+                    </svg>
+                </button>
             </div>
         </div>
-    </section>
+
+        <!-- Change Password Button -->
+        <a href="{{ route('profile.password') }}" class="px-6 py-2 font-medium border-2 border-old-hulk text-hulk rounded-full hover:bg-hulk hover:text-white">Ubah Kata Sandi</a>
+    </div>
+</section>
+
+<div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center flex">
+    <div class="bg-white p-6 rounded-md shadow-md text-center w-11/12 sm:w-80">
+        <h2 class="text-lg sm:text-xl font-semibold mb-4">Yakin Menghapus Akun ini?</h2>
+        <div class="flex justify-center space-x-4">
+            <button id="confirm-delete-button" class="px-4 py-2 border-2 border-hulk text-hulk rounded hover:bg-red-100">
+                Ya
+            </button>
+            <button onclick="closeOverlay()" class="px-4 py-2 border-2 border-red-600 text-red-600 rounded hover:bg-green-100">
+                Tidak
+            </button>
+        </div>
+    </div>
+</div>
+</section>
+
+<script>
+
+function openOverlay(userId) {
+    deleteUserId = userId;
+    document.getElementById('overlay').classList.remove('hidden');
+}
+
+function closeOverlay() {
+    document.getElementById('overlay').classList.add('hidden');
+}
+
+document.getElementById('confirm-delete-button').addEventListener('click', function () {
+    if (deleteUserId) {
+        document.getElementById(`delete-form-${deleteUserId}`).submit();
+    }
+});
+</script>
+
 
     <!-- Footer -->
     <section>

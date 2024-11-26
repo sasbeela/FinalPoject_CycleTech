@@ -78,7 +78,7 @@
                 </div>
             </div>
             <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Kelola Sampah</a></li>
-            <li><a href="{{ route('profile.nasabah') }}" class="hover:text-hulk scroll-smooth">Profile</a></li>
+            <li><a href="{{ route('profile.nasabah')}}" class="hover:text-hulk scroll-smooth">Profile</a></li>
         </ul>
     </nav>
     
@@ -122,85 +122,70 @@
         });
     </script>
 
-    <!-- Hero Section -->
-    <section class="bg-white py-10 mt-16">
-        <div class="container mx-auto text-center px-4">
-            <img src="{{ asset('images/beranda 1.png') }}" alt="Recycle Bins" class="w-full max-w-5xl mx-auto rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-gray-800 mt-8">Cycle Tech</h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Solusi untuk manajemen sampah yang lebih baik. Kami menyediakan berbagai layanan untuk menjaga lingkungan tetap bersih dan sehat.</p>
-        </div>
-    </section>
+<section class="p-8 flex justify-center mt-16">
+    <div class="w-full max-w-lg bg-white border border-hulk rounded-lg p-6">
+        <h3 class="font-semibold text-lg mb-6">Ubah Kata Sandi Anda</h3>
 
-    <!-- Artikel & Informasi Section -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto text-center px-32">
-            <h2 class="text-2xl font-bold text-center text-gray-800">Artikel & Informasi</h2>
-            <!-- Card Artikel -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
-                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
-                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="mx-auto items-center space-x-4 mt-8">
-                <a href="{{ route('artikel.nasabah') }}" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Lebih Banyak</a>
+        <!-- Current Password Field -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">Kata sandi saat ini</label>
+            <div class="flex items-center border border-hulk rounded-lg p-2">
+                <span class="text-hulk mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <input type="password" class="w-full border-none focus:outline-none" placeholder="Kata sandi saat ini">
+                <button class="text-gray-500 hover:text-old-hulk focus:outline-none ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M21 12c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z" />
+                    </svg>
+                </button>
             </div>
         </div>
-    </section>
 
-    <!-- Mitra Kami Section -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-2xl font-bold text-center text-gray-800">Rekomendasi Pengelola Sampah</h2>
-            <div class="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 gap-6 mt-8 px-24 lg:px-8 md:px-32 ">
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden ">
-                    <img src="{{ asset('images/apsi.png') }}" alt="" class="w-[240px] h-[133px]">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/adupi.png') }}" alt="" class="w-[240px] h-[133px]">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/ibcsd.png') }}" alt="" class="w-[240px] h-[133px]">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/repurpose.png') }}" alt="" class="w-[240px] h-[133px]">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
+        <!-- New Password Fields -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">Kata sandi baru</label>
+            <div class="flex items-center border border-hulk rounded-lg p-2">
+                <span class="text-hulk mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <input type="password" class="w-full border-none focus:outline-none" placeholder="Kata sandi baru">
+                <button class="text-gray-500 hover:text-old-hulk focus:outline-none ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M21 12c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z" />
+                    </svg>
+                </button>
             </div>
         </div>
-    </section>
+
+        <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">Konfirmasi kata sandi baru</label>
+            <div class="flex items-center border border-hulk rounded-lg p-2">
+                <span class="text-hulk mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <input type="password" class="w-full border-none focus:outline-none" placeholder="Konfirmasi kata sandi baru">
+                <button class="text-gray-500 hover:text-hulk focus:outline-none ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M21 12c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex space-x-4">
+            <button class="px-6 py-2 bg-hulk text-white rounded-full hover:bg-old-hulk font-semibold">Ubah</button>
+            <a href="{{ route('profile.keamanan')}}" class="px-6 py-2 border-2 border-red-500 text-red-600 rounded-full hover:bg-red-500 font-semibold hover:text-white">Batalkan</a>
+        </div>
+    </div>
+</section>
 
     <!-- Footer -->
     <section>
