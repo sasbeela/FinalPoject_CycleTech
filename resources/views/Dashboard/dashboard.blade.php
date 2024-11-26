@@ -171,28 +171,28 @@
             <h2 class="text-2xl font-bold text-center text-gray-800">Rekomendasi Pengelola Sampah</h2>
             <div class="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 gap-6 mt-8 px-24 lg:px-8 md:px-32 ">
                 <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden ">
-                    <img src="{{ asset('images/mitra 1.png') }}" alt="" class="w-[240px] h-[133px]">
+                    <img src="{{ asset('images/apsi.png') }}" alt="" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
                         <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
                     </div>
                 </div>
                 <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/mitra 2.png') }}" alt="" class="w-[240px] h-[133px]">
+                    <img src="{{ asset('images/adupi.png') }}" alt="" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
                         <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
                     </div>
                 </div>
                 <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/mitra 3.png') }}" alt="" class="w-[240px] h-[133px]">
+                    <img src="{{ asset('images/ibcsd.png') }}" alt="" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
                         <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
                     </div>
                 </div>
                 <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/mitra 4.png') }}" alt="" class="w-[240px] h-[133px]">
+                    <img src="{{ asset('images/repurpose.png') }}" alt="" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
                         <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>

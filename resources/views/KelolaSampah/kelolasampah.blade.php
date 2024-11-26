@@ -8,109 +8,116 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
-    <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
-        <!-- Logo -->
-        <div class="flex items-center space-x-3">
-            <img src="{{ asset('images/logo 2.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
-            <h1 class="text-xl font-semibold text-hulk">Cycle Tech</h1>
-        </div>
-
-        <!-- Hamburger Menu Icon (Visible on Mobile) -->
-        <div class="lg:hidden">
-            <button id="menu-toggle" class="text-black active:text-hulk focus:outline-none">
-                <i class="bi bi-list text-3xl"></i>
-            </button>
-        </div>
-
-        <!-- Centered Navigation Links for Desktop -->
-        <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
-            <li><a href="{{ route('dashboard.nasabah') }}" class="hover:text-old-hulk">Beranda</a></li>
-            <li><a href="{{ route('kelola.sampah') }}" class="text-white bg-hulk px-5 py-2 rounded-lg hover:bg-old-hulk">Kelola Sampah</a></li>
-            <li>
-                <div class="relative inline-block text-left">
-                    <button id="dropdownButtonDesktop" type="button" class="inline-flex justify-center w-full px-4 py-2 hover:text-old-hulk">
-                        Kreasi
-                    </button>
-                    <div id="dropdownMenuDesktop" class="absolute right-0 z-10 hidden mt-2 w-20 rounded-md bg-hulk shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
-                        <div class="py-1" role="none">
-                        <a href="{{ route('kreasi') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-0">Kreasi</a>
-                        <a href="{{ route('kreasiku') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-2">Kreasiku</a>
+        <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <img src="{{ asset('images/logo 2.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
+                <h1 class="text-xl font-semibold text-hulk">Cycle Tech</h1>
+            </div>
+            
+            <!-- Centered Navigation Links for Desktop -->
+            <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
+                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black hover:text-hulk">Beranda</a></li>
+                <li><a href="{{ route('kelola.sampah') }}" class="text-white bg-green-700 rounded-lg hover:bg-old-hulk inline-flex justify-center w-full px-4 py-2 ">Kelola Sampah</a></li>
+                <li>
+                    <div class="relative inline-block text-left">
+                        <button id="dropdownButtonDesktop" type="button" class="text-black px-4 py-2 hover:text-old-hulk">
+                            Kreasi
+                        </button>
+                        <div id="dropdownMenuDesktop" class="absolute right-0 z-10 hidden mt-2 w-20 rounded-md bg-green-200 shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
+                            <div class="py-1" role="none">
+                                <a href="{{ route('kreasi') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-0">Kreasi</a>
+                                <a href="{{ route('kreasiku') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-2">Kreasiku</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
-            <li><a href="{{ route('tentang.kami') }}" class="hover:text-old-hulk">Tentang Kami</a></li>
-        </ul>
-
-        <!-- Notification & Profile Icons -->
-        <div class="lg:flex items-center space-x-4 hidden">
-            <a href="#" class="text-gray-600 hover:text-old-hulk">
-                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
-            </a>
-            <a href="#">
-                <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border border-gray-300">
-            </a>
+                </li>
+                <li><a href="{{ route('tentang.kami') }}" class="hover:text-green-700">Tentang Kami</a></li>
+            </ul>
+            
+            <!-- Notification & Profile Icons -->
+            <ul class="flex items-center space-x-6 font-medium text-gray-700">
+                <!-- Notification Icon -->
+                <li class="flex items-center">
+                    <button href="#" class="text-gray-600 hover:text-green-700 mt-2">
+                        <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
+                    </button>
+                </li>
+                
+                <!-- Hamburger Icon (only visible on smaller screens) -->
+                <li class="lg:hidden flex items-center">
+                    <button id="menu-toggle" class="text-black active:text-hulk focus:outline-none mt-2">
+                        <i class="bi bi-list text-3xl"></i>
+                    </button>
+                </li>
+            
+                <!-- Profile Icon (only visible on larger screens) -->
+                <li class="hidden lg:flex items-center">
+                    <a href="#">
+                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border border-gray-300">
+                    </a>
+                </li>
+            </ul>
         </div>
-    </div>
-
-    <!-- Dropdown Menu for Mobile (initially hidden) -->
-    <ul id="dropdown-menu" class="lg:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
-        <li><a href="{{ route('dashboard.nasabah') }}" class="hover:text-old-hulk">Beranda</a></li>
-        <li><a href="{{ route('kelola.sampah') }}" class="hover:text-old-hulk scroll-smooth">Kelola Sampah</a></li>
-        <button id="dropdownButton" type="button" class="inline-flex w-full py-2 hover:text-old-hulk">
-            Kreasi
-        </button>
-        <div id="dropdownMenu" class="relative left-0 hidden z-10 mt-2 w-20 rounded-md bg-hulk shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
-            <div class="py-1" role="none">
-            <a href="{{ route('kreasi') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-0">Kreasi</a>
-            <a href="{{ route('kreasiku') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-2">Kreasiku</a>
-            </div>
-        </div>
-        <li><a href="#tentang-kami" class="hover:text-old-hulk scroll-smooth">Kelola Sampah</a></li>
-    </ul>
-</nav>
-
-<!-- JavaScript for Toggle Menu -->
-<script>
-    const dropdownButton = document.getElementById('dropdownButton');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-
-        dropdownButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevents the event from closing the whole menu
-            dropdownMenu.classList.toggle('hidden');
-        });
-
-        // Close submenu when clicking outside
-        document.addEventListener('click', (event) => {
-            if (!event.target.closest('#dropdownButton') && !event.target.closest('#dropdownMenu')) {
-                dropdownMenu.classList.add('hidden');
-            }
-        });
-
-        const dropdownButtonDesktop = document.getElementById('dropdownButtonDesktop');
-        const dropdownMenuDesktop = document.getElementById('dropdownMenuDesktop');
-
-        dropdownButtonDesktop.addEventListener('click', () => {
-            dropdownMenuDesktop.classList.toggle('hidden');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
-            dropdownMenu.classList.add('hidden');
-            }
-        });
         
-    document.getElementById("menu-toggle").addEventListener("click", function () {
-        var menu = document.getElementById("dropdown-menu");
-        if (menu.classList.contains("hidden")) {
-            menu.classList.remove("hidden");
-        } else {
-            menu.classList.add("hidden");
-        }
-    });
-</script>
+        <!-- Dropdown Menu for Mobile (initially hidden) -->
+        <ul id="dropdown-menu" class="lg:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
+            <li><a href="{{ route('dashboard.nasabah') }}" class="hover:text-hulk">Beranda</a></li>
+            <li><a href="{{ route('kelola.sampah') }}" class="hover:text-hulk scroll-smooth">Kelola Sampah</a></li>
+            <button id="dropdownButton" type="button" class="inline-flex w-full py-2 hover:text-green-700">
+                Kreasi
+            </button>
+            <div id="dropdownMenu" class="relative left-0 hidden z-10 mt-2 w-20 rounded-md bg-green-200 shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
+                <div class="py-1" role="none">
+                <a href="{{ route('kreasi') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-0">Kreasi</a>
+                <a href="{{ route('kreasiku') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-2">Kreasiku</a>
+                </div>
+            </div>
+            <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Kelola Sampah</a></li>
+            <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Profile</a></li>
+        </ul>
+    </nav>
+    
+    <!-- JavaScript for Toggle Menu -->
+    <script>
+        const dropdownButton = document.getElementById('dropdownButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+    
+            dropdownButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevents the event from closing the whole menu
+                dropdownMenu.classList.toggle('hidden');
+            });
+    
+            // Close submenu when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('#dropdownButton') && !event.target.closest('#dropdownMenu')) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            });
+    
+            const dropdownButtonDesktop = document.getElementById('dropdownButtonDesktop');
+            const dropdownMenuDesktop = document.getElementById('dropdownMenuDesktop');
+    
+            dropdownButtonDesktop.addEventListener('click', () => {
+                dropdownMenuDesktop.classList.toggle('hidden');
+            });
+    
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
+                dropdownMenu.classList.add('hidden');
+                }
+            });
+            
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            var menu = document.getElementById("dropdown-menu");
+            if (menu.classList.contains("hidden")) {
+                menu.classList.remove("hidden");
+            } else {
+                menu.classList.add("hidden");
+            }
+        });
+    </script>
 
     <!-- Hero Section -->
     <section class="bg-white py-12 mt-12">
@@ -175,48 +182,61 @@
     </section>
 
     <!-- Cara Menyiapkan Sampah -->
-    <section class="bg-gradient-to-b from-birumuda to-krem py-16">
-        <div class="mx-auto p-8 px-24 lg:px-32">
-            <h1 class="text-2xl font-bold text-center mb-6">Cara Menyiapkan Sampah</h1>
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-                <div class="flex-1 mb-6 md:mb-0 md:mr-4">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4">1</div>
-                        <div>
-                            <h2 class="font-bold">Bersihkan Sampah</h2>
-                            <p>Pastikan sampah yang akan disetorkan dalam keadaan bersih untuk menghindari penyebaran kuman dan penyakit.</p>
-                        </div>
+   <section class="bg-gradient-to-b from-birumuda to-krem py-16">
+    <div class="mx-auto p-8 px-6 md:px-12 lg:px-32">
+        <h1 class="text-2xl font-bold text-center mb-6">Cara Menyiapkan Sampah</h1>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <!-- Left Section -->
+            <div class="flex-1 mb-6 md:mb-0 md:mr-4">
+                <div class="flex items-start text-right mb-4">
+                    <div class="mb-8 mr-8">
+                        <h2 class="font-bold">Bersihkan Sampah</h2>
+                        <p>Pastikan sampah yang akan disetorkan dalam keadaan bersih untuk menghindari penyebaran kuman dan penyakit.</p>
                     </div>
-                    <div class="flex items-start mb-4">
-                        <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4">2</div>
-                        <div>
-                            <h2 class="font-bold">Pastikan Sampah Kering</h2>
-                            <p>Sampah yang akan disetorkan harus dalam keadaan kering, tidak basah, maupun lembab.</p>
-                        </div>
+                    <div class="text-black font-bold text-5xl w-12 h-12 flex items-center justify-center mr-4">
+                        1
                     </div>
                 </div>
-                <div class="flex justify-center mt-6 hidden lg:block">
-                    <img src="{{ asset('images/kelolasampah 2.png') }}" alt="Ilustrasi persiapan sampah" class="w-48 h-48">
-                </div>
-                <div class="flex-1 mb-6 md:mb-0 md:ml-4">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4">3</div>
-                        <div>
-                            <h2 class="font-bold">Remas dan Lipat</h2>
-                            <p>Remas dan lipat sampah untuk memaksimalkan ruang dan volume paket.</p>
-                        </div>
+                <div class="flex items-start mb-4 text-right">
+                    <div class="mr-8">
+                        <h2 class="font-bold">Pastikan Sampah Kering</h2>
+                        <p>Sampah yang akan disetorkan harus dalam keadaan kering, tidak basah, maupun lembab.</p>
                     </div>
-                    <div class="flex items-start mb-4">
-                        <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4">4</div>
-                        <div>
-                            <h2 class="font-bold">Kemas Rapi</h2>
-                            <p>Kemas sampah menggunakan kardus atau kemasan lain. Jangan lupa tulis kode SSA pada paket.</p>
-                        </div>
+                    <div class="text-black font-bold text-5xl w-12 h-12 flex items-center justify-center mr-4">
+                        2
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Center Image (only visible on large screens) -->
+            <div class="justify-center mt-6 hidden lg:block">
+                <img src="{{ asset('images/kelolasampah 2.png') }}" alt="Ilustrasi persiapan sampah" class="w-48 h-48">
+            </div>
+            
+            <!-- Right Section -->
+            <div class="flex-1 mb-6 md:mb-0 md:ml-4">
+                <div class="flex items-start text-left mb-4">
+                    <div class="text-black font-bold text-5xl w-12 h-12 flex items-center justify-center mb-8 mr-8">
+                        3
+                    </div>
+                    <div class=>
+                        <h2 class="font-bold">Remas dan Lipat</h2>
+                        <p>Remas dan lipat sampah untuk memaksimalkan ruang dan volume paket.</p>
+                    </div>
+                </div>
+                <div class="flex items-start mt-8">
+                    <div class="text-black font-bold text-5xl w-12 h-12 flex items-center justify-center mr-4 mb-8 mr-8">
+                        4
+                    </div>
+                    <div>
+                        <h2 class="font-bold">Kemas Rapi</h2>
+                        <p>Kemas sampah menggunakan kardus atau kemasan lain. Jangan lupa tulis kode SSA pada paket.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Lokasi -->
     <div class="mx-auto bg-white p-6 px-6 md:px-24 lg:px-32 text-center">
