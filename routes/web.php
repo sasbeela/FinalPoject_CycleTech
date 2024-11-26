@@ -36,6 +36,16 @@ Route::prefix('nasabah')->group(function () {
     // Proses pendaftaran nasabah
     Route::post('/signin', [AuthController::class, 'createSignin'])->name('signin.create');
 
+    // Route untuk profile nasabah
+    Route::get('/profile', function () {
+        return view('Profile.index');})->name('profile.nasabah');
+    
+    Route::get('/profile/keamanan', function () {
+        return view('Profile.keamanan');})->name('profile.keamanan');
+    
+    Route::get('/profile/keamanan/ubah-password', function () {
+        return view('Profile.editpassword');})->name('profile.password');
+
     // Route untuk dashboard nasabah
     Route::get('/dashboard', function () {
         return view('Dashboard.dashboard');

@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cycle Tech</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
 </head>
 
-<body>
-    <!-- Header -->
+<body class="bg-blue-50">
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
             <!-- Logo -->
@@ -21,7 +21,7 @@
             
             <!-- Centered Navigation Links for Desktop -->
             <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
-                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black px-4 py-2 hover:text-old-hulk">Beranda</a></li>
+                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black  hover:text-old-hulk px-4 py-2">Beranda</a></li>
                 <li><a href="{{ route('kelola.sampah') }}" class=" hover:text-old-hulk">Kelola Sampah</a></li>
                 <li>
                     <div class="relative inline-block text-left">
@@ -58,7 +58,7 @@
                 <!-- Profile Icon (only visible on larger screens) -->
                 <li class="hidden lg:flex items-center">
                     <a href="{{ route('profile.nasabah') }}">
-                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border-4 border-hulk">
+                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border-4 border-green-500">
                     </a>
                 </li>
             </ul>
@@ -122,93 +122,91 @@
         });
     </script>
 
-    <!-- Kreasiku -->
-    <section class="bg-white mt-20 py-10 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
-        <header class="mb-6">
-            <h1 class="text-2xl font-semibold text-gray-800">Kreasiku</h1>
-            <p class="text-gray-600">Ini adalah galeri pribadi yang berisi semua karya yang telah kamu unggah.</p>
-        </header>
-        <div class="container mx-auto text-center">
-            <!-- Grid Container for Items -->
-            <div id="itemsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                <!-- Card Item -->
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
+<section class="p-8 flex flex-col lg:flex-row gap-8 mt-16">
+    <!-- Sidebar -->
+    <div class="w-full h-64 lg:w-1/4 bg-white border border-hulk rounded-lg p-4">
+        <h2 class="font-semibold text-xl mb-4">Profil</h2>
+        <ul class="space-y-4">
+            <li>
+               <a href="{{ route('profile.nasabah')}}" class="text-black hover:text-old-hulk">Profil Saya</a>
+            </li>
+            <li>
+                <a href="{{ route('profile.keamanan')}}" class="text-hulk font-semibold">Keamanan</a>
+            </li>
+            <li>
+                <div class="mt-20">
+                    <a href="#" class="text-red-600 hover:font-medium hover:text-red-700">Hapus Akun</a>
                 </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Account Detail Content -->
+    <div class="w-full lg:w-3/4 bg-white border border-old-hulk rounded-lg p-6">
+        <h3 class="font-semibold text-lg mb-4">Detail Akun</h3>
+
+        <!-- Email Information -->
+        <div class="mb-6">
+            <label class="block text-gray-700 font-medium">Alamat Email</label>
+            <p class="text-gray-800">amandamanopo@gmail.com</p>
+        </div>
+
+        <!-- Password Section -->
+        <div class="mb-6">
+            <label class="block text-gray-700 font-medium">Kata Sandi</label>
+            <div class="flex items-center border border-old-hulk rounded-lg p-2 mt-2">
+                <span class="text-hulk mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <input type="password" class="w-full border-none focus:outline-none" value="xxxxxxxx" disabled>
+                <button class="text-gray-500 hover:text-hulk focus:outline-none ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M21 12c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z" />
+                    </svg>
+                </button>
             </div>
-            
-            <!-- More Button -->
-            <button id="moreButton" class="border-2 border-hulk text-hulk py-2 px-4 rounded-lg hover:bg-hulk hover:text-white mt-8">Lebih Banyak</button>
-            
-            <!-- Upload Button -->
-            <button class="flex my-8 py-1 border-2 font-semibold bg-hulk border-hulk text-white px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">
-                Unggah Kreasi
+        </div>
+
+        <!-- Change Password Button -->
+        <a href="{{ route('profile.password') }}" class="px-6 py-2 font-medium border-2 border-old-hulk text-hulk rounded-full hover:bg-hulk hover:text-white">Ubah Kata Sandi</a>
+    </div>
+</section>
+
+<div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center flex">
+    <div class="bg-white p-6 rounded-md shadow-md text-center w-11/12 sm:w-80">
+        <h2 class="text-lg sm:text-xl font-semibold mb-4">Yakin Menghapus Akun ini?</h2>
+        <div class="flex justify-center space-x-4">
+            <button id="confirm-delete-button" class="px-4 py-2 border-2 border-hulk text-hulk rounded hover:bg-red-100">
+                Ya
+            </button>
+            <button onclick="closeOverlay()" class="px-4 py-2 border-2 border-red-600 text-red-600 rounded hover:bg-green-100">
+                Tidak
             </button>
         </div>
-    </section>
-    
-    <script>
-        function toggleExtraCards() {
-            const moreButton = document.getElementById('moreButton');
-            const extraCards = document.getElementById('extraCards');
+    </div>
+</div>
+</section>
 
-            moreButton.addEventListener('click', function () {
-                extraCards.classList.toggle('hidden');
-                moreButton.textContent = extraCards.classList.contains('hidden') ? 'Lebih Banyak' : 'Lebih Sedikit';
-            });
-        }
+<script>
 
-        function checkRowsVisibility() {
-            const itemsContainer = document.getElementById('itemsContainer');
-            const moreButton = document.getElementById('moreButton');
-            const items = itemsContainer.querySelectorAll('.item');
-            const itemsPerRow = 3; // Misalnya, 3 item per baris (sesuai grid Tailwind)
+function openOverlay(userId) {
+    deleteUserId = userId;
+    document.getElementById('overlay').classList.remove('hidden');
+}
 
-            // Tampilkan tombol hanya jika ada lebih dari 2 baris
-            if (items.length > itemsPerRow * 2) {
-                moreButton.classList.remove('hidden');
-            } else {
-                moreButton.classList.add('hidden');
-            }
-        }
+function closeOverlay() {
+    document.getElementById('overlay').classList.add('hidden');
+}
 
-        document.addEventListener('DOMContentLoaded', function () {
-            checkRowsVisibility();
-            toggleExtraCards();
-        });
-    </script>
+document.getElementById('confirm-delete-button').addEventListener('click', function () {
+    if (deleteUserId) {
+        document.getElementById(`delete-form-${deleteUserId}`).submit();
+    }
+});
+</script>
+
 
     <!-- Footer -->
     <section>

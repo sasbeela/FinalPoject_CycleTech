@@ -8,24 +8,9 @@
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
-    <script>
-        function toggleExtraCards() {
-            const moreButton = document.getElementById('moreButton');
-            const extraCards = document.getElementById('extraCards');
-
-            moreButton.addEventListener('click', function () {
-                extraCards.classList.toggle('hidden');
-                moreButton.textContent = extraCards.classList.contains('hidden') ? 'Lebih Banyak' : 'Lebih Sedikit';
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            toggleExtraCards();
-        });
-    </script>
 </head>
 
-<body>
+<body class="bg-blue-50">
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
             <!-- Logo -->
@@ -93,7 +78,7 @@
                 </div>
             </div>
             <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Kelola Sampah</a></li>
-            <li><a href="{{ route('profile.nasabah') }}" class="hover:text-hulk scroll-smooth">Profile</a></li>
+            <li><a href="{{ route('profile.nasabah')}}" class="hover:text-hulk scroll-smooth">Profile</a></li>
         </ul>
     </nav>
     
@@ -137,116 +122,108 @@
         });
     </script>
 
-    <!-- Artikel & Informasi Section -->
-    <section class="bg-white py-16 px-32">
-        <nav class="text-sm text-gray-600 mb-4">
-                <a href="{{ route('dashboard.nasabah') }}" class="hover:underline">Beranda</a> > <span class="text-gray-800">Artikel</span>
-            </nav>
-            <header class="mb-6">
-                <h1 class="text-2xl font-semibold text-gray-800">Artikel</h1>
-                <p class="text-gray-600">Temukan tips dan trik serta informasi terbaru seputar lingkungan dan pengelolaan sampah.</p>
-            </header>
-        <div class="container mx-auto text-center">
-            <!-- Card 1 Artikel -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-8">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
-                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
-                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
-                    </div>
-                </div>
-            </div>
+<section class="p-8 flex justify-center mt-16">
+    <div class="w-full max-w-lg bg-white border border-hulk rounded-lg p-6">
+        <h3 class="font-semibold text-lg mb-6">Ubah Kata Sandi Anda</h3>
 
-            <!-- Card 2 Artikel -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-8">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
-                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
-                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
-                    </div>
-                </div>
+        <!-- Current Password Field -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">Kata sandi saat ini</label>
+            <div class="flex items-center border border-hulk rounded-lg p-2">
+                <span class="text-hulk mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <input type="password" class="w-full border-none focus:outline-none" placeholder="Kata sandi saat ini">
+                <button class="text-gray-500 hover:text-old-hulk focus:outline-none ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M21 12c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z" />
+                    </svg>
+                </button>
             </div>
-
-            <!-- Extra Card Artikel -->
-            <div id="extraCards" class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-8 hidden">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-            </div>
-
-            <button id="moreButton" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Lebih Banyak</button>
         </div>
-    </section>
+
+        <!-- New Password Fields -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">Kata sandi baru</label>
+            <div class="flex items-center border border-hulk rounded-lg p-2">
+                <span class="text-hulk mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <input type="password" class="w-full border-none focus:outline-none" placeholder="Kata sandi baru">
+                <button class="text-gray-500 hover:text-old-hulk focus:outline-none ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M21 12c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">Konfirmasi kata sandi baru</label>
+            <div class="flex items-center border border-hulk rounded-lg p-2">
+                <span class="text-hulk mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <input type="password" class="w-full border-none focus:outline-none" placeholder="Konfirmasi kata sandi baru">
+                <button class="text-gray-500 hover:text-hulk focus:outline-none ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M21 12c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex space-x-4">
+            <button class="px-6 py-2 bg-hulk text-white rounded-full hover:bg-old-hulk font-semibold">Ubah</button>
+            <a href="{{ route('profile.keamanan')}}" class="px-6 py-2 border-2 border-red-500 text-red-600 rounded-full hover:bg-red-500 font-semibold hover:text-white">Batalkan</a>
+        </div>
+    </div>
+</section>
 
     <!-- Footer -->
-    <footer class="custom-footer-bg py-10">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-32">
-            <div class="md:w-1/3 mb-6 md:mb-0">
-                <div class="flex items-center">
-                    <img src="logo.png" alt="Cycle Tech Logo" class="w-10 h-10 mr-3">
-                    <h2 class="text-lg font-bold">Cycle Tech</h2>
+    <section>
+        <footer class="bg-gradient-to-t from-birumuda to-krem py-10">
+            <div class="container mx-auto flex flex-col md:flex-row justify-between items-center md:px-32 px-24">
+                <div class="md:w-1/3 mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <img src="{{ asset('images/logo 2.png') }}" alt="Cycle Tech Logo" class="w-10 h-10 mr-3">
+                        <h2 class="text-lg font-bold text-hulk">Cycle Tech</h2>
+                    </div>
+                    <p class="mt-4 text-sm hidden md:block">
+                        Cycle Tech adalah platform inovatif untuk pengelolaan sampah. Dengan fitur-fitur canggih, kami memudahkan Anda untuk memilah, mengelola, dan mendaur ulang sampah secara efektif.
+                    </p>
                 </div>
-                <p class="mt-4 text-sm">
-                    Cycle Tech adalah platform inovatif untuk pengelolaan sampah. Dengan fitur-fitur canggih, kami memudahkan Anda untuk memilah, mengelola, dan mendaur ulang sampah secara efektif.
-                </p>
-            </div>
-            <div class="md:w-1/3 mb-6 md:mb-0 text-center">
-                <h3 class="text-lg font-semibold mb-2">Hubungi</h3>
-                <p class="text-sm">+62 812 3456 7890</p>
-                <p class="text-sm">cycletech@gmail.com</p>
-            </div>
-            <div class="md:w-1/3 text-center md:text-right">
-                <h3 class="text-lg font-semibold mb-2">Media Sosial</h3>
-                <div class="flex justify-center md:justify-end space-x-4">
-                    <a href="#" class="text-white hover:text-gray-400">
-                        <i class="bi bi-facebook w-6 h-6"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-gray-400">
-                        <i class="bi bi-twitter w-6 h-6"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-gray-400">
-                        <i class="bi bi-instagram w-6 h-6"></i>
-                    </a>
+                <div class="md:w-1/3 mb-6 md:mb-0 text-center">
+                    <h3 class="text-lg font-semibold mb-2">Hubungi</h3>
+                    <p class="text-sm">+62 812 3456 7890</p>
+                    <p class="text-sm">cycletech@gmail.com</p>
+                </div>
+                <div class="md:w-1/3 text-center md:text-right">
+                    <h3 class="text-lg font-semibold mb-2">Media Sosial</h3>
+                    <div class="flex justify-center md:justify-end space-x-4">
+                        <a href="#" class="text-black hover:text-gray-400">
+                            <i class="bi bi-facebook w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-gray-400">
+                            <i class="bi bi-twitter w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-gray-400">
+                            <i class="bi bi-instagram w-6 h-6"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="text-center mt-8">
-            <p class="text-sm">© 2024 CycleTech. All Rights Reserved.</p>
-        </div>
-    </footer>
+            <div class="text-center mt-8">
+                <p class="text-sm">© 2024 CycleTech. All Rights Reserved.</p>
+            </div>
+        </footer>
+        </section>
 </body>
 </html>

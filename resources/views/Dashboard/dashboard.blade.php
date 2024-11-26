@@ -21,7 +21,7 @@
             
             <!-- Centered Navigation Links for Desktop -->
             <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
-                <li><a href="{{ route('dashboard.nasabah') }}" class="text-white bg-green-700 rounded-lg hover:bg-old-hulk inline-flex justify-center w-full px-4 py-2">Beranda</a></li>
+                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black px-4 py-2 hover:text-old-hulk">Beranda</a></li>
                 <li><a href="{{ route('kelola.sampah') }}" class=" hover:text-old-hulk">Kelola Sampah</a></li>
                 <li>
                     <div class="relative inline-block text-left">
@@ -57,8 +57,8 @@
             
                 <!-- Profile Icon (only visible on larger screens) -->
                 <li class="hidden lg:flex items-center">
-                    <a href="#">
-                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border border-gray-300">
+                    <a href="{{ route('profile.nasabah') }}">
+                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border-4 border-hulk">
                     </a>
                 </li>
             </ul>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Kelola Sampah</a></li>
-            <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Profile</a></li>
+            <li><a href="{{ route('profile.nasabah') }}" class="hover:text-hulk scroll-smooth">Profile</a></li>
         </ul>
     </nav>
     
