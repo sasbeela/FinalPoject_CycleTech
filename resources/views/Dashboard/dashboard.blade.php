@@ -231,21 +231,5 @@
             <p class="text-sm">© 2024 CycleTech. All Rights Reserved.</p>
         </div>
     </footer>
-
-    <!-- JS -->
-    <script>
-        const dropdownButton = document.getElementById('dropdownButton');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-
-        dropdownButton.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('hidden');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
-            dropdownMenu.classList.add('hidden');
-            }
-        });
-    </script>
 </body>
 </html>

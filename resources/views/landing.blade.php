@@ -15,7 +15,7 @@
     <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
         <!-- Logo -->
         <div class="flex items-center space-x-3">
-            <img src="https://picsum.photos/40" alt="Logo" class="w-10 h-10 rounded-full">
+            <img src="{{ asset('images/logo 2.png') }}" alt="Logo" class="w-[55px] h-[55px] rounded-full">
             <h1 class="text-xl font-semibold text-hulk">Cycle Tech</h1>
         </div>
 
@@ -35,8 +35,8 @@
 
         <!-- Action Buttons -->
         <div class="hidden md:flex space-x-4">
-            <a href="{{ route('login.nasabah') }}" class="ease-in duration-150 border-2 border-hulk text-hulk py-2 px-4 rounded-lg hover:bg-hulk hover:text-white">Masuk</a>
-            <a href="{{ route('signin.nasabah') }}" class="border-2 ease-in duration-150 bg-hulk border-hulk text-white py-2 px-4 rounded-lg hover:bg-old-hulk">Daftar</a>
+            <a href="{{ route('login.nasabah') }}" class="ease-in duration-150 border-2 border-hulk text-hulk py-2 px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk hover:text-white">Masuk</a>
+            <a href="{{ route('signin.nasabah') }}" class="border-2 ease-in duration-150 bg-hulk border-hulk text-white py-2 px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">Daftar</a>
         </div>
     </div>
 
@@ -46,8 +46,8 @@
         <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Tentang Kami</a></li>
         <li><a href="#kontak" class="hover:text-hulk">Kontak</a></li>
         <div class="flex gap-4">
-            <li><a href="{{ route('login.nasabah') }}" class="flex border-2 border-hulk text-hulk py-2 px-4 rounded-lg hover:bg-hulk hover:text-white">Masuk</a></li>
-            <li><a href="{{ route('signin.nasabah') }}" class="flex border-2 bg-hulk border-hulk text-white py-2 px-4 rounded-lg hover:bg-hulk hover:text-white">Daftar</a></li>
+            <li><a href="{{ route('login.nasabah') }}" class="flex border-2 border-hulk text-hulk py-2 px-4 rounded-lg hover:bg-gradient-to-r from-black to-old-hulk hover:text-white">Masuk</a></li>
+            <li><a href="{{ route('signin.nasabah') }}" class="flex border-2 bg-hulk border-hulk text-white py-2 px-4 rounded-lg hover:bg-gradient-to-r from-black to-old-hulk hover:text-white">Daftar</a></li>
         </div>
     </ul>
 </nav>
@@ -73,7 +73,7 @@
                 <p class="text-md md:text-lg text-gray-600">Cycle Tech hadir untuk membantu mengelola dan daur ulang sampah agar bisa digunakan kembali. Yuk bergabung menjadi penyelamat bumi!</p>
             </div>
             <div class="md:w-1/2 mt-6 md:mt-0 flex justify-center">
-                <img src="https://picsum.photos/350" alt="Hero Image" class="rounded-xl shadow-lg w-full max-w-xs md:max-w-md">
+                <img src="{{ asset('images/landing 1.png') }}" alt="Hero Image" class="rounded-xl shadow-lg w-full max-w-xs md:max-w-md">
             </div>
         </div>
     </section>
@@ -132,7 +132,7 @@
     <section class="py-8 md:py-16 bg-white">
         <div class="container mx-auto flex flex-col md:flex-row items-center px-4 md:px-32">
             <div class="md:w-1/2 mt-6 md:mt-0 flex justify-center mb-8">
-                <img src="https://picsum.photos/400/400" alt="Benefits Image" class="rounded-lg shadow-lg w-full max-w-xs md:max-w-md">
+                <img src="{{ asset('images/landing 2.png') }}" alt="Benefits Image" class="rounded-lg shadow-lg w-full max-w-xs md:max-w-md">
             </div>
             <div class="md:w-1/2 text-left mx-auto md:space-y-6 ml-8">
                 <h2 class="text-xl md:text-2xl font-bold text-gray-800">Mengapa Harus Bergabung?</h2>
@@ -157,7 +157,7 @@
                 <p class="text-md md:text-lg text-gray-600">Gabung bersama kami sekarang untuk membuat perubahan!</p>
             </div>
             <div class="md:w-1/2 flex justify-center md:justify-end space-x-4">
-                <a href="{{ route('signin.nasabah') }}" class="hover:bg-old-hulk bg-hulk hover:bg-hulk-dark text-white py-3 px-6 rounded-lg font-semibold transition duration-150">Bergabung</a>
+                <a href="{{ route('signin.nasabah') }}" class="border-2 ease-in duration-150 bg-hulk border-hulk text-white py-2 px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">Bergabung</a>
             </div>
         </div>
     </section>
@@ -171,43 +171,43 @@
             <!-- Baris Pertama -->
             <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mt-12">
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/150" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/salma.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Salma Salsabila</h3>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/151" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/mutia.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Mutia Azzahra</h3>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/152" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/harry.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Harry Bonardo</h3>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/153" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/ivan.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Ivan Herdianto</h3>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/154" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/aprin.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Aprinia Salsabila</h3>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/155" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/ilham.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Ilham Saputra</h3>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/156" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/anggita.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Anggita Adilianza</h3>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/157" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/rizma.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Rizma Agustin</h3>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/158" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/velizha.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Velizha Sandy</h3>
                 </div>
                 <div class="flex flex-col items-center">
-                    <img src="https://picsum.photos/159" alt="Member" class="rounded-full object-cover">
+                    <img src="{{ asset('images/danu.png') }}" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Muhammad Danu</h3>
                 </div>
             </div>
@@ -221,8 +221,8 @@
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center md:px-32 px-24">
             <div class="md:w-1/3 mb-6 md:mb-0">
                 <div class="flex items-center">
-                    <img src="logo.png" alt="Cycle Tech Logo" class="w-10 h-10 mr-3">
-                    <h2 class="text-lg font-bold">Cycle Tech</h2>
+                    <img src="{{ asset('images/logo 2.png') }}" alt="Cycle Tech Logo" class="w-10 h-10 mr-3">
+                    <h2 class="text-lg font-bold text-hulk">Cycle Tech</h2>
                 </div>
                 <p class="mt-4 text-sm hidden md:block">
                     Cycle Tech adalah platform inovatif untuk pengelolaan sampah. Dengan fitur-fitur canggih, kami memudahkan Anda untuk memilah, mengelola, dan mendaur ulang sampah secara efektif.
