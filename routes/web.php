@@ -59,8 +59,12 @@ Route::prefix('nasabah')->group(function () {
         return view('Kreasi.unggahkreasi');
     })->name('unggah.kreasi');
 
+    Route::get('/artikel-kreasi', function () {
+        return view('Kreasi.artikelkreasi');
+    })->name('artikel.kreasi');
+
     Route::get('/Kreasiku', function () {
-        return view('Kreasi.kreasiku');
+        return view('Kreasiku.kreasiku');
     })->name('kreasiku');
 
     // Route untuk Tentang Kami

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cycle Tech</title>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script>
         function toggleExtraCards() {
             const moreButton = document.getElementById('moreButton');
@@ -24,8 +22,8 @@
         });
     </script>
 </head>
-
 <body>
+    <!-- header -->
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
             <!-- Logo -->
@@ -36,8 +34,8 @@
             
             <!-- Centered Navigation Links for Desktop -->
             <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
-                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black">Beranda</a></li>
-                <li><a href="{{ route('kelola.sampah') }}" class="hover:text-old-hulk">Kelola Sampah</a></li>
+                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black hover:text-hulk">Beranda</a></li>
+                <li><a href="{{ route('kelola.sampah') }}" class="text-black hover:text-hulk">Kelola Sampah</a></li>
                 <li>
                     <div class="relative inline-block text-left">
                         <button id="dropdownButtonDesktop" type="button" class="text-white bg-green-700 rounded-lg hover:bg-old-hulk inline-flex justify-center w-full px-4 py-2">
@@ -51,7 +49,7 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="{{ route('tentang.kami') }}" class="hover:text-green-700">Tentang Kami</a></li>
+                <li><a href="{{ route('tentang.kami') }}" class="hover:text-black hover:text-hulk">Tentang Kami</a></li>
             </ul>
             
             <!-- Notification & Profile Icons -->
@@ -137,90 +135,60 @@
         });
     </script>
 
-    <!-- Artikel & Informasi Section -->
-    <section class="bg-white py-16 px-32">
-        <nav class="text-sm text-gray-600 mb-4">
-                <a href="{{ route('dashboard.nasabah') }}" class="hover:underline">Beranda</a> > <span class="text-gray-800">Artikel</span>
-            </nav>
-            <header class="mb-6">
-                <h1 class="text-2xl font-semibold text-gray-800">Artikel</h1>
-                <p class="text-gray-600">Temukan tips dan trik serta informasi terbaru seputar lingkungan dan pengelolaan sampah.</p>
-            </header>
-        <div class="container mx-auto text-center">
-            <!-- Card 1 Artikel -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-8">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
-                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
-                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
-                    </div>
-                </div>
-            </div>
+    <!-- artikel -->
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div class="text-center">
+        <img src="image-url.jpg" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-32 h-32 mx-auto rounded-full">
+    </div>
+    <h1 class="text-2xl font-bold mt-4">Gantungan Kunci dari Botol Plastik Bekas</h1>
+    <p class="text-gray-600">Penulis: Amanda Manopo</p>
+    <p class="text-gray-600">Kategori: Plastik</p>
+    <p class="text-gray-600">Diterbitkan: 15 Oktober 2024</p>
+    
+    <h2 class="text-xl font-semibold mt-6">Alat dan Bahan:</h2>
+    <ul class="list-disc list-inside ml-4">
+        <li>Botol plastik bekas</li>
+        <li>Gunting</li>
+        <li>Gantungan kunci (cincin atau pengait kecil)</li>
+        <li>Stiker atau cat (untuk hiasan)</li>
+        <li>Paku/alat pemanas (opsional, untuk membuat lubang)</li>
+    </ul>
+    
+    <h2 class="text-xl font-semibold mt-6">Langkah-langkah:</h2>
+    <ol class="list-decimal list-inside ml-4">
+        <li>Cuci dan keringkan botol plastik bekas.</li>
+        <li>Potong botol menjadi bentuk yang diinginkan (bunga, hati, dll.).</li>
+        <li>Buat lubang di bagian atas potongan untuk gantungan kunci.</li>
+        <li>Pasang gantungan kunci ke dalam lubang yang telah dibuat.</li>
+        <li>Hias dengan stiker atau cat sesuai selera.</li>
+    </ol>
+</div>
 
-            <!-- Card 2 Artikel -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-8">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
-                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
-                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Extra Card Artikel -->
-            <div id="extraCards" class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-8 hidden">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-            </div>
-
-            <button id="moreButton" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Lebih Banyak</button>
+<div class="max-w-2xl mx-auto mt-8">
+    <h2 class="text-xl font-semibold">Kreasi Serupa</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div class="bg-white p-4 rounded-lg shadow-lg">
+            <img src="lampu-tidur-url.jpg" alt="Lampu Tidur dari Botol Bekas" class="w-full h-32 object-cover rounded-lg">
+            <h3 class="text-lg font-semibold mt-2">Lampu Tidur dari Botol Bekas</h3>
+            <p class="text-gray-600">Oleh David Nugraha</p>
         </div>
-    </section>
+        <div class="bg-white p-4 rounded-lg shadow-lg">
+            <img src="vas-bunga-url.jpg" alt="Vas Bunga dari Botol Plastik Bekas" class="w-full h-32 object-cover rounded-lg">
+            <h3 class="text-lg font-semibold mt-2">Vas Bunga dari Botol Plastik Bekas</h3>
+            <p class="text-gray-600">Oleh Aisyah Putri Wardani</p>
+        </div>
+    </div>
+</div>
 
     <!-- Footer -->
-    <footer class="custom-footer-bg py-10">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-32">
+    <footer class="bg-gradient-to-t from-birumuda to-krem py-10">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center md:px-32 px-24">
             <div class="md:w-1/3 mb-6 md:mb-0">
                 <div class="flex items-center">
-                    <img src="logo.png" alt="Cycle Tech Logo" class="w-10 h-10 mr-3">
-                    <h2 class="text-lg font-bold">Cycle Tech</h2>
+                    <img src="{{ asset('images/logo 2.png') }}" alt="Cycle Tech Logo" class="w-10 h-10 mr-3">
+                    <h2 class="text-lg font-bold text-hulk">Cycle Tech</h2>
                 </div>
-                <p class="mt-4 text-sm">
+                <p class="mt-4 text-sm hidden md:block">
                     Cycle Tech adalah platform inovatif untuk pengelolaan sampah. Dengan fitur-fitur canggih, kami memudahkan Anda untuk memilah, mengelola, dan mendaur ulang sampah secara efektif.
                 </p>
             </div>
@@ -232,13 +200,13 @@
             <div class="md:w-1/3 text-center md:text-right">
                 <h3 class="text-lg font-semibold mb-2">Media Sosial</h3>
                 <div class="flex justify-center md:justify-end space-x-4">
-                    <a href="#" class="text-white hover:text-gray-400">
+                    <a href="#" class="text-black hover:text-gray-400">
                         <i class="bi bi-facebook w-6 h-6"></i>
                     </a>
-                    <a href="#" class="text-white hover:text-gray-400">
+                    <a href="#" class="text-black hover:text-gray-400">
                         <i class="bi bi-twitter w-6 h-6"></i>
                     </a>
-                    <a href="#" class="text-white hover:text-gray-400">
+                    <a href="#" class="text-black hover:text-gray-400">
                         <i class="bi bi-instagram w-6 h-6"></i>
                     </a>
                 </div>

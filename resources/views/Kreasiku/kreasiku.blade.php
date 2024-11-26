@@ -7,36 +7,6 @@
     <title>Cycle Tech</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
-    <script>
-        function toggleExtraCards() {
-            const moreButton = document.getElementById('moreButton');
-            const extraCards = document.getElementById('extraCards');
-
-            moreButton.addEventListener('click', function () {
-                extraCards.classList.toggle('hidden');
-                moreButton.textContent = extraCards.classList.contains('hidden') ? 'Lebih Banyak' : 'Lebih Sedikit';
-            });
-        }
-
-        function checkRowsVisibility() {
-            const itemsContainer = document.getElementById('itemsContainer');
-            const moreButton = document.getElementById('moreButton');
-            const items = itemsContainer.querySelectorAll('.item');
-            const itemsPerRow = 3; // Misalnya, 3 item per baris (sesuai grid Tailwind)
-
-            // Tampilkan tombol hanya jika ada lebih dari 2 baris
-            if (items.length > itemsPerRow * 2) {
-                moreButton.classList.remove('hidden');
-            } else {
-                moreButton.classList.add('hidden');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            checkRowsVisibility();
-            toggleExtraCards();
-        });
-    </script>
 </head>
 
 <body>
@@ -209,6 +179,36 @@
         </div>
     </section>
     
+    <script>
+        function toggleExtraCards() {
+            const moreButton = document.getElementById('moreButton');
+            const extraCards = document.getElementById('extraCards');
+
+            moreButton.addEventListener('click', function () {
+                extraCards.classList.toggle('hidden');
+                moreButton.textContent = extraCards.classList.contains('hidden') ? 'Lebih Banyak' : 'Lebih Sedikit';
+            });
+        }
+
+        function checkRowsVisibility() {
+            const itemsContainer = document.getElementById('itemsContainer');
+            const moreButton = document.getElementById('moreButton');
+            const items = itemsContainer.querySelectorAll('.item');
+            const itemsPerRow = 3; // Misalnya, 3 item per baris (sesuai grid Tailwind)
+
+            // Tampilkan tombol hanya jika ada lebih dari 2 baris
+            if (items.length > itemsPerRow * 2) {
+                moreButton.classList.remove('hidden');
+            } else {
+                moreButton.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            checkRowsVisibility();
+            toggleExtraCards();
+        });
+    </script>
 
     <!-- Footer -->
     <section>

@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
+    <!-- header -->
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
             <!-- Logo -->
@@ -215,20 +216,20 @@
             
             <!-- Right Section -->
             <div class="flex-1 mb-6 md:mb-0 md:ml-4">
-                <div class="flex items-start text-left mb-4">
-                    <div class="text-black font-bold text-5xl w-12 h-12 flex items-center justify-center mb-8 mr-8">
+                <div class="flex items-end text-left mb-4">
+                    <div class="text-black font-bold text-5xl w-12 h-12 flex items-center justify-center mb-8 ml-4">
                         3
                     </div>
-                    <div class=>
+                    <div class="ml-8">
                         <h2 class="font-bold">Remas dan Lipat</h2>
                         <p>Remas dan lipat sampah untuk memaksimalkan ruang dan volume paket.</p>
                     </div>
                 </div>
-                <div class="flex items-start mt-8">
-                    <div class="text-black font-bold text-5xl w-12 h-12 flex items-center justify-center mr-4 mb-8 mr-8">
+                <div class="flex items-end mb-4 text-left">
+                    <div class="text-black font-bold text-5xl w-12 h-12 flex items-center justify-center ml-4">
                         4
                     </div>
-                    <div>
+                    <div class="ml-8">
                         <h2 class="font-bold">Kemas Rapi</h2>
                         <p>Kemas sampah menggunakan kardus atau kemasan lain. Jangan lupa tulis kode SSA pada paket.</p>
                     </div>
