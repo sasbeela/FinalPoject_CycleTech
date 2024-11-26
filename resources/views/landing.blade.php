@@ -29,7 +29,7 @@
         <!-- Centered Navigation Links for Desktop -->
         <ul id="menu" class="hidden md:flex center-navbar space-x-8 font-medium text-gray-700">
             <li><a href="{{ route('landing.page') }}" class="hover:text-hulk">Beranda</a></li>
-            <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Tentang Kami</a></li>
+            <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth hidden lg:flex">Tentang Kami</a></li>
             <li><a href="#kontak" class="hover:text-hulk">Kontak</a></li>
         </ul>
 
@@ -43,7 +43,6 @@
     <!-- Dropdown Menu for Mobile (initially hidden) -->
     <ul id="dropdown-menu" class="md:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
         <li><a href="{{ route('landing.page') }}" class="hover:text-hulk">Beranda</a></li>
-        <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth">Tentang Kami</a></li>
         <li><a href="#kontak" class="hover:text-hulk">Kontak</a></li>
         <div class="flex gap-4">
             <li><a href="{{ route('login.nasabah') }}" class="flex border-2 border-hulk text-hulk py-2 px-4 rounded-lg hover:bg-gradient-to-r from-black to-old-hulk hover:text-white">Masuk</a></li>
@@ -163,7 +162,7 @@
     </section>
 
       <!-- Section: Tim Kami -->
-      <section id="tentang-kami" class="bg-gradient-to-b from-white to-krem py-10">
+      <section id="tentang-kami" class="lg:grid hidden bg-gradient-to-b from-white to-krem py-10">
         <div class="container mx-auto text-center px-24 md:px-32">
             <h2 class="text-3xl font-bold text-gray-800">Tentang Tim Kami</h2>
             <p class="text-gray-600 mt-4">Berikut adalah tim hebat yang bekerja di balik layar Cycle Tech.</p>
@@ -216,7 +215,7 @@
     </section>
 
     <!-- Footer -->
-    <section id="kontak">
+    <section>
     <footer class="bg-gradient-to-t from-birumuda to-krem py-10">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center md:px-32 px-24">
             <div class="md:w-1/3 mb-6 md:mb-0">
