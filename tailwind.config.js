@@ -21,8 +21,10 @@ export default {
                 "birumuda" : "#EEF7FF",
                 "krem" : "#FFF7EA",
                 "hijau" : "#008254", 
-
             },
+            backgroundImage: {
+                'hero': "url('../public/images/tentangkami.png')",
+              },
         },
     },
     plugins: [],
