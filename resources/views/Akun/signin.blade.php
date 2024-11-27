@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cycle Tech Registration</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo 2.png">
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gradient-to-b from-birumuda to-krem flex min-h-screen">
