@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Dashboard')</title>
     <link rel="stylesheet" href="{{ asset('fontawesome-free-6.6.0-web/css') }}">
+    <link rel="icon" type="image/x-icon" href="/images/logo 2.png">
     @vite('resources/css/app.css')
 </head>
 <body class="">
