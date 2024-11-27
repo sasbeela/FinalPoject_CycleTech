@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cycle Tech</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo 2.png">
     @vite('resources/css/app.css')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
@@ -55,7 +56,7 @@
             
                 <!-- Profile Icon (only visible on larger screens) -->
                 <li class="hidden lg:flex items-center">
-                    <a href="{{ route('profile.nasabah') }}">
+                    <a href="{{ route('profile.nasabah')}}">
                         <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border-4 border-hulk">
                     </a>
                 </li>
@@ -120,128 +121,85 @@
         });
     </script>
 
-    <!-- intro -->
-    <div id="intro" class="mx-auto item-center justify-center px-10 mt-10">
-        <div class="border-2 border-green-500 rounded-lg mx-auto items-center justify-center mb-6 w-[1240px] h-[657px] relative">
-            <div class="absolute top-4 left-8 mt-6">  <!-- Posisi tombol di kiri atas -->
-                <button id="utamaBtn" class="border-2 border-green-700 text-white-700 font-bold text-2xl py-2 px-4 rounded-full bg-green-700 hover:bg-green-700 hover:text-white w-[131px] h-[50px]">
-                    Utama
-                </button>
-                <button id="uploadBtn" class="border-2 border-green-700 text-green-700 text-2xl py-2 px-4 rounded-full hover:bg-green-700 hover:text-white w-[131px] h-[50px]">
-                    Upload
-                </button>
-            </div>
-            <div class="flex justify-center items-center w-full h-full">
-                <img src="{{ asset('images/camera.png') }}" alt="Kamera" class="object-cover w-[197px] h-[177px]">
-            </div>
-            <div class="absolute bottom-4 left-8">
-                <div class="text-left mb-4">
-                    <h1 class="text-2xl font-bold">Foto dan Daur Ulang</h1>
+    <!-- Intro Section -->
+<div class="mx-auto flex flex-col items-center justify-center px-4 mt-28">
+    <!-- Text Section -->
+    <div class="text-center mb-6">
+        <h1 class="text-lg font-bold md:text-xl lg:text-2xl">Deteksi Sampah-mu dan Mulai Daur Ulang!</h1>
+    </div>
+    <div class="mb-16">
+        <p class="text-base md:text-lg lg:text-xl px-6 md:px-12 lg:px-24">
+            Yuk, kenali kategori sampahmu! Seret dan lepas fotonya ke kotak yang telah disediakan di bawah ini atau pilih foto dari penyimpananmu. Tunggu beberapa saat dan hasilnya akan muncul.
+        </p>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="w-full h-auto px-4 lg:px-0">
+        <div class="flex flex-col justify-center items-center">
+            <!-- Upload Box -->
+            <label class="block text-black font-semibold mb-2 w-full max-w-4xl">
+                <div class="border-2 border-dashed border-hulk rounded-xl w-full h-48 md:h-64 lg:h-[380px] flex justify-center items-center">
+                    <input type="file" id="foto" name="foto" class="hidden">
+                    <img src="{{ asset('images/upload.png') }}" alt="Kamera" class="object-cover w-12 h-12 md:w-16 md:h-16 lg:w-[197px] lg:h-[177px]">
                 </div>
-                <div class="text-left mb-4">
-                    <p class="text-xl">Sistem berbasis AI untuk membantu mengenali kategori sampah yang dimiliki dan bagaimana mengolah sampah menjadi kerajinan tangan yang bernilai. Pertama-tama, ambil gambar atau unggah ke sistem, lalu sistem akan mengklasifikasikan gambar dan menghasilkan termasuk kategori sampah dan rekomendasi kreasi. Coba sekarang!</p>
-                </div>
-            </div>
+            </label>
+            <p class="text-sm md:text-base font-normal text-gray text-center mt-4">
+                Perunjuk: Untuk hasil yang akurat, pastikan hanya ada satu objek yang terlihat jelas dalam foto.
+            </p>
         </div>
     </div>
 
-    <!-- Inti -->
-    <div id="uploadForm" class="mx-auto item-center justify-center px-10 mt-10 hidden">
-        <div class="border-2 border-green-500 rounded-lg mx-auto items-center justify-center mb-6 w-[1240px] h-[816px] relative">
-            <div class="absolute top-4 left-8 mt-6">
-                <button id="utamaBtn" class="border-2 border-green-700 text-green-700 text-2xl py-2 px-4 rounded-full hover:bg-green-700 hover:text-white w-[131px] h-[50px]">
-                    Utama
-                </button>
-                <button id="uploadBtn" class="border-2 border-green-700 text-white-700 font-bold text-2xl py-2 px-4 rounded-full bg-green-700 hover:bg-green-700 hover:text-white w-[131px] h-[50px]">
-                    Upload
-                </button>
-            </div>
-            <div class="absolute top-32 left-8 mt-6">
-                <div class="text-left mb-4">
-                    <p class="text-xl">Yuk, kenali kategori sampahmu! Seret dan lepas fotonya ke kotak yang telah disediakan di bawah ini atau pilih foto dari penyimpananmu. Tunggu beberapa saat dan hasilnya akan muncul.</p>
-                </div>
-            </div>
-            <!-- Unggah Foto-->
-            <div class="absolute bottom-28 left-1/2 transform -translate-x-1/2 mt-6">
-                <div class="border-2 border-green-500 rounded-lg h-[467px] w-[1126px] flex items-center justify-center bg-gray-100">
-                    <form id="uploadFormElement" enctype="multipart/form-data">
-                        <input type="file" name="fileToUpload" id="fileToUpload" class="mb-4">
-                    </form>
-                    <div class="absolute bottom-10 right-[200px]">
-                        <button type="button" id="uploadSubmitBtn" class="px-6 py-2 border-2 border-green-500 text-green-500 font-medium rounded-full hover:bg-green-500 hover:text-white transition">
-                            Unggah
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- sampai sini -->
-            <div class="absolute bottom-4 left-8">
-                <div class="text-left mb-4">
-                    <p class="text-xl">Yuk, kenali kategori sampahmu! Seret dan lepas fotonya ke kotak yang telah disediakan di bawah ini atau pilih foto dari penyimpananmu. Tunggu beberapa saat dan hasilnya akan muncul.</p>
-                </div>
-            </div>
+    <!-- Description Section -->
+    <div class="text-center mt-16 mb-24 px-4 md:px-16 lg:px-24">
+        <p class="text-base md:text-lg lg:text-xl">
+            Sistem berbasis AI untuk membantu mengenali kategori sampah yang dimiliki dan bagaimana mengolah sampah menjadi kerajinan tangan yang bernilai. Pertama-tama, ambil gambar atau unggah ke sistem, lalu sistem akan mengklasifikasikan gambar dan menghasilkan termasuk kategori sampah dan rekomendasi kreasi. Coba sekarang!
+        </p>
+        <div class="flex justify-center mt-6">
+            <a id="uploadBtn" class="border-2 px-4 py-2 border-hulk font-medium text-hulk rounded-full text-sm md:text-base lg:text-lg hover:bg-old-hulk hover:text-white">
+                Upload
+            </a>
         </div>
     </div>
-
-    <!-- hasil -->
-    <section id="recommendationSection" class="bg-white py-16 px-32 hidden">
-        <div class="container mx-auto text-center px-32">
-            <header class="mb-6">
-                <h1 class="text-4xl font-bold text-gray-800">Hasil</h1>
-                <p class="text-gray-600 text-2xl">Berdasarkan deteksi kami, sampah ini termasuk dalam kategori Plastik. Berikut rekomendasi kreasi daur ulang sampahmu!</p>
-            </header>
-            <div class="container mx-auto text-center">
-                <!-- Card 1 Artikel -->
-                <div id="itemsContainer" class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-12 mt-8">
-                    <div class="item bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl w-[370px] h-[432px] overflow-hidden border border-black-100">
-                        <h3 class="text-xl font-bold text-black-800 mb-4 mt-6">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                        <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-[330px] h-[231px] object-cover rounded-t-lg">
-                        <p class="text-black-400 text-xl text-left mt-4">Oleh Amanda Manopo</p>
-                    </div>
-                </div>
-                <!-- button muncul jika lebih dari 2 row -->
-                <button id="moreButton" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Lebih Banyak</button>
-            </div>
-        </div>
-    </section>
-
+</div>
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-b from-blue-800 via-white-100 to-brown-100 py-10">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-32">
-            <div class="md:w-1/3 mb-6 md:mb-0">
-                <div class="flex items-center">
-                    <img src="logo.png" alt="Cycle Tech Logo" class="w-10 h-10 mr-3">
-                    <h2 class="text-lg font-bold">Cycle Tech</h2>
+    <section>
+        <footer class="bg-gradient-to-t from-birumuda to-krem py-10">
+            <div class="container mx-auto flex flex-col md:flex-row justify-between items-center md:px-32 px-24">
+                <div class="md:w-1/3 mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <img src="{{ asset('images/logo 2.png') }}" alt="Cycle Tech Logo" class="w-10 h-10 mr-3">
+                        <h2 class="text-lg font-bold text-hulk">Cycle Tech</h2>
+                    </div>
+                    <p class="mt-4 text-sm hidden md:block">
+                        Cycle Tech adalah platform inovatif untuk pengelolaan sampah. Dengan fitur-fitur canggih, kami memudahkan Anda untuk memilah, mengelola, dan mendaur ulang sampah secara efektif.
+                    </p>
                 </div>
-                <p class="mt-4 text-sm">
-                    Cycle Tech adalah platform inovatif untuk pengelolaan sampah. Dengan fitur-fitur canggih, kami memudahkan Anda untuk memilah, mengelola, dan mendaur ulang sampah secara efektif.
-                </p>
-            </div>
-            <div class="md:w-1/3 mb-6 md:mb-0 text-center">
-                <h3 class="text-lg font-semibold mb-2">Hubungi</h3>
-                <p class="text-sm">+62 812 3456 7890</p>
-                <p class="text-sm">cycletech@gmail.com</p>
-            </div>
-            <div class="md:w-1/3 text-center md:text-right">
-                <h3 class="text-lg font-semibold mb-2">Media Sosial</h3>
-                <div class="flex justify-center md:justify-end space-x-4">
-                    <a href="#" class="text-white hover:text-gray-400">
-                        <i class="bi bi-facebook w-6 h-6"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-gray-400">
-                        <i class="bi bi-twitter w-6 h-6"></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-gray-400">
-                        <i class="bi bi-instagram w-6 h-6"></i>
-                    </a>
+                <div class="md:w-1/3 mb-6 md:mb-0 text-center">
+                    <h3 class="text-lg font-semibold mb-2">Hubungi</h3>
+                    <p class="text-sm">+62 812 3456 7890</p>
+                    <p class="text-sm">cycletech@gmail.com</p>
+                </div>
+                <div class="md:w-1/3 text-center md:text-right">
+                    <h3 class="text-lg font-semibold mb-2">Media Sosial</h3>
+                    <div class="flex justify-center md:justify-end space-x-4">
+                        <a href="#" class="text-black hover:text-gray-400">
+                            <i class="bi bi-facebook w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-gray-400">
+                            <i class="bi bi-twitter w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="text-black hover:text-gray-400">
+                            <i class="bi bi-instagram w-6 h-6"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="text-center mt-8">
-            <p class="text-sm">© 2024 CycleTech. All Rights Reserved.</p>
-        </div>
-    </footer>
+            <div class="text-center mt-8">
+                <p class="text-sm">© 2024 CycleTech. All Rights Reserved.</p>
+            </div>
+        </footer>
+        </section>
 
     <!-- JS -->
     <script>
