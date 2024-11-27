@@ -203,20 +203,6 @@
 
     <!-- JS -->
     <script>
-        // dropdown kreasi
-        const dropdownButton = document.getElementById('dropdownButton');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-
-        dropdownButton.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('hidden');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
-                dropdownMenu.classList.add('hidden');
-            }
-        });
-
         // Unggah Foto
         const uploadBtn = document.getElementById('uploadBtn');
         const introSection = document.getElementById('intro');
