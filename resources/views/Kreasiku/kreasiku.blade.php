@@ -142,9 +142,11 @@
             <div id="itemsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                 <!-- Card Item -->
                 <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
+                    <a href="{{ route('edit.kreasiku') }}">
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
+                        <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
+                        <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
+                    </a>
                 </div>
                 <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
                     <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>

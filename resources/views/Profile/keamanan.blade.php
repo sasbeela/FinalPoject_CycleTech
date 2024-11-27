@@ -8,6 +8,7 @@
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
+    <link rel="icon" type="image/x-icon" href="/images/logo 2.png">
 </head>
 
 <body class="bg-blue-50">

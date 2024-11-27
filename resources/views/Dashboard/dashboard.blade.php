@@ -10,7 +10,8 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-blue-50">
+<body>
+    <!-- header -->
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
             <!-- Logo -->
@@ -147,11 +148,13 @@
             <!-- Card Artikel -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
+                    <a href="{{ route('detail.artikel') }}">
+                        <img src="https://picsum.photos/500/300" alt="" class="w-full">
+                        <div class="p-4">
+                            <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
+                            <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
+                        </div>
+                    </a>   
                 </div>
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
                     <img src="https://picsum.photos/500/300" alt="" class="w-full">
@@ -248,6 +251,6 @@
                 <p class="text-sm">© 2024 CycleTech. All Rights Reserved.</p>
             </div>
         </footer>
-        </section>
+    </section>
 </body>
 </html>

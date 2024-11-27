@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Header -->
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
             <!-- Logo -->
@@ -23,7 +24,7 @@
                 <li><a href="{{ route('kelola.sampah') }}" class="hover:text-old-hulk">Kelola Sampah</a></li>
                 <li>
                     <div class="relative inline-block text-left">
-                        <button id="desktopKreasiButton" type="button" class="text-black hover:text-old-hulk">
+                        <button id="desktopKreasiButton" type="button" class="text-white bg-green-700 rounded-lg hover:bg-old-hulk inline-flex justify-center w-full px-4 py-2">
                             Kreasi
                         </button>
                         <div id="desktopKreasiDropdown" class="absolute right-0 z-10 hidden mt-2 w-20 rounded-md bg-green-200 shadow-lg">
@@ -34,7 +35,7 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="{{ route('tentang.kami') }}" class="text-white bg-green-700 rounded-lg hover:bg-old-hulk inline-flex justify-center w-full px-4 py-2">Tentang Kami</a></li>
+                <li><a href="{{ route('tentang.kami') }}" class="hover:text-green-700">Tentang Kami</a></li>
             </ul>
     
             <!-- Notification & Profile Icons -->
@@ -128,115 +129,135 @@
         });
     </script>
 
-    <!-- Hero Section -->
-    <div class="relative bg-gray-50 py-10 px-6 md:px-10">
-        <div class="relative bg-[url('public/images/tentangkami.png')] bg-no-repeat bg-cover bg-center h-[400px] rounded-lg overflow-show">
-            <div class="absolute top-44 left-6 bg-white bg-opacity-100 rounded-lg p-6 max-w-full w-[412px]">
-                <div class="bg-white-200 flex items-center">
-                    <img src="{{ asset('images/logo 2.png') }}" alt="Logo" class="w-12 h-12 rounded-full mr-4">
-                    <h2 class="text-2xl font-bold text-hulk">Cycle Tech</h2>
-                </div>
-                <p class="mt-4 text-gray-600">
-                    Cycle Tech adalah platform inovatif untuk pengelolaan sampah yang cerdas dan berkelanjutan. Dengan fitur-fitur canggih, kami membantu Anda memilah, mengelola, dan mendaur ulang sampah dengan lebih mudah dan efektif, sambil berkontribusi pada lingkungan yang lebih bersih.
-                </p>
-            </div>
+
+    <!-- Unggah Kreasi -->
+    <div class="max-w-4xl mx-auto mt-20 p-6">
+        <header class="mb-6">
+            <h1 class="text-2xl font-semibold text-gray-800">Edit Kreasimu</h1>
+            <p class="text-gray-600">Tunjukkan kreativitasmu! Unggah karya daur ulangmu dan bergabunglah dengan para pencinta lingkungan lainnya.</p>
+        </header>
+
+        <!-- ganti foto -->
+        <div class="border-2 border-dashed border-hulk rounded-lg h-64 flex items-center justify-center mb-6">
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+                <img src="https://picsum.photos/300/200" alt="" class="mb-4">
+                <input type="file" name="fileToUpload" id="fileToUpload" placeholder="">
+            </form>
         </div>
+
+        <div class="border-t-2 border-hulk mb-6"></div>
+
+        <!-- Form Section -->
+        <form class="space-y-4" action="submit_kreasi.php" method="post" >
+            <!-- Title and Author -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-lg font-medium text-gray-800 mb-2">Judul Kreasi</label>
+                    <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3" contenteditable="true">Gantungan Kunci dari Botol Plastik Bekas</div>
+                </div>
+                <div>
+                    <label class="block text-lg font-medium text-gray-800 mb-2">Nama Penulis</label>
+                    <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3" contenteditable="true">Amanda Manopo</div>
+                </div>
+            </div>
+
+            <!-- Category and Date -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-lg font-medium text-gray-800 mb-2">Kategori</label>
+                    <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3" contenteditable="true">Plastik</div>
+                </div>
+                <div class="relative">
+                <label for="tanggal" class="block text-lg font-medium text-gray-800 mb-2">Tanggal</label>
+                <div class="flex items-center">
+                    <input id="tanggal" name="tanggal" type="date" class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3 pr-12"/>
+                </div>
+            </div>
+            </div>
+
+            <!-- Tools and Materials -->
+            <div>
+                <label class="block text-lg font-medium text-gray-800 mb-2">Alat dan Bahan</label>
+                <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3 pr-12" contenteditable="true">
+                    - Botol plastik bekas <br>
+                    - Gunting <br>
+                    - Gantungan kunci (cincin atau pengait kecil) <br>
+                    - Stiker atau cat (untuk hiasan) <br>
+                    - Paku/alat pemanas (opsional, untuk membuat lubang)
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div>
+                <label class="block text-lg font-medium text-gray-800 mb-2">Langkah-langkah</label>
+                <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3 pr-12" contenteditable="true">
+                    1. Cuci dan keringkan botol plastik bekas. <br>
+                    2. Potong botol menjadi bentuk yang diinginkan (bunga, hati, dll.). <br>
+                    3. Buat lubang di bagian atas potongan untuk gantungan kunci. <br>
+                    4. Pasang gantungan kunci ke dalam lubang yang telah dibuat. <br>
+                    5. Hias dengan stiker atau cat sesuai selera.
+                </div>
+            </div>
+
+            <div class="flex justify-center md:justify-end gap-6 mb-6 justify-end">
+                <button type="submit" class="px-6 py-2 border-2 border-hulk text-hulk font-medium rounded-full hover:bg-old-hulk hover:text-white transition">
+                    Perbarui
+                </button>
+                <!-- Button -->
+                <button 
+                    onclick="openModal()" 
+                    class="px-6 py-2 border-2 border-red-500 text-red-500 font-medium rounded-full hover:bg-red-500 hover:text-white transition">
+                    Hapus
+                </button>
+
+                <!-- Modal -->
+                <div id="deleteModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+                    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Konfirmasi Hapus</h2>
+                        <p class="text-gray-600 mb-6">Apakah Anda yakin ingin menghapus kreasi ini? Tindakan ini tidak dapat dibatalkan.</p>
+                        <div class="flex justify-end space-x-4">
+                            <!-- Cancel Button -->
+                            <button 
+                                onclick="closeModal()" 
+                                class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition">
+                                Batal
+                            </button>
+                            <!-- Confirm Delete Button -->
+                            <form action="#" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button 
+                                    type="submit" 
+                                    class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    
-    <div class="max-w-6xl mx-auto mt-10 text-justify text-gray-700 lg:px-10 md:px-12 px-16 mb-10">
-        <p class="text-lg leading-relaxed">
-            Cycle Tech adalah solusi cerdas untuk pengelolaan sampah Anda. Kami menyediakan platform lengkap yang tidak hanya mengedukasi, tetapi juga menginspirasi pengelolaan sampah secara kreatif. Dengan fitur deteksi jenis sampah otomatis, Anda dapat mengunggah gambar sampah dan mendapatkan rekomendasi kreasi menarik yang dapat dibuat dari limbah tersebut.
-        </p>
-        <p class="mt-4 text-lg leading-relaxed">
-            Selain itu, kami juga menghadirkan galeri inspirasi daur ulang untuk membantu Anda mengubah sampah menjadi barang bernilai guna, serta artikel terkini yang membahas isu-isu penting seputar pengelolaan dan teknologi daur ulang. Cycle Tech hadir untuk mempermudah pengelolaan sampah Anda sekaligus berkontribusi pada lingkungan yang lebih bersih dan berkelanjutan.
-        </p>
-  </div>
 
+    <script>
+    function openModal() {
+        document.getElementById('deleteModal').classList.remove('hidden');
+    }
 
-    <!-- Visi dan Misi -->
-    <section class="bg-gradient-to-t from-krem to-birumuda py-16">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8">Visi dan Misi</h2>
-            <div class="flex flex-col items-center space-y-8 md:space-y-0 justify-center">
-                <div class="flex flex-col items-center">
-                    <h3 class="text-2xl font-semibold text-hulk mb-4">Visi Kami</h3>
-                    <p class="text-gray-700 text-justify w-full max-w-4xl">Menjadi platform digital terdepan yang menginspirasi dan memberdayakan masyarakat untuk mengelola sampah secara kreatif dan inovatif, demi menciptakan lingkungan yang bersih, sehat, dan berkelanjutan.</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <h3 class="text-2xl font-semibold text-hulk mb-4">Misi Kami</h3>
-                    <ul class="text-gray-700 space-y-2 list-decimal list-inside w-full max-w-4xl">
-                        <li>Meningkatkan kesadaran dan edukasi masyarakat tentang pentingnya pengelolaan sampah yang ramah lingkungan dan berkelanjutan.</li>
-                        <li>Mengembangkan fitur-fitur inovatif yang mendukung daur ulang dan pemanfaatan kembali sampah dengan cara yang kreatif.</li>
-                        <li>Memberikan informasi terkini tentang manfaat, peluang, dan nilai ekonomi dari pengelolaan sampah yang baik.</li>
-                        <li>Mendorong partisipasi aktif masyarakat dalam pengelolaan sampah melalui platform yang inklusif dan mudah diakses.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    
+    function closeModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
 
-    <!-- Section: Tim Kami -->
-    <section class="bg-white py-10">
-        <div class="container mx-auto text-center px-6 md:px-32">
-            <h2 class="text-3xl font-bold text-gray-800">Tentang Tim Kami</h2>
-            <p class="text-gray-600 mt-4">Berikut adalah tim hebat yang bekerja di balik layar Cycle Tech.</p>
-    
-            <!-- Baris Pertama -->
-            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-8 mt-12">
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/salma.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Salma Salsabila</h3>
-                    <p class="text-gray-600">Product Manager</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/mutia.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Mutia Azzahra</h3>
-                    <p class="text-gray-600">UI/UX Designer</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/harry.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Harry Bonardo</h3>
-                    <p class="text-gray-600">UI/UX Designer</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/ivan.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Ivan Herdianto</h3>
-                    <p class="text-gray-600">Front-End Developer</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/aprin.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Aprinia Salsabila</h3>
-                    <p class="text-gray-600">Front-End Developer</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/ilham.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Ilham Saputra</h3>
-                    <p class="text-gray-600">Back-End Developer</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/anggita.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Anggita Adilianza</h3>
-                    <p class="text-gray-600">Back-End Developer</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/rizma.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Rizma Agustin</h3>
-                    <p class="text-gray-600">Back-End Developer</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/velizha.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Velizha Sandy</h3>
-                    <p class="text-gray-600">Data Analyst</p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('images/danu.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Muhammad Danu</h3>
-                    <p class="text-gray-600">Data Analyst</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    function handleDelete(event) {
+        event.preventDefault(); // Prevent form submission to handle redirection manually
+
+        // Simulate successful deletion (replace with an actual AJAX request if needed)
+        setTimeout(() => {
+            // Redirect to the "Kreasiku" page after deletion
+            window.location.href = "{{ route('kreasiku') }}";
+        }, 500); // Simulated delay for UX
+    }
+</script>
 
     <!-- Footer -->
     <section>
@@ -275,6 +296,21 @@
                 <p class="text-sm">© 2024 CycleTech. All Rights Reserved.</p>
             </div>
         </footer>
-    </section>
+        </section>
+    <!-- JS -->
+    <script>
+            const dropdownButton = document.getElementById('dropdownButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+
+            dropdownButton.addEventListener('click', () => {
+                dropdownMenu.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
+                dropdownMenu.classList.add('hidden');
+                }
+            });
+        </script>
 </body>
 </html>
