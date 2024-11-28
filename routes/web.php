@@ -51,6 +51,16 @@ Route::prefix('nasabah')->group(function () {
         return view('Dashboard.dashboard');
     })->name('dashboard.nasabah');
 
+    //Route artikel
+    Route::get('/artikel', function () {
+        return view('Dashboard.artikel');
+    })->name('artikel.nasabah');
+
+    //Route artikel detail
+    Route::get('/artikel-show', function () {
+        return view('Dashboard.detailartikel');
+    })->name('detail.artikel');
+
     // Route untuk Kelola Sampah
     Route::get('/Kelola-Sampah', function () {
         return view('KelolaSampah.kelolasampah');
@@ -61,6 +71,10 @@ Route::prefix('nasabah')->group(function () {
         return view('Kreasi.kreasi');
     })->name('kreasi');
 
+    Route::get('/Kreasi-show', function () {
+        return view('Kreasi.artikelkreasi');
+    })->name('artikel.kreasi');
+
     Route::get('/deteksi', function () {
         return view('Kreasi.deteksi');
     })->name('deteksi.sampah');
@@ -69,9 +83,9 @@ Route::prefix('nasabah')->group(function () {
         return view('Kreasi.unggahkreasi');
     })->name('unggah.kreasi');
 
-    Route::get('/artikel-kreasi', function () {
-        return view('Kreasi.artikelkreasi');
-    })->name('artikel.kreasi');
+    Route::get('/edit-kreasi', function () {
+        return view('Kreasiku.editkreasiku');
+    })->name('edit.kreasiku');
 
     Route::get('/Kreasiku', function () {
         return view('Kreasiku.kreasiku');
@@ -81,11 +95,6 @@ Route::prefix('nasabah')->group(function () {
     Route::get('/Tentang-Kami', function () {
         return view('Dashboard.tentangkami');
     })->name('tentang.kami');
-
-    //Route Dashboard Nasabah
-    Route::get('/artikel', function () {
-        return view('Dashboard.artikel');
-    })->name('artikel.nasabah');
     
 });
 
