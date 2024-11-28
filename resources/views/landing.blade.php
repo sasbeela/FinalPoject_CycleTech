@@ -30,7 +30,7 @@
         <!-- Centered Navigation Links for Desktop -->
         <ul id="menu" class="hidden md:flex center-navbar space-x-8 font-medium text-gray-700">
             <li><a href="{{ route('landing.page') }}" class="hover:text-hulk">Beranda</a></li>
-            <li><a href="#tentang-kami" class="hover:text-hulk scroll-smooth hidden lg:flex">Tentang Kami</a></li>
+            <li><a href="#tentang-kami" class="hover:text-hulk scroll-snap hidden lg:flex">Tentang Kami</a></li>
             <li><a href="#kontak" class="hover:text-hulk">Kontak</a></li>
         </ul>
 
