@@ -141,13 +141,13 @@
             <!-- Grid Container for Items -->
             <div id="itemsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                 <!-- Card Item -->
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <a href="{{ route('edit.kreasiku') }}">
+                <a href="{{ route('edit.kreasiku') }}">
+                    <div class="item bg-gradient-to-b from-birumuda to-krem p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
                         <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
                         <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
                         <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                    </a>
-                </div>
+                    </div>
+                </a>
                 <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
                     <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
                     <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
@@ -191,34 +191,38 @@
     </section>
     
     <script>
-        function toggleExtraCards() {
-            const moreButton = document.getElementById('moreButton');
-            const extraCards = document.getElementById('extraCards');
+    document.addEventListener('DOMContentLoaded', function () {
+        const moreButton = document.getElementById('moreButton');
+        const itemsContainer = document.getElementById('itemsContainer');
+        const items = itemsContainer.querySelectorAll('.item');
+        const itemsPerRow = 3; // Misalnya, 3 item per baris sesuai grid Tailwind
+        const maxVisibleRows = 2; // Maksimum 2 baris yang terlihat secara default
 
-            moreButton.addEventListener('click', function () {
-                extraCards.classList.toggle('hidden');
-                moreButton.textContent = extraCards.classList.contains('hidden') ? 'Lebih Banyak' : 'Lebih Sedikit';
+        // Hitung jumlah item yang terlihat
+        const updateVisibility = () => {
+            items.forEach((item, index) => {
+                if (index < itemsPerRow * maxVisibleRows) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
             });
-        }
+        };
 
-        function checkRowsVisibility() {
-            const itemsContainer = document.getElementById('itemsContainer');
-            const moreButton = document.getElementById('moreButton');
-            const items = itemsContainer.querySelectorAll('.item');
-            const itemsPerRow = 3; // Misalnya, 3 item per baris (sesuai grid Tailwind)
-
-            // Tampilkan tombol hanya jika ada lebih dari 2 baris
-            if (items.length > itemsPerRow * 2) {
-                moreButton.classList.remove('hidden');
+        // Tampilkan lebih banyak/mengurangi item
+        moreButton.addEventListener('click', function () {
+            if (moreButton.textContent === 'Lebih Banyak') {
+                items.forEach(item => item.classList.remove('hidden'));
+                moreButton.textContent = 'Lebih Sedikit';
             } else {
-                moreButton.classList.add('hidden');
+                updateVisibility();
+                moreButton.textContent = 'Lebih Banyak';
             }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            checkRowsVisibility();
-            toggleExtraCards();
         });
+
+        // Set visibilitas awal
+        updateVisibility();
+    });
     </script>
 
     <!-- Footer -->

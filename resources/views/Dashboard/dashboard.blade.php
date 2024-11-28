@@ -10,8 +10,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
-    <!-- header -->
+<body class="bg-blue-50">
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
             <!-- Logo -->
@@ -134,28 +133,40 @@
 
     <!-- Hero Section -->
     <section class="bg-white py-10 mt-16">
-        <div class="container mx-auto text-center px-4">
+        <div class="container mx-auto text-left px-4 flex flex-col text-justify max-w-5xl">
             <img src="{{ asset('images/beranda 1.png') }}" alt="Recycle Bins" class="w-full max-w-5xl mx-auto rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-gray-800 mt-8">Cycle Tech</h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Solusi untuk manajemen sampah yang lebih baik. Kami menyediakan berbagai layanan untuk menjaga lingkungan tetap bersih dan sehat.</p>
+            <p class="text-gray-600 mt-4 mx-auto"><span class="text-3xl font-bold text-gray-800 mt-8"> Cycle Tech </span>hadir untuk membantumu mengubah sampah menjadi sesuatu yang berharga. Kami menyediakan berbagai solusi kreatif untuk mendaur ulang limbah, mengedukasi masyarakat tentang pengelolaan sampah, dan membantu menciptakan lingkungan yang lebih bersih. Bergabunglah dengan kami dalam perjalanan menuju keberlanjutan dan jadilah bagian dari perubahan positif di komunitasmu!</p>
+        </div>
+    </section>
+
+    <!-- Informasi Fitur Deteksi -->
+    <section class="bg-gradient-to-b from-white via-birumuda to-krem py-8 md:py-16">
+        <div class="container mx-auto flex flex-col items-center justify-between px-4 md:px-32">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Mau Melatih Kreatifitasmu?</h2>
+                <p class="text-md md:text-lg text-gray-600">Ayo deteksi jenis sampahmu dan ubah menjadi barang berguna!</p>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <a href="{{ route('deteksi.sampah') }}" class="border-2 ease-in duration-150 bg-hulk border-hulk text-white py-2 px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">Mulai Deteksi!</a>
+            </div>
         </div>
     </section>
 
     <!-- Artikel & Informasi Section -->
-    <section class="bg-white py-16">
+    <section class="bg-gradient-to-b from-krem to-white py-16">
         <div class="container mx-auto text-center px-32">
             <h2 class="text-2xl font-bold text-center text-gray-800">Artikel & Informasi</h2>
             <!-- Card Artikel -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <a href="{{ route('detail.artikel') }}">
+                <a href="{{ route('detail.artikel') }}">
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
                         <img src="https://picsum.photos/500/300" alt="" class="w-full">
                         <div class="p-4">
                             <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
                             <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
                         </div>
-                    </a>   
-                </div>
+                    </div>
+                </a>
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden">
                     <img src="https://picsum.photos/500/300" alt="" class="w-full">
                     <div class="p-4">
@@ -178,41 +189,42 @@
     </section>
 
     <!-- Mitra Kami Section -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-2xl font-bold text-center text-gray-800">Rekomendasi Pengelola Sampah</h2>
-            <div class="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 gap-6 mt-8 px-24 lg:px-8 md:px-32 ">
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden ">
-                    <img src="{{ asset('images/apsi.png') }}" alt="" class="w-[240px] h-[133px]">
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-6 lg:px-24">
+            <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-8">Rekomendasi Pengelola Sampah</h2>
+            <div class="grid lg:grid-cols-4 sm:grid-cols-2 gap-8">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="{{ asset('images/apsi.png') }}" alt="APSI" class="w-full h-[133px] object-cover">
                     <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
+                        <h3 class="font-bold text-gray-700 text-lg">APSI</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Asosiasi Pengusaha Sampah Indonesia</p>
                     </div>
                 </div>
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/adupi.png') }}" alt="" class="w-[240px] h-[133px]">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="{{ asset('images/adupi.png') }}" alt="ADUPI" class="w-full h-[133px] object-cover">
                     <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
+                        <h3 class="font-bold text-gray-700 text-lg">ADUPI</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Asosiasi Daur Ulang Plastik Indonesia</p>
                     </div>
                 </div>
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/ibcsd.png') }}" alt="" class="w-[240px] h-[133px]">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="{{ asset('images/ibcsd.png') }}" alt="IBCSD" class="w-full h-[133px] object-cover">
                     <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
+                        <h3 class="font-bold text-gray-700 text-lg">IBCSD</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Indonesia Business Council for Sustainable Development</p>
                     </div>
                 </div>
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
-                    <img src="{{ asset('images/repurpose.png') }}" alt="" class="w-[240px] h-[133px]">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="{{ asset('images/repurpose.png') }}" alt="Repurpose" class="w-full h-[133px] object-cover">
                     <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
+                        <h3 class="font-bold text-gray-700 text-lg">RePurpose Global</h3>
+                        <p class="text-gray-600 mt-2 text-sm">Global Plastic Action Platform </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Footer -->
     <section>
@@ -251,6 +263,6 @@
                 <p class="text-sm">© 2024 CycleTech. All Rights Reserved.</p>
             </div>
         </footer>
-    </section>
+        </section>
 </body>
 </html>
