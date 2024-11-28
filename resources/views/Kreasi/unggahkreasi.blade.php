@@ -184,7 +184,7 @@
             </div>
         
             <!-- Tombol Kembali -->
-            <div class="flex justify-center md:justify-start">
+            <div class="flex hidden md:flex justify-center md:justify-start">
                 <a href="{{ route('kreasi') }}" class="px-6 py-2 border-2 border-hulk text-hulk font-medium rounded-full hover:bg-hulk hover:text-white transition">
                     Kembali
                 </a>
@@ -195,6 +195,13 @@
                 <button type="submit" class="px-6 py-2 border-2 border-hulk text-hulk font-medium rounded-full hover:bg-old-hulk hover:text-white transition">
                     Unggah
                 </button>
+            </div>
+
+            <!-- Tombol Kembali -->
+            <div class="flex md:hidden justify-center md:justify-start">
+                <a href="{{ route('kreasi') }}" class="px-6 py-2 border-2 border-hulk text-hulk font-medium rounded-full hover:bg-hulk hover:text-white transition">
+                    Kembali
+                </a>
             </div>
         </form>
     </div>        

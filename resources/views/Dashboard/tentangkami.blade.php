@@ -275,6 +275,6 @@
                 <p class="text-sm">© 2024 CycleTech. All Rights Reserved.</p>
             </div>
         </footer>
-        </section>
+    </section>
 </body>
 </html>

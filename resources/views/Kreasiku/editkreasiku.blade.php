@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cycle Tech</title>
-    <link rel="icon" type="image/x-icon" href="/images/logo 2.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     @vite('resources/css/app.css')
+    <link rel="icon" type="image/x-icon" href="/images/logo 2.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-
 <body>
     <!-- Header -->
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
@@ -131,95 +129,135 @@
         });
     </script>
 
-    <!-- Kreasiku -->
-    <section class="bg-white mt-20 py-10 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
+
+    <!-- Unggah Kreasi -->
+    <div class="max-w-4xl mx-auto mt-20 p-6">
         <header class="mb-6">
-            <h1 class="text-2xl font-semibold text-gray-800">Kreasiku</h1>
-            <p class="text-gray-600">Ini adalah galeri pribadi yang berisi semua karya yang telah kamu unggah.</p>
+            <h1 class="text-2xl font-semibold text-gray-800">Edit Kreasimu</h1>
+            <p class="text-gray-600">Tunjukkan kreativitasmu! Unggah karya daur ulangmu dan bergabunglah dengan para pencinta lingkungan lainnya.</p>
         </header>
-        <div class="container mx-auto text-center">
-            <!-- Grid Container for Items -->
-            <div id="itemsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                <!-- Card Item -->
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <a href="{{ route('edit.kreasiku') }}">
-                        <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                        <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                        <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                    </a>
+
+        <!-- ganti foto -->
+        <div class="border-2 border-dashed border-hulk rounded-lg h-64 flex items-center justify-center mb-6">
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+                <img src="https://picsum.photos/300/200" alt="" class="mb-4">
+                <input type="file" name="fileToUpload" id="fileToUpload" placeholder="">
+            </form>
+        </div>
+
+        <div class="border-t-2 border-hulk mb-6"></div>
+
+        <!-- Form Section -->
+        <form class="space-y-4" action="submit_kreasi.php" method="post" >
+            <!-- Title and Author -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-lg font-medium text-gray-800 mb-2">Judul Kreasi</label>
+                    <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3" contenteditable="true">Gantungan Kunci dari Botol Plastik Bekas</div>
                 </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
+                <div>
+                    <label class="block text-lg font-medium text-gray-800 mb-2">Nama Penulis</label>
+                    <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3" contenteditable="true">Amanda Manopo</div>
                 </div>
             </div>
-            
-            <!-- More Button -->
-            <button id="moreButton" class="border-2 border-hulk text-hulk py-2 px-4 rounded-lg hover:bg-hulk hover:text-white mt-8">Lebih Banyak</button>
-            
-            <!-- Upload Button -->
-            <a href="{{ route('unggah.kreasi') }}" class="flex my-8 w-44 py-1 border-2 font-semibold bg-hulk border-hulk text-white px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">
-                Unggah Kreasi
-            </a>
-        </div>
-    </section>
-    
+
+            <!-- Category and Date -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-lg font-medium text-gray-800 mb-2">Kategori</label>
+                    <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3" contenteditable="true">Plastik</div>
+                </div>
+                <div class="relative">
+                <label for="tanggal" class="block text-lg font-medium text-gray-800 mb-2">Tanggal</label>
+                <div class="flex items-center">
+                    <input id="tanggal" name="tanggal" type="date" class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3 pr-12"/>
+                </div>
+            </div>
+            </div>
+
+            <!-- Tools and Materials -->
+            <div>
+                <label class="block text-lg font-medium text-gray-800 mb-2">Alat dan Bahan</label>
+                <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3 pr-12" contenteditable="true">
+                    - Botol plastik bekas <br>
+                    - Gunting <br>
+                    - Gantungan kunci (cincin atau pengait kecil) <br>
+                    - Stiker atau cat (untuk hiasan) <br>
+                    - Paku/alat pemanas (opsional, untuk membuat lubang)
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div>
+                <label class="block text-lg font-medium text-gray-800 mb-2">Langkah-langkah</label>
+                <div class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3 pr-12" contenteditable="true">
+                    1. Cuci dan keringkan botol plastik bekas. <br>
+                    2. Potong botol menjadi bentuk yang diinginkan (bunga, hati, dll.). <br>
+                    3. Buat lubang di bagian atas potongan untuk gantungan kunci. <br>
+                    4. Pasang gantungan kunci ke dalam lubang yang telah dibuat. <br>
+                    5. Hias dengan stiker atau cat sesuai selera.
+                </div>
+            </div>
+
+            <div class="flex justify-center md:justify-end gap-6 mb-6 justify-end">
+                <button type="submit" class="px-6 py-2 border-2 border-hulk text-hulk font-medium rounded-full hover:bg-old-hulk hover:text-white transition">
+                    Perbarui
+                </button>
+                <!-- Button -->
+                <button 
+                    onclick="openModal()" 
+                    class="px-6 py-2 border-2 border-red-500 text-red-500 font-medium rounded-full hover:bg-red-500 hover:text-white transition">
+                    Hapus
+                </button>
+
+                <!-- Modal -->
+                <div id="deleteModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+                    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Konfirmasi Hapus</h2>
+                        <p class="text-gray-600 mb-6">Apakah Anda yakin ingin menghapus kreasi ini? Tindakan ini tidak dapat dibatalkan.</p>
+                        <div class="flex justify-end space-x-4">
+                            <!-- Cancel Button -->
+                            <button 
+                                onclick="closeModal()" 
+                                class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition">
+                                Batal
+                            </button>
+                            <!-- Confirm Delete Button -->
+                            <form action="#" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button 
+                                    type="submit" 
+                                    class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <script>
-        function toggleExtraCards() {
-            const moreButton = document.getElementById('moreButton');
-            const extraCards = document.getElementById('extraCards');
+    function openModal() {
+        document.getElementById('deleteModal').classList.remove('hidden');
+    }
 
-            moreButton.addEventListener('click', function () {
-                extraCards.classList.toggle('hidden');
-                moreButton.textContent = extraCards.classList.contains('hidden') ? 'Lebih Banyak' : 'Lebih Sedikit';
-            });
-        }
+    function closeModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
 
-        function checkRowsVisibility() {
-            const itemsContainer = document.getElementById('itemsContainer');
-            const moreButton = document.getElementById('moreButton');
-            const items = itemsContainer.querySelectorAll('.item');
-            const itemsPerRow = 3; // Misalnya, 3 item per baris (sesuai grid Tailwind)
+    function handleDelete(event) {
+        event.preventDefault(); // Prevent form submission to handle redirection manually
 
-            // Tampilkan tombol hanya jika ada lebih dari 2 baris
-            if (items.length > itemsPerRow * 2) {
-                moreButton.classList.remove('hidden');
-            } else {
-                moreButton.classList.add('hidden');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            checkRowsVisibility();
-            toggleExtraCards();
-        });
-    </script>
+        // Simulate successful deletion (replace with an actual AJAX request if needed)
+        setTimeout(() => {
+            // Redirect to the "Kreasiku" page after deletion
+            window.location.href = "{{ route('kreasiku') }}";
+        }, 500); // Simulated delay for UX
+    }
+</script>
 
     <!-- Footer -->
     <section>
@@ -259,5 +297,20 @@
             </div>
         </footer>
         </section>
+    <!-- JS -->
+    <script>
+            const dropdownButton = document.getElementById('dropdownButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+
+            dropdownButton.addEventListener('click', () => {
+                dropdownMenu.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
+                dropdownMenu.classList.add('hidden');
+                }
+            });
+        </script>
 </body>
 </html>
