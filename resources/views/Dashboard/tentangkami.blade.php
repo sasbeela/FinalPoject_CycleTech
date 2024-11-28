@@ -130,8 +130,8 @@
 
     <!-- Hero Section -->
     <div class="relative bg-gray-50 py-10 px-6 md:px-10">
-        <div class="relative bg-[url('public/images/tentangkami.png')] bg-no-repeat bg-cover bg-center h-[400px] rounded-lg overflow-show">
-            <div class="absolute top-44 left-6 bg-white bg-opacity-100 rounded-lg p-6 max-w-full w-[412px]">
+        <div class="relative md:bg-[url('/public/images/tentangkami.png')] bg-no-repeat bg-cover bg-center h-[400px] rounded-lg lg:overflow-show">
+            <div class="absolute top-24 left-4 md:top-44 md:left-6 bg-white bg-opacity-100 rounded-lg p-6 max-w-full w-[412px]">
                 <div class="bg-white-200 flex items-center">
                     <img src="{{ asset('images/logo 2.png') }}" alt="Logo" class="w-12 h-12 rounded-full mr-4">
                     <h2 class="text-2xl font-bold text-hulk">Cycle Tech</h2>
@@ -143,7 +143,7 @@
         </div>
     </div>
     
-    <div class="max-w-6xl mx-auto mt-10 text-justify text-gray-700 lg:px-10 md:px-12 px-16 mb-10">
+    <div class="max-w-6xl mx-auto text-justify text-gray-700 lg:px-10 md:px-12 md:mt-10 px-16 mb-10">
         <p class="text-lg leading-relaxed">
             Cycle Tech adalah solusi cerdas untuk pengelolaan sampah Anda. Kami menyediakan platform lengkap yang tidak hanya mengedukasi, tetapi juga menginspirasi pengelolaan sampah secara kreatif. Dengan fitur deteksi jenis sampah otomatis, Anda dapat mengunggah gambar sampah dan mendapatkan rekomendasi kreasi menarik yang dapat dibuat dari limbah tersebut.
         </p>

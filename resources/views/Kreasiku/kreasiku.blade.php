@@ -182,9 +182,9 @@
             <button id="moreButton" class="border-2 border-hulk text-hulk py-2 px-4 rounded-lg hover:bg-hulk hover:text-white mt-8">Lebih Banyak</button>
             
             <!-- Upload Button -->
-            <button class="flex my-8 py-1 border-2 font-semibold bg-hulk border-hulk text-white px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">
+            <a href="{{ route('unggah.kreasi') }}" class="flex my-8 w-44 py-1 border-2 font-semibold bg-hulk border-hulk text-white px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">
                 Unggah Kreasi
-            </button>
+            </a>
         </div>
     </section>
     

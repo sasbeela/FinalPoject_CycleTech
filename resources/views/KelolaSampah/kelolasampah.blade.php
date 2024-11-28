@@ -257,7 +257,7 @@
         <div id="details" class="space-y-4 text-left hidden">
             <div class="border p-4 rounded-lg">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <div class="w-full md:w-1/2 flex justify-center items-center">
+                    <div class="w-full md:w-1/2 flex justify-center items-center xl:px-24">
                         <img src="{{ asset('images/kelola apsi.png') }}" class="mt-8 mb-8">
                     </div>
                     <div>
@@ -268,7 +268,7 @@
             </div>
             <div class="border p-4 rounded-lg">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <div class="w-full md:w-1/2 flex justify-center items-center">
+                    <div class="w-full md:w-1/2 flex justify-center items-center xl:px-24">
                         <img src="{{ asset('images/kelola adupi.png') }}" class="mt-8 mb-8">
                     </div>
                     <div>
@@ -279,7 +279,7 @@
             </div>
             <div class="border p-4 rounded-lg">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <div class="w-full md:w-1/2 flex justify-center items-center">
+                    <div class="w-full md:w-1/2 flex justify-center items-center xl:px-24">
                         <img src="{{ asset('images/kelola ibcsd.png') }}" class="mt-8 mb-8">
                     </div>
                     <div>
@@ -290,7 +290,7 @@
             </div>
             <div class="border p-4 rounded-lg">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <div class="w-full md:w-1/2 flex justify-center items-center">
+                    <div class="w-full md:w-1/2 flex justify-center items-center xl:px-24">
                         <img src="{{ asset('images/kelola repurpose.png') }}" class="mt-8 mb-8">
                     </div>
                     <div>
