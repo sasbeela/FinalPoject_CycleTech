@@ -35,7 +35,7 @@
                 <img src="{{ asset('images/logo 2.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
                 <h1 class="text-xl font-semibold text-hulk">Cycle Tech</h1>
             </div>
-    
+
             <!-- Centered Navigation Links for Desktop -->
             <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
                 <li><a href="{{ route('dashboard.nasabah') }}" class="text-white bg-green-700 rounded-lg hover:bg-old-hulk inline-flex justify-center w-full px-4 py-2">Beranda</a></li>
@@ -55,45 +55,60 @@
                 </li>
                 <li><a href="{{ route('tentang.kami') }}" class="hover:text-green-700">Tentang Kami</a></li>
             </ul>
-    
-            <!-- Notification & Profile Icons -->
-            <ul class="flex items-center space-x-6 font-medium text-gray-700">
-                <!-- Notification Dropdown -->
-                <li class="relative mt-2 lg:mt-0">
-                    <button id="notificationButton" class="text-gray-600 hover:text-green-700 mt-2">
-                        <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
-                    </button>
-                    <div id="notificationDropdown" class="absolute right-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-lg hidden">
-                        <div class="p-4">
-                            <p class="text-sm text-gray-800 font-medium">Notifikasi</p>
-                        </div>
-                        <ul class="divide-y divide-gray-200">
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Anda memiliki pesan baru.</p>
-                                <span class="text-xs text-gray-500">1 jam yang lalu</span>
-                            </li>
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Update sistem telah berhasil.</p>
-                                <span class="text-xs text-gray-500">2 jam yang lalu</span>
-                            </li>
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Jadwal meeting dimulai dalam 30 menit.</p>
-                                <span class="text-xs text-gray-500">Hari ini</span>
-                            </li>
-                        </ul>
-                        <div class="p-4 border-t border-gray-200 text-center">
-                            <button class="text-sm text-green-700 hover:underline">Lihat Semua</button>
-                        </div>
+
+            @php
+                use App\Models\Notification;
+                $notifications = Notification::latest()->take(5)->get(); // Ambil 5 notifikasi terbaru
+            @endphp
+
+            <!-- Notification Dropdown -->
+            <div class="relative">
+                <!-- Notification Icon -->
+                <button id="notificationButton" class="relative focus:outline-none">
+                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
+                    @if($notifications->where('read_status', false)->count() > 0)
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                            {{ $notifications->where('read_status', false)->count() }}
+                        </span>
+                    @endif
+                </button>
+
+                <!-- Dropdown -->
+                <div id="notificationDropdown" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold">Notifikasi</h3>
                     </div>
-                </li>
-    
+                    <ul class="divide-y divide-gray-200">
+                        @forelse($notifications as $notification)
+                            <li class="p-4 flex items-start">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">{{ $notification->message }}</p>
+                                    <p class="mt-1 text-xs text-gray-500">
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    </p>
+                                </div>
+                            </li>
+                        @empty
+                            <li class="p-4">
+                                <p class="text-sm text-gray-500 text-center">Tidak ada notifikasi baru</p>
+                            </li>
+                        @endforelse
+
+                        <form action="{{ route('notifications.mark-read') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+
                 <!-- Hamburger Icon (only visible on smaller screens) -->
                 <li class="lg:hidden flex items-center">
                     <button id="mobileMenuToggle" class="text-black active:text-hulk focus:outline-none mt-2">
                         <i class="bi bi-list text-3xl"></i>
                     </button>
                 </li>
-    
+
                 <!-- Profile Icon (only visible on larger screens) -->
                 <li class="hidden lg:flex items-center">
                     <a href="{{ route('profile.nasabah')}}">
@@ -102,7 +117,7 @@
                 </li>
             </ul>
         </div>
-    
+
         <!-- Dropdown Menu for Mobile -->
         <ul id="mobileDropdownMenu" class="lg:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
             <li><a href="{{ route('dashboard.nasabah') }}" class="hover:text-hulk">Beranda</a></li>
@@ -112,105 +127,63 @@
             <li><a href="#" class="hover:text-hulk">Profil</a></li>
         </ul>
     </nav>
-    
+
     <!-- JavaScript -->
     <script>
         // Dropdown Notification
-        const notificationButton = document.getElementById('notificationButton');
-        const notificationDropdown = document.getElementById('notificationDropdown');
-    
-        notificationButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent click from closing everything
-            notificationDropdown.classList.toggle('hidden');
+        document.getElementById('notificationButton').addEventListener('click', function () {
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('hidden');
         });
-    
+
         document.addEventListener('click', (event) => {
             if (!event.target.closest('#notificationButton') && !event.target.closest('#notificationDropdown')) {
                 notificationDropdown.classList.add('hidden');
             }
         });
-    
+
         // Desktop Kreasi Dropdown
         const desktopKreasiButton = document.getElementById('desktopKreasiButton');
         const desktopKreasiDropdown = document.getElementById('desktopKreasiDropdown');
-    
+
         desktopKreasiButton.addEventListener('click', () => {
             desktopKreasiDropdown.classList.toggle('hidden');
         });
-    
+
         // Mobile Menu Toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
-    
+
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
         });
     </script>
 
-    <!-- artikel -->
-    <div class="max-w-[1240px] mx-auto p-4 mt-24">
+    <!-- Artikel Section -->
+    <section class="container mx-auto px-4 lg:px-20 py-24 bg-white shadow-lg mt-16 rounded-lg">
         <!-- Breadcrumb -->
         <nav class="text-sm text-gray-600 mb-4">
-            <a href="{{ route('dashboard.nasabah') }}" class="hover:underline">Beranda</a> > <a href="{{ route('artikel.nasabah') }}" class="text-gray-800">Artikel</a> > <span class="text-gray-800">Judul Artikel</span>
+            <a href="{{ route('dashboard.nasabah') }}" class="hover:underline">Beranda</a> >
+            <a href="#" class="hover:underline">Artikel</a> >
+            <span class="font-semibold text-gray-800">{{ $article->judul_artikel }}</span>
         </nav>
 
-        <!-- Main Card -->
-        <div class="bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-            <!-- Header Image -->
-            <div class="flex flex-col items-center justify-center py-6 gap-6 bg-gray-50">
-                <img src="https://picsum.photos/1000" alt="Image" class="w-3/4 h-[400px] rounded-lg border border-gray-300 shadow-sm">
-                <p><time class="block text-gray-500 mb-2">16:45, 1 September 2024 </time></p>
-            </div>
-
-            <!-- content -->
-            <div class="px-10 lg:px-24 mb-4 text-justify">
-                <h1 class="text-2xl font-bold mb-4">Transformasi Sampah dengan Daur Ulang Menjadi Emas</h1>
-                <p class="text-gray-700 mb-4">
-                    Dunia saat ini tengah bergulat dengan krisis sampah yang semakin mengkhawatirkan. Timbunan sampah yang menumpuk tinggi di berbagai sudut kota bukan hanya merusak pemandangan, tetapi juga mencemari lingkungan dan mengancam keberlangsungan hidup makhluk hidup. Limbah plastik yang sulit terurai, limbah elektronik yang mengandung bahan berbahaya, serta sampah organik yang menghasilkan gas metana menjadi dalang utama permasalahan ini. Dampaknya pun terasa begitu nyata, mulai dari pencemaran tanah dan air, kerusakan ekosistem, hingga perubahan iklim yang semakin ekstrem.
-                </p>
-                <p class="text-gray-700 mb-4">
-                    Namun, di tengah permasalahan ini, secercah harapan mulai terlihat. Berkat kemajuan teknologi, kini sistem pengelolaan sampah terus bertransformasi. Dari yang awalnya hanya sekadar dibuang, kini sampah bisa diolah kembali menjadi barang yang memiliki nilai ekonomi. Model ekonomi sirkular menjadi kunci keberhasilan, dan limbah elektronik serta limbah sumber bahan bakar alternatif menjadi fokus utama.
-                </p>
-                <p class="text-gray-700 mb-4">
-                    Konsep ekonomi sirkular juga menjadi solusi jangka panjang. Model ekonomi ini mendorong perusahaan untuk mendesain produk yang dapat didaur ulang dan meminimalisir limbah dari awal. Selain itu, produk daur ulang semakin tidak dapat dipandang sebelah mata. Dengan daur ulang, barang-barang yang sebelumnya dianggap sampah kini bisa memiliki nilai ekonomi tinggi.
-                </p>
-                <p class="text-gray-700 mb-4">
-                    Seiring dengan meningkatnya kesadaran akan pentingnya daur ulang, langkah-langkah kecil seperti memilah sampah dari rumah tangga menjadi sangat penting. Dengan dukungan dari pemerintah dan masyarakat, diharapkan pengelolaan sampah yang lebih baik dapat tercapai. Selain itu, inovasi teknologi terus berkembang untuk mendukung proses daur ulang yang lebih efisien dan efektif.
-                </p>
-                <p class="text-gray-700">
-                    Mari bersama-sama kita berjuang untuk mengatasi krisis sampah ini. Setiap langkah kecil yang kita ambil akan membawa dampak besar bagi kelestarian lingkungan. Ingat, setiap tindakan kita hari ini akan menentukan masa depan bumi kita. Jadi, selamatkan lingkungan, selamatkan masa depan!
-                </p>
-            </div>    
+        <!-- Artikel Image -->
+        <div class="my-8 flex justify-center">
+            <img src="{{ asset('storage/' . $article->foto) }}" alt="{{ $article->judul_artikel }}" class="rounded-lg shadow-md max-w-full">
         </div>
 
-        <!-- Similar Creations Section -->
-        <h2 class="flex justify-center text-center text-lg font-semibold text-gray-800 mb-4 mt-8">Artikel Lain</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-8 px-24 sm:px-10">
-            <div class="bg-gradient-to-b from-birumuda to-krem shadow-lg rounded-lg overflow-hidden">
-                    <a href="{{ route('detail.artikel') }}">
-                        <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                        <div class="p-4">
-                            <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                            <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                        </div>
-                    </a>   
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
-                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
-                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
-                    </div>
-                </div>
+        <!-- Artikel Header -->
+        <div class="text-center">
+            <p class="text-gray-500 text-sm mb-2">{{ \Carbon\Carbon::parse($article->created_at)->format('H:i, j F Y') }}</p>
+            <h1 class="text-3xl font-bold text-gray-800">{{ $article->judul_artikel }}</h1>
         </div>
-    </div>
+
+        <!-- Artikel Content -->
+        <div class="text-gray-700 space-y-4 leading-relaxed text-justify">
+            {!! nl2br(e($article->isi)) !!}
+        </div>
+    </section>
 
     <!-- Footer -->
     <section>

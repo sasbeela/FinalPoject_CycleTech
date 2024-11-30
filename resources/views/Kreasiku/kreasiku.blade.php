@@ -19,7 +19,7 @@
                 <img src="{{ asset('images/logo 2.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
                 <h1 class="text-xl font-semibold text-hulk">Cycle Tech</h1>
             </div>
-    
+
             <!-- Centered Navigation Links for Desktop -->
             <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
                 <li><a href="{{ route('dashboard.nasabah') }}" class="text-black hover:text-old-hulk">Beranda</a></li>
@@ -39,54 +39,71 @@
                 </li>
                 <li><a href="{{ route('tentang.kami') }}" class="hover:text-green-700">Tentang Kami</a></li>
             </ul>
-    
-            <!-- Notification & Profile Icons -->
-            <ul class="flex items-center space-x-6 font-medium text-gray-700">
-                <!-- Notification Dropdown -->
-                <li class="relative mt-2 lg:mt-0">
-                    <button id="notificationButton" class="text-gray-600 hover:text-green-700 mt-2">
-                        <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
-                    </button>
-                    <div id="notificationDropdown" class="absolute right-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-lg hidden">
-                        <div class="p-4">
-                            <p class="text-sm text-gray-800 font-medium">Notifikasi</p>
-                        </div>
-                        <ul class="divide-y divide-gray-200">
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Anda memiliki pesan baru.</p>
-                                <span class="text-xs text-gray-500">1 jam yang lalu</span>
-                            </li>
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Update sistem telah berhasil.</p>
-                                <span class="text-xs text-gray-500">2 jam yang lalu</span>
-                            </li>
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Jadwal meeting dimulai dalam 30 menit.</p>
-                                <span class="text-xs text-gray-500">Hari ini</span>
-                            </li>
-                        </ul>
-                        <div class="p-4 border-t border-gray-200 text-center">
-                            <button class="text-sm text-green-700 hover:underline">Lihat Semua</button>
-                        </div>
+
+            @php
+                use App\Models\Notification;
+                $notifications = Notification::latest()->take(5)->get(); // Ambil 5 notifikasi terbaru
+            @endphp
+
+            <!-- Notification Dropdown -->
+            <div class="relative">
+                <!-- Notification Icon -->
+                <button id="notificationButton" class="relative focus:outline-none">
+                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
+                    @if($notifications->where('read_status', false)->count() > 0)
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                            {{ $notifications->where('read_status', false)->count() }}
+                        </span>
+                    @endif
+                </button>
+
+                <!-- Dropdown -->
+                <div id="notificationDropdown" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold">Notifikasi</h3>
                     </div>
-                </li>
-    
+                    <ul class="divide-y divide-gray-200">
+                        @forelse($notifications as $notification)
+                            <li class="p-4 flex items-start">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">{{ $notification->message }}</p>
+                                    <p class="mt-1 text-xs text-gray-500">
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    </p>
+                                </div>
+                            </li>
+                        @empty
+                            <li class="p-4">
+                                <p class="text-sm text-gray-500 text-center">Tidak ada notifikasi baru</p>
+                            </li>
+                        @endforelse
+
+                        <form action="{{ route('notifications.mark-read') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+
                 <!-- Hamburger Icon (only visible on smaller screens) -->
                 <li class="lg:hidden flex items-center">
                     <button id="mobileMenuToggle" class="text-black active:text-hulk focus:outline-none mt-2">
                         <i class="bi bi-list text-3xl"></i>
                     </button>
                 </li>
-    
+
                 <!-- Profile Icon (only visible on larger screens) -->
                 <li class="hidden lg:flex items-center">
-                    <a href="{{ route('profile.nasabah')}}">
-                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border border-gray-300">
+                    <a href="{{ route('profile.nasabah') }}">
+                        <img src="{{ auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40' }}" 
+                            alt="Profile" 
+                            class="w-10 h-10 rounded-full border border-gray-300">
                     </a>
                 </li>
             </ul>
         </div>
-    
+
         <!-- Dropdown Menu for Mobile -->
         <ul id="mobileDropdownMenu" class="lg:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
             <li><a href="{{ route('dashboard.nasabah') }}" class="hover:text-hulk">Beranda</a></li>
@@ -96,100 +113,70 @@
             <li><a href="#" class="hover:text-hulk">Profil</a></li>
         </ul>
     </nav>
-    
+
     <!-- JavaScript -->
     <script>
         // Dropdown Notification
-        const notificationButton = document.getElementById('notificationButton');
-        const notificationDropdown = document.getElementById('notificationDropdown');
-    
-        notificationButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent click from closing everything
-            notificationDropdown.classList.toggle('hidden');
+        document.getElementById('notificationButton').addEventListener('click', function () {
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('hidden');
         });
-    
+
         document.addEventListener('click', (event) => {
             if (!event.target.closest('#notificationButton') && !event.target.closest('#notificationDropdown')) {
                 notificationDropdown.classList.add('hidden');
             }
         });
-    
+
         // Desktop Kreasi Dropdown
         const desktopKreasiButton = document.getElementById('desktopKreasiButton');
         const desktopKreasiDropdown = document.getElementById('desktopKreasiDropdown');
-    
+
         desktopKreasiButton.addEventListener('click', () => {
             desktopKreasiDropdown.classList.toggle('hidden');
         });
-    
+
         // Mobile Menu Toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
-    
+
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
         });
     </script>
 
-    <!-- Kreasiku -->
+    <!-- Content -->
+    @section('content')
     <section class="bg-white mt-20 py-10 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
         <header class="mb-6">
             <h1 class="text-2xl font-semibold text-gray-800">Kreasiku</h1>
             <p class="text-gray-600">Ini adalah galeri pribadi yang berisi semua karya yang telah kamu unggah.</p>
         </header>
         <div class="container mx-auto text-center">
-            <!-- Grid Container for Items -->
-            <div id="itemsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                <!-- Card Item -->
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <a href="{{ route('edit.kreasiku') }}">
-                        <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                        <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                        <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                    </a>
+            @if($kreasiku->isEmpty())
+                <p class="text-gray-500 mt-4">Belum ada kreasi yang diunggah. Yuk, unggah kreasi pertamamu!</p>
+            @else
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+                    @foreach ($kreasiku as $kreasi)
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                            <img src="{{ asset('storage/' . $kreasi->foto_kreasi) }}" alt="{{ $kreasi->judul_kreasi }}" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold text-gray-800">{{ $kreasi->judul_kreasi }}</h3>
+                                <p class="text-gray-600 mt-2">Kategori: {{ $kreasi->kategori_kreasi ?? 'Tidak ada kategori' }}</p>
+                                <a href="{{ route('edit.kreasiku', $kreasi->id) }}" class="text-green-700 hover:underline mt-4 block">Lihat Selengkapnya</a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-                <div class="item bg-white p-4 md:p-6 rounded-lg shadow-lg hover:shadow-2xl overflow-hidden border border-gray-200">
-                    <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Gantungan Kunci dari Botol Plastik Bekas</h3>
-                    <img src="https://picsum.photos/300/200" alt="Gantungan Kunci dari Botol Plastik Bekas" class="w-full h-[200px] md:h-[231px] object-cover rounded-t-lg">
-                    <p class="text-gray-600 text-base md:text-lg text-left mt-4">Oleh Amanda Manopo</p>
-                </div>
-            </div>
-            
-            <!-- More Button -->
-            <button id="moreButton" class="border-2 border-hulk text-hulk py-2 px-4 rounded-lg hover:bg-hulk hover:text-white mt-8">Lebih Banyak</button>
-            
+            @endif
+
             <!-- Upload Button -->
             <a href="{{ route('unggah.kreasi') }}" class="flex my-8 w-44 py-1 border-2 font-semibold bg-hulk border-hulk text-white px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">
                 Unggah Kreasi
             </a>
         </div>
     </section>
-    
+
     <script>
         function toggleExtraCards() {
             const moreButton = document.getElementById('moreButton');

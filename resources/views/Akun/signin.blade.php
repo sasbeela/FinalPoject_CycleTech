@@ -22,31 +22,54 @@
             <p class="text-gray-600">Ayo bergabung dan jadi bagian dari penyelamatan bumi!</p>
         </div>
 
-        <form id="registrationForm" class="block md:px-32 lg:px-0" action="{{ route('signin.create') }}" method="POST" novalidate>
+        <form id="registrationForm" action="{{ route('signin.create') }}" method="POST" novalidate>
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-gray-700">Nama Lengkap</label>
-                <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk" required>
+                <input type="text" id="name" name="name" value="{{ old('name') }}"
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk"
+                       required>
+                @error('name')
+                <small class="text-red-500">{{ $message }}</small>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="phone" class="block text-gray-700">Nomor Handphone</label>
-                <input type="text" id="phone" name="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk" required pattern="\d*">
+                <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk"
+                       required>
+                @error('phone')
+                <small class="text-red-500">{{ $message }}</small>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="email" class="block text-gray-700">Email</label>
-                <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk" required>
-                <small id="emailError" class="text-red-500 hidden">Email sudah terdaftar, silakan gunakan email lain.</small>
+                <input type="email" id="email" name="email" value="{{ old('email') }}"
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk"
+                       required>
+                @error('email')
+                <small class="text-red-500">{{ $message }}</small>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-gray-700">Kata Sandi</label>
-                <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk" required>
+                <input type="password" id="password" name="password"
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk"
+                       required>
+                @error('password')
+                <small class="text-red-500">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="mb-4">
+                <label for="password_confirmation" class="block text-gray-700">Konfirmasi Kata Sandi</label>
+                <input type="password" id="password_confirmation" name="password_confirmation"
+                       class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk"
+                       required>
             </div>
             <button type="submit" class="w-full bg-hulk text-white py-2 rounded-lg hover:bg-old-hulk">Daftar</button>
         </form>
-        <div class="text-center mt-4">
-            <p>Sudah memiliki Akun? <a href="{{ route('login.nasabah') }}" class="text-hulk">Masuk</a></p>
-        </div>
-    </div>
+
+
 
 <script>
     const emailInput = document.getElementById('email');

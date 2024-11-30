@@ -148,7 +148,6 @@
         </div>
     </section>
 
-
     <!-- Call to Action Section -->
     <section class="bg-white py-8 md:py-16">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-32">

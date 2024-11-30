@@ -39,36 +39,53 @@
                 <li><a href="<?php echo e(route('tentang.kami')); ?>" class="hover:text-green-700">Tentang Kami</a></li>
             </ul>
 
-            <!-- Notification & Profile Icons -->
-            <ul class="flex items-center space-x-6 font-medium text-gray-700">
-                <!-- Notification Dropdown -->
-                <li class="relative mt-2 lg:mt-0">
-                    <button id="notificationButton" class="text-gray-600 hover:text-green-700 mt-2">
-                        <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
-                    </button>
-                    <div id="notificationDropdown" class="absolute right-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-lg hidden">
-                        <div class="p-4">
-                            <p class="text-sm text-gray-800 font-medium">Notifikasi</p>
-                        </div>
-                        <ul class="divide-y divide-gray-200">
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Anda memiliki pesan baru.</p>
-                                <span class="text-xs text-gray-500">1 jam yang lalu</span>
-                            </li>
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Update sistem telah berhasil.</p>
-                                <span class="text-xs text-gray-500">2 jam yang lalu</span>
-                            </li>
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Jadwal meeting dimulai dalam 30 menit.</p>
-                                <span class="text-xs text-gray-500">Hari ini</span>
-                            </li>
-                        </ul>
-                        <div class="p-4 border-t border-gray-200 text-center">
-                            <button class="text-sm text-green-700 hover:underline">Lihat Semua</button>
-                        </div>
+            <?php
+                use App\Models\Notification;
+                $notifications = Notification::latest()->take(5)->get(); // Ambil 5 notifikasi terbaru
+            ?>
+
+            <!-- Notification Dropdown -->
+            <div class="relative">
+                <!-- Notification Icon -->
+                <button id="notificationButton" class="relative focus:outline-none">
+                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
+                    <?php if($notifications->where('read_status', false)->count() > 0): ?>
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                            <?php echo e($notifications->where('read_status', false)->count()); ?>
+
+                        </span>
+                    <?php endif; ?>
+                </button>
+
+                <!-- Dropdown -->
+                <div id="notificationDropdown" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold">Notifikasi</h3>
                     </div>
-                </li>
+                    <ul class="divide-y divide-gray-200">
+                        <?php $__empty_1 = true; $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <li class="p-4 flex items-start">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900"><?php echo e($notification->message); ?></p>
+                                    <p class="mt-1 text-xs text-gray-500">
+                                        <?php echo e($notification->created_at->diffForHumans()); ?>
+
+                                    </p>
+                                </div>
+                            </li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                            <li class="p-4">
+                                <p class="text-sm text-gray-500 text-center">Tidak ada notifikasi baru</p>
+                            </li>
+                        <?php endif; ?>
+
+                        <form action="<?php echo e(route('notifications.mark-read')); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
 
                 <!-- Hamburger Icon (only visible on smaller screens) -->
                 <li class="lg:hidden flex items-center">
@@ -99,18 +116,9 @@
     <!-- JavaScript -->
     <script>
         // Dropdown Notification
-        const notificationButton = document.getElementById('notificationButton');
-        const notificationDropdown = document.getElementById('notificationDropdown');
-
-        notificationButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent click from closing everything
-            notificationDropdown.classList.toggle('hidden');
-        });
-
-        document.addEventListener('click', (event) => {
-            if (!event.target.closest('#notificationButton') && !event.target.closest('#notificationDropdown')) {
-                notificationDropdown.classList.add('hidden');
-            }
+        document.getElementById('notificationButton').addEventListener('click', function () {
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('hidden');
         });
 
         // Desktop Kreasi Dropdown
@@ -146,30 +154,19 @@
             <h2 class="text-2xl font-bold text-center text-gray-800">Artikel & Informasi</h2>
             <!-- Card Artikel -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pengelolaan Sampah</h3>
-                        <p class="text-gray-600 mt-2">Daur ulang dan pengelolaan sampah yang tepat.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Pentingnya Daur Ulang</h3>
-                        <p class="text-gray-600 mt-2">Mengurangi sampah plastik dengan daur ulang.</p>
-                    </div>
-                </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                    <img src="https://picsum.photos/500/300" alt="" class="w-full">
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-700">Zero Waste Movement</h3>
-                        <p class="text-gray-600 mt-2">Hidup tanpa sampah untuk keberlanjutan.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="mx-auto items-center space-x-4 mt-8">
-                <a href="<?php echo e(route('artikel.nasabah')); ?>" class="border-2 border-green-700 text-green-700 py-2 px-4 rounded-lg hover:bg-green-700 hover:text-white mt-8">Lebih Banyak</a>
+                <?php $__empty_1 = true; $__currentLoopData = $articles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $article): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <a href="<?php echo e(route('detail.artikel', $article->id)); ?>" class="block">
+                        <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                            <img src="<?php echo e(asset('storage/' . $article->foto)); ?>" alt="<?php echo e($article->judul_artikel); ?>" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold text-gray-700"><?php echo e($article->judul_artikel); ?></h3>
+                                <p class="text-gray-600 mt-2"><?php echo e(Str::limit($article->isi, 50)); ?></p>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                    <p class="text-gray-600">Belum ada artikel tersedia.</p>
+                <?php endif; ?>
             </div>
         </div>
     </section>

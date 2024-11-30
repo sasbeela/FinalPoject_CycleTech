@@ -8,7 +8,9 @@
     <link rel="icon" type="image/x-icon" href="/images/logo 2.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
+
 <body>
+
     <!-- Header -->
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
@@ -17,7 +19,7 @@
                 <img src="{{ asset('images/logo 2.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
                 <h1 class="text-xl font-semibold text-hulk">Cycle Tech</h1>
             </div>
-    
+
             <!-- Centered Navigation Links for Desktop -->
             <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
                 <li><a href="{{ route('dashboard.nasabah') }}" class="text-black hover:text-old-hulk">Beranda</a></li>
@@ -37,54 +39,71 @@
                 </li>
                 <li><a href="{{ route('tentang.kami') }}" class="hover:text-green-700">Tentang Kami</a></li>
             </ul>
-    
-            <!-- Notification & Profile Icons -->
-            <ul class="flex items-center space-x-6 font-medium text-gray-700">
-                <!-- Notification Dropdown -->
-                <li class="relative mt-2 lg:mt-0">
-                    <button id="notificationButton" class="text-gray-600 hover:text-green-700 mt-2">
-                        <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
-                    </button>
-                    <div id="notificationDropdown" class="absolute right-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-lg hidden">
-                        <div class="p-4">
-                            <p class="text-sm text-gray-800 font-medium">Notifikasi</p>
-                        </div>
-                        <ul class="divide-y divide-gray-200">
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Anda memiliki pesan baru.</p>
-                                <span class="text-xs text-gray-500">1 jam yang lalu</span>
-                            </li>
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Update sistem telah berhasil.</p>
-                                <span class="text-xs text-gray-500">2 jam yang lalu</span>
-                            </li>
-                            <li class="p-4 hover:bg-gray-100 cursor-pointer">
-                                <p class="text-sm text-gray-700">Jadwal meeting dimulai dalam 30 menit.</p>
-                                <span class="text-xs text-gray-500">Hari ini</span>
-                            </li>
-                        </ul>
-                        <div class="p-4 border-t border-gray-200 text-center">
-                            <button class="text-sm text-green-700 hover:underline">Lihat Semua</button>
-                        </div>
+
+            @php
+                use App\Models\Notification;
+                $notifications = Notification::latest()->take(5)->get(); // Ambil 5 notifikasi terbaru
+            @endphp
+
+            <!-- Notification Dropdown -->
+            <div class="relative">
+                <!-- Notification Icon -->
+                <button id="notificationButton" class="relative focus:outline-none">
+                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
+                    @if($notifications->where('read_status', false)->count() > 0)
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                            {{ $notifications->where('read_status', false)->count() }}
+                        </span>
+                    @endif
+                </button>
+
+                <!-- Dropdown -->
+                <div id="notificationDropdown" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold">Notifikasi</h3>
                     </div>
-                </li>
-    
+                    <ul class="divide-y divide-gray-200">
+                        @forelse($notifications as $notification)
+                            <li class="p-4 flex items-start">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">{{ $notification->message }}</p>
+                                    <p class="mt-1 text-xs text-gray-500">
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    </p>
+                                </div>
+                            </li>
+                        @empty
+                            <li class="p-4">
+                                <p class="text-sm text-gray-500 text-center">Tidak ada notifikasi baru</p>
+                            </li>
+                        @endforelse
+
+                        <form action="{{ route('notifications.mark-read') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+
                 <!-- Hamburger Icon (only visible on smaller screens) -->
                 <li class="lg:hidden flex items-center">
                     <button id="mobileMenuToggle" class="text-black active:text-hulk focus:outline-none mt-2">
                         <i class="bi bi-list text-3xl"></i>
                     </button>
                 </li>
-    
+
                 <!-- Profile Icon (only visible on larger screens) -->
                 <li class="hidden lg:flex items-center">
-                    <a href="{{ route('profile.nasabah')}}">
-                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border border-gray-300">
+                    <a href="{{ route('profile.nasabah') }}">
+                        <img src="{{ auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40' }}" 
+                            alt="Profile" 
+                            class="w-10 h-10 rounded-full border border-gray-300">
                     </a>
                 </li>
             </ul>
         </div>
-    
+
         <!-- Dropdown Menu for Mobile -->
         <ul id="mobileDropdownMenu" class="lg:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
             <li><a href="{{ route('dashboard.nasabah') }}" class="hover:text-hulk">Beranda</a></li>
@@ -94,36 +113,33 @@
             <li><a href="#" class="hover:text-hulk">Profil</a></li>
         </ul>
     </nav>
-    
+
     <!-- JavaScript -->
     <script>
         // Dropdown Notification
-        const notificationButton = document.getElementById('notificationButton');
-        const notificationDropdown = document.getElementById('notificationDropdown');
-    
-        notificationButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent click from closing everything
-            notificationDropdown.classList.toggle('hidden');
+        document.getElementById('notificationButton').addEventListener('click', function () {
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('hidden');
         });
-    
+
         document.addEventListener('click', (event) => {
             if (!event.target.closest('#notificationButton') && !event.target.closest('#notificationDropdown')) {
                 notificationDropdown.classList.add('hidden');
             }
         });
-    
+
         // Desktop Kreasi Dropdown
         const desktopKreasiButton = document.getElementById('desktopKreasiButton');
         const desktopKreasiDropdown = document.getElementById('desktopKreasiDropdown');
-    
+
         desktopKreasiButton.addEventListener('click', () => {
             desktopKreasiDropdown.classList.toggle('hidden');
         });
-    
+
         // Mobile Menu Toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
-    
+
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
         });
@@ -140,71 +156,75 @@
             <p class="text-gray-600">Tunjukkan kreativitasmu! Unggah karya daur ulangmu dan bergabunglah dengan para pecinta lingkungan lainnya.</p>
         </header>
 
+        {{-- Form Isi --}}
+    <form id="uploadForm" action="{{ route('nasabah.kreasi.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        @csrf
         <!-- Unggah Foto -->
-        <div class="border-2 border-dashed border-hulk rounded-lg h-64 flex items-center justify-center mb-6">
-            <form action="upload.php" method="post" enctype="multipart/form-data">
-                <input type="file" name="fileToUpload" id="fileToUpload">
-            </form>
+        <div class="border-2 border-dashed border-gray-300 rounded-lg h-64 flex items-center justify-center mb-6 relative">
+            <label for="fileToUpload" class="flex flex-col items-center cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v4a2 2 0 002 2h12a2 2 0 002-2v-4M16 12l-4-4m0 0l-4 4m4-4v12"/>
+                </svg>
+                <span class="text-sm text-gray-500">Unggah Foto Kreasi</span>
+                <input type="file" id="fileToUpload" name="fileToUpload" class="hidden" accept="image/*" required onchange="previewImage(event)">
+            </label>
+
+            <!-- Gambar Preview -->
+            <img id="previewImage" class="absolute inset-0 w-full h-full object-cover rounded-lg hidden" alt="Preview Gambar">
         </div>
 
         <div class="border-t-2 border-hulk mb-6"></div>
 
-        <!-- form detail -->
-        <form action="submit_kreasi.php" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Fields lainnya -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-                <label for="judul" class="block text-lg font-medium text-gray-800 mb-2">Judul Kreasi</label>
-                <input id="judul" name="judul" type="text" class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3" />
+                <label for="judul" class="block text-sm font-medium text-gray-700">Judul Kreasi</label>
+                <input id="judul" name="judul" type="text" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-hulk focus:border-hulk" required>
             </div>
-        
             <div>
-                <label for="penulis" class="block text-lg font-medium text-gray-800 mb-2">Nama Penulis</label>
-                <input id="penulis" name="penulis" type="text" class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3" />
+                <label for="penulis" class="block text-sm font-medium text-gray-700">Nama Penulis</label>
+                <input id="penulis" name="penulis" type="text" value="{{ auth()->guard('nasabah')->check() ? auth()->guard('nasabah')->user()->name : 'Guest' }}" readonly class="mt-1 block w-full p-3 border border-gray-300 rounded-md bg-gray-100 shadow-sm">
             </div>
-        
-            <div>
-                <label for="kategori" class="block text-lg font-medium text-gray-800 mb-2">Kategori</label>
-                <input id="kategori" name="kategori" type="text" class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3" />
-            </div>
-        
-            <div class="relative">
-                <label for="tanggal" class="block text-lg font-medium text-gray-800 mb-2">Tanggal</label>
-                <div class="flex items-center">
-                    <input id="tanggal" name="tanggal" type="date" class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3 pr-12" />
-                </div>
-            </div>
-        
-            <div class="col-span-1 md:col-span-2">
-                <label for="alat-bahan" class="block text-lg font-medium text-gray-800 mb-2">Alat dan Bahan</label>
-                <textarea id="alat-bahan" name="alat_bahan" rows="4" class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3"></textarea>
-            </div>
-        
-            <div class="col-span-1 md:col-span-2">
-                <label for="langkah" class="block text-lg font-medium text-gray-800 mb-2">Langkah-langkah</label>
-                <textarea id="langkah" name="langkah" rows="4" class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3"></textarea>
-            </div>
-        
-            <!-- Tombol Kembali -->
-            <div class="flex hidden md:flex justify-center md:justify-start">
-                <a href="{{ route('kreasi') }}" class="px-6 py-2 border-2 border-hulk text-hulk font-medium rounded-full hover:bg-hulk hover:text-white transition">
-                    Kembali
-                </a>
-            </div>
-        
-            <!-- Tombol Unggah -->
-            <div class="flex justify-center md:justify-end">
-                <button type="submit" class="px-6 py-2 border-2 border-hulk text-hulk font-medium rounded-full hover:bg-old-hulk hover:text-white transition">
-                    Unggah
-                </button>
-            </div>
+        </div>
 
+        <div>
+            <label for="kategori" class="block text-sm font-medium text-gray-700">Kategori</label>
+            <select id="kategori" name="kategori" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-hulk focus:border-hulk" required>
+                <option value="" disabled selected>Pilih Kategori</option>
+                @foreach ($kategoris as $kategori)
+                    <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
+            <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
+            <input id="tanggal" name="tanggal" type="date" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-hulk focus:border-hulk" required>
+        </div>
+
+        <div>
+            <label for="alat_bahan" class="block text-sm font-medium text-gray-700">Alat dan Bahan</label>
+            <textarea id="alat_bahan" name="alat_bahan" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-hulk focus:border-hulk" required></textarea>
+        </div>
+
+        <div>
+            <label for="langkah" class="block text-sm font-medium text-gray-700">Langkah-langkah</label>
+            <textarea id="langkah" name="langkah" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-hulk focus:border-hulk" required></textarea>
+        </div>
+
+        <div class="flex justify-between mt-6">
             <!-- Tombol Kembali -->
-            <div class="flex md:hidden justify-center md:justify-start">
-                <a href="{{ route('kreasi') }}" class="px-6 py-2 border-2 border-hulk text-hulk font-medium rounded-full hover:bg-hulk hover:text-white transition">
-                    Kembali
-                </a>
-            </div>
-        </form>
-    </div>        
+            <a href="{{ route('kreasi') }}" class="px-6 py-2 text-center bg-gray-200 border border-gray-300 text-gray-700 rounded-lg hover:bg-old-hulk hover:text-white transition duration-200">
+                Kembali
+            </a>
+
+            <!-- Tombol Unggah -->
+            <button type="submit" class="px-6 py-2 text-center bg-gray-200 border border-gray-300 text-gray-700 rounded-lg hover:bg-old-hulk hover:text-white transition duration-200">
+                Unggah
+            </button>
+        </div>
+    </form>
+    </div>
 
     <!-- Footer -->
     <section>
@@ -244,20 +264,76 @@
             </div>
         </footer>
         </section>
+
     <!-- JS -->
     <script>
-            const dropdownButton = document.getElementById('dropdownButton');
-            const dropdownMenu = document.getElementById('dropdownMenu');
+        // Fungsi untuk menampilkan preview gambar
+        function previewImage(event) {
+            const fileInput = event.target; // Input file
+            const file = fileInput.files[0]; // File pertama yang dipilih
+            const preview = document.getElementById('previewImage'); // Elemen gambar preview
 
-            dropdownButton.addEventListener('click', () => {
-                dropdownMenu.classList.toggle('hidden');
-            });
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result; // Set URL gambar
+                    preview.classList.remove('hidden'); // Tampilkan gambar
+                };
+                reader.readAsDataURL(file); // Baca file sebagai URL data
 
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
-                dropdownMenu.classList.add('hidden');
+            } else {
+                preview.src = ''; // Kosongkan src jika tidak ada file
+                preview.classList.add('hidden'); // Sembunyikan gambar
+            }
+        }
+
+        // Validasi saat form di-submit
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+            // Ambil semua input yang wajib diisi
+            const requiredInputs = document.querySelectorAll('#uploadForm [required]');
+            let formIsValid = true;
+            let firstInvalidInput = null;
+
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    formIsValid = false;
+
+                    // Tandai input yang tidak valid
+                    input.classList.add('border-red-500');
+                    input.classList.add('bg-red-100');
+
+                    if (!firstInvalidInput) {
+                        firstInvalidInput = input;
+                    }
+                } else {
+                    // Hilangkan tanda kesalahan jika input sudah diisi
+                    input.classList.remove('border-red-500');
+                    input.classList.remove('bg-red-100');
                 }
             });
-        </script>
+
+            if (!formIsValid) {
+                alert('Harap isi semua bidang yang wajib diisi!');
+                event.preventDefault(); // Cegah pengiriman form
+
+                // Gulir ke input pertama yang tidak valid
+                firstInvalidInput?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstInvalidInput?.focus();
+            }
+        });
+
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        dropdownButton?.addEventListener('click', () => {
+            dropdownMenu?.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
+                dropdownMenu?.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
