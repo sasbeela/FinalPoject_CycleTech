@@ -3,100 +3,126 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\adminKategoriController;
+use App\Http\Controllers\Admin\AdminKategoriController;
 use App\Http\Controllers\Admin\AdminArtikelController;
 use App\Http\Controllers\Admin\AdminKreasiController;
 use App\Http\Controllers\Admin\AdminPenggunaController;
 use App\Http\Controllers\Admin\AdminUploadArtikelController;
-use App\Http\Controllers\Admin\AdminEditArtikelController;
-use App\Http\Controllers\Admin\adminAddCategoriesController;
-use App\Http\Controllers\Admin\adminEditCategoriesController;
-use App\Http\Controllers\Admin\adminDataAdminController;
-use App\Http\Controllers\Admin\adminEditDataAdminController;
+use App\Http\Controllers\Admin\AdminDataAdminController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KreasiController;
+use App\Http\Controllers\NasabahKreasiController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Notification;
 
 // Route untuk halaman landing
 Route::get('/', function () {
     return view('landing');
-})->name('landing.page');;
+})->name('landing.page');
+
 
 // Route untuk logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
+// Route Check Email Signin
+Route::get('/check-email', function (Request $request) {
+    $email = $request->query('email');
+    $exists = DB::table('nasabah')->where('email', $email)->exists();
+    return response()->json(['exists' => $exists]);
+});
+
+
 // Routes untuk fitur akun nasabah
 Route::prefix('nasabah')->group(function () {
+
     // Halaman login nasabah
     Route::get('/login', [AuthController::class, 'showNasabahLoginForm'])->name('login.nasabah');
-
-    // Proses login nasabah
     Route::post('/login', [AuthController::class, 'submitNasabahLogin'])->name('submit.nasabah');
+
 
     // Halaman daftar nasabah
     Route::get('/signin', [AuthController::class, 'showNasabahSigninForm'])->name('signin.nasabah');
+    Route::post('/nasabah/signin', [AuthController::class, 'createSignin'])->name('signin.create');
 
-    // Proses pendaftaran nasabah
-    Route::post('/signin', [AuthController::class, 'createSignin'])->name('signin.create');
 
     // Route untuk profile nasabah
     Route::get('/profile', function () {
-        return view('Profile.index');})->name('profile.nasabah');
-    
+        return view('Profile.index');
+    })->name('profile.nasabah');
     Route::get('/profile/keamanan', function () {
-        return view('Profile.keamanan');})->name('profile.keamanan');
-    
+        return view('Profile.keamanan');
+    })->name('profile.keamanan');
     Route::get('/profile/keamanan/ubah-password', function () {
-        return view('Profile.editpassword');})->name('profile.password');
+        return view('Profile.editpassword');
+    })->name('profile.password');
+
 
     // Route untuk dashboard nasabah
     Route::get('/dashboard', function () {
         return view('Dashboard.dashboard');
     })->name('dashboard.nasabah');
 
-    //Route artikel
-    Route::get('/artikel', function () {
-        return view('Dashboard.artikel');
-    })->name('artikel.nasabah');
 
-    //Route artikel detail
-    Route::get('/artikel-show', function () {
-        return view('Dashboard.detailartikel');
-    })->name('detail.artikel');
+    // Route Notifikasi
+    Route::post('/notifications/mark-read', function () {
+        Notification::where('read_status', false)->update(['read_status' => true]);
+        return back();
+    })->name('notifications.mark-read');
+
+
+    // Route Munculin Artikel Ke Dashboard
+    Route::get('/nasabah/dashboard', [DashboardController::class, 'index'])->name('dashboard.nasabah');
+    Route::get('/artikel/{id}', [DashboardController::class, 'showArticleDetail'])->name('detail.artikel');
+
+
+    // Route untuk menampilkan detail kreasi
+    Route::get('/artikel-kreasi/{id}', [KreasiController::class, 'show'])->name('artikel.kreasi');
+
 
     // Route untuk Kelola Sampah
-    Route::get('/Kelola-Sampah', function () {
+    Route::get('/kelola-sampah', function () {
         return view('KelolaSampah.kelolasampah');
     })->name('kelola.sampah');
 
-    // Route untuk Kreasi
-    Route::get('/Kreasi', function () {
-        return view('Kreasi.kreasi');
-    })->name('kreasi');
 
-    Route::get('/Kreasi-show', function () {
-        return view('Kreasi.artikelkreasi');
-    })->name('artikel.kreasi');
+    // Route Kreasi
+    Route::put('/kreasi/{id}', [NasabahKreasiController::class, 'update'])->name('kreasi.update');
+    Route::delete('/kreasi/{id}', [NasabahKreasiController::class, 'destroy'])->name('kreasi.destroy');
+    Route::get('/kreasi', [KreasiController::class, 'index'])->name('kreasi');
+    Route::get('/unggah-kreasi', [NasabahKreasiController::class, 'create'])->name('unggah.kreasi');
 
+
+    // Route untuk artikel kreasi tanpa ID (redirect ke halaman kreasi atau tampilkan pesan)
+    Route::get('/artikel-kreasi', function () {
+        return redirect()->route('kreasi')->with('error', 'ID Kreasi diperlukan untuk melihat detail.');
+    });
+
+
+    // Route untuk Kreasiku (Hanya kreasi milik nasabah)
+    Route::get('/kreasiku', [NasabahKreasiController::class, 'index'])->name('kreasiku');
+    Route::get('/kreasiku/edit/{id}', [NasabahKreasiController::class, 'edit'])->name('edit.kreasiku');
+    Route::post('/kreasiku/store', [NasabahKreasiController::class, 'store'])->name('nasabah.kreasi.store');
+
+
+    // Route untuk deteksi sampah
     Route::get('/deteksi', function () {
         return view('Kreasi.deteksi');
     })->name('deteksi.sampah');
 
-    Route::get('/unggah-kreasi', function () {
-        return view('Kreasi.unggahkreasi');
-    })->name('unggah.kreasi');
-
-    Route::get('/edit-kreasi', function () {
-        return view('Kreasiku.editkreasiku');
-    })->name('edit.kreasiku');
-
-    Route::get('/Kreasiku', function () {
-        return view('Kreasiku.kreasiku');
-    })->name('kreasiku');
-
     // Route untuk Tentang Kami
-    Route::get('/Tentang-Kami', function () {
+    Route::get('/tentang-kami', function () {
         return view('Dashboard.tentangkami');
     })->name('tentang.kami');
-    
+
+    // Route untuk artikel pada dashboard nasabah
+    Route::get('/artikel', function () {
+        return view('Dashboard.artikel');
+    })->name('artikel.nasabah');
+
 });
+
 
 // Routes untuk login admin
 Route::prefix('admin')->group(function () {
@@ -109,13 +135,12 @@ Route::prefix('admin')->group(function () {
 
 // Routes Admin
 Route::prefix('admin')->name('admin.')->group(function () {
-
     // Dashboard
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // Kategori Sampah
     Route::get('/categories', [AdminKategoriController::class, 'index'])->name('categories.index');
-    Route::get('/categories/tambah', [AdminKategoriController::class, 'create'])->name('categories.create'); // Mengarahkan ke method create
+    Route::get('/categories/tambah', [AdminKategoriController::class, 'create'])->name('categories.create');
     Route::post('/categories/store', [AdminKategoriController::class, 'store'])->name('categories.store');
     Route::get('/categories/edit/{id}', [AdminKategoriController::class, 'edit'])->name('categories.edit');
     Route::put('/categories/update/{id}', [AdminKategoriController::class, 'update'])->name('categories.update');
@@ -127,15 +152,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/articles/edit/{id}', [AdminArtikelController::class, 'edit'])->name('artikel.edit');
     Route::put('/articles/update/{id}', [AdminArtikelController::class, 'update'])->name('artikel.update');
     Route::delete('/articles/{id}', [AdminArtikelController::class, 'destroy'])->name('artikel.destroy');
+    Route::get('/articles/upload', [AdminUploadArtikelController::class, 'index'])->name('artikel.upload');
 
     // Kreasi
-    Route::get('/creations', [AdminKreasiController::class, 'index'])->name('kreasi.index');
+    Route::get('/kreasi', [AdminKreasiController::class, 'index'])->name('kreasi.index');
+    Route::delete('/kreasi/{id}', [AdminKreasiController::class, 'destroy'])->name('kreasi.destroy');
 
     // Data Pengguna
     Route::get('/users', [AdminPenggunaController::class, 'index'])->name('datauser.index');
     Route::delete('/users/{id}', [AdminPenggunaController::class, 'destroy'])->name('datauser.destroy');
-
-    Route::get('/articles/upload', [AdminUploadArtikelController::class, 'index'])->name('artikel.upload');
 
     // Data Admin
     Route::get('/data-admin', [AdminDataAdminController::class, 'index'])->name('dataadmin.index');
