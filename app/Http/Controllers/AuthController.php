@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Nasabah;
+use App\Models\Nasabah; // Model untuk nasabah
+use App\Models\Admin;   // Model untuk admin (jika diperlukan)
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -12,89 +12,107 @@ class AuthController extends Controller
     // Menampilkan form login nasabah
     public function showNasabahLoginForm()
     {
-        return view('Akun.login');
+        return view('Akun.login'); // File Blade 'Akun.login' harus tersedia
     }
 
     // Menampilkan form login admin
     public function showAdminLoginForm()
     {
-        return view('Admin.login');
+        return view('Admin.login'); // File Blade 'Admin.login' harus tersedia
     }
 
     // Menampilkan form daftar nasabah
     public function showNasabahSigninForm()
     {
-        return view('Akun.signin');
+        return view('Akun.signin'); // File Blade 'Akun.signin' harus tersedia
     }
 
     // Proses pendaftaran nasabah
     public function createSignin(Request $request)
     {
-        $request->validate([
+        // Validasi input
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
-            'email' => 'required|email|unique:nasabah,email',
-            'password' => 'required|string|min:6',
+            'email' => 'required|email|unique:nasabah,email', // Pastikan tabel 'nasabah'
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        Nasabah::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+        try {
+            // Buat data nasabah
+            Nasabah::create([
+                'name' => $validated['name'],
+                'phone' => $validated['phone'],
+                'email' => $validated['email'],
+                'password' => bcrypt($validated['password']), // Enkripsi password
+            ]);
 
-        return redirect()->route('login.nasabah')->with('success', 'Akun berhasil dibuat. Silakan login.');
+            // Redirect ke halaman login dengan pesan sukses
+            return redirect()->route('login.nasabah')->with('success', 'Akun berhasil dibuat. Silakan login.');
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, kembalikan ke halaman sebelumnya dengan error
+            return back()->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()])->withInput();
+        }
     }
+
 
     // Proses login untuk nasabah
     public function submitNasabahLogin(Request $request)
     {
-        $request->validate([
+        // Validasi input
+        $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8',
+            'password' => 'required|string|min:8',
         ]);
 
-        // Login menggunakan guard 'nasabah'
-        if (Auth::guard('nasabah')->attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
-
-            // Redirect ke dashboard nasabah
-            return redirect()->route('dashboard.nasabah');
+        // Cek autentikasi dengan guard nasabah
+        if (!Auth::guard('nasabah')->attempt($credentials, $request->filled('remember'))) {
+            return back()
+                ->withErrors(['email' => 'Email atau password salah.'])
+                ->withInput();
         }
 
-        // Jika login gagal
-        return back()->withErrors(['email' => 'Email atau password salah.']);
+        // Regenerasi session untuk keamanan
+        $request->session()->regenerate();
+
+        // Redirect ke dashboard nasabah
+        return redirect()->route('dashboard.nasabah');
     }
 
     // Proses login untuk admin
     public function submitAdminLogin(Request $request)
     {
         // Validasi input
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8',
+            'password' => 'required|string|min:8',
         ]);
 
-        // Coba login menggunakan guard 'admin'
-        if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
-
-            // Redirect ke dashboard admin
-            return redirect()->route('admin.dashboard');
+        // Cek autentikasi dengan guard admin
+        if (!Auth::guard('admin')->attempt($credentials, $request->filled('remember'))) {
+            return back()
+                ->withErrors(['email' => 'Email atau password salah.'])
+                ->withInput();
         }
 
-        // Jika login gagal
-        return back()->withErrors(['email' => 'Email atau password salah.']);
+        // Regenerasi session untuk keamanan
+        $request->session()->regenerate();
+
+        // Redirect ke dashboard admin
+        return redirect()->route('admin.dashboard');
     }
 
-    public function logout()
+    // Proses logout untuk nasabah dan admin
+    public function logout(Request $request)
     {
-        // Logout pengguna
+        // Logout pengguna saat ini
         Auth::logout();
+
+        // Bersihkan sesi
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         // Redirect ke halaman landing
         return redirect('/');
     }
-
 }

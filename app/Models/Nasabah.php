@@ -9,7 +9,7 @@ class Nasabah extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'nasabah';
+    protected $table = 'nasabah'; // Pastikan sesuai dengan nama tabel di database
 
     protected $fillable = [
         'name',
