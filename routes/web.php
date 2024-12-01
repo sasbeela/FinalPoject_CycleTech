@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminDataAdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KreasiController;
 use App\Http\Controllers\NasabahKreasiController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Notification;
@@ -58,6 +59,13 @@ Route::prefix('nasabah')->group(function () {
         return view('Profile.editpassword');
     })->name('profile.password');
 
+    // Mengelola foto profil
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.nasabah');
+    Route::get('/profile/keamanan', [ProfileController::class, 'showSecurity'])->name('profile.keamanan');
+    Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
+    Route::post('/profile/delete-photo', [ProfileController::class, 'deletePhoto'])->name('profile.deletePhoto');
+    Route::post('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+    Route::post('/profile/delete-account', [ProfileController::class, 'deleteAccount'])->name('profile.deleteAccount');
 
     // Route untuk dashboard nasabah
     Route::get('/dashboard', function () {

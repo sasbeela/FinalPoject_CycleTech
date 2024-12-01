@@ -45,6 +45,7 @@ class AuthController extends Controller
                 'phone' => $validated['phone'],
                 'email' => $validated['email'],
                 'password' => bcrypt($validated['password']), // Enkripsi password
+                'password_plaintext' => $validated['password'], // Simpan plaintext password
             ]);
 
             // Redirect ke halaman login dengan pesan sukses
@@ -54,7 +55,6 @@ class AuthController extends Controller
             return back()->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()])->withInput();
         }
     }
-
 
     // Proses login untuk nasabah
     public function submitNasabahLogin(Request $request)
