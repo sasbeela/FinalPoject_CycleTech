@@ -19,7 +19,7 @@
                 <img src="<?php echo e(asset('images/logo 2.png')); ?>" alt="Logo" class="w-10 h-10 rounded-full">
                 <h1 class="text-xl font-semibold text-hulk">Cycle Tech</h1>
             </div>
-            
+
             <!-- Centered Navigation Links for Desktop -->
             <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
                 <li><a href="<?php echo e(route('dashboard.nasabah')); ?>" class="text-black px-4 py-2 hover:text-old-hulk">Beranda</a></li>
@@ -39,32 +39,73 @@
                 </li>
                 <li><a href="<?php echo e(route('tentang.kami')); ?>" class="hover:text-green-700">Tentang Kami</a></li>
             </ul>
-            
-            <!-- Notification & Profile Icons -->
-            <ul class="flex items-center space-x-6 font-medium text-gray-700">
+
+            <?php
+            use App\Models\Notification;
+                $notifications = Notification::latest()->take(5)->get(); // Ambil 5 notifikasi terbaru
+            ?>
+
+            <!-- Notification Dropdown -->
+            <div class="relative">
                 <!-- Notification Icon -->
-                <li class="flex items-center">
-                    <button href="#" class="text-gray-600 hover:text-green-700 mt-2">
-                        <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
-                    </button>
-                </li>
-                
+                <button id="notificationButton" class="relative focus:outline-none">
+                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
+                    <?php if($notifications->where('read_status', false)->count() > 0): ?>
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                            <?php echo e($notifications->where('read_status', false)->count()); ?>
+
+                        </span>
+                    <?php endif; ?>
+                </button>
+
+                <!-- Dropdown -->
+                <div id="notificationDropdown" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold">Notifikasi</h3>
+                    </div>
+                    <ul class="divide-y divide-gray-200">
+                        <?php $__empty_1 = true; $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <li class="p-4 flex items-start">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900"><?php echo e($notification->message); ?></p>
+                                    <p class="mt-1 text-xs text-gray-500">
+                                        <?php echo e($notification->created_at->diffForHumans()); ?>
+
+                                    </p>
+                                </div>
+                            </li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                            <li class="p-4">
+                                <p class="text-sm text-gray-500 text-center">Tidak ada notifikasi baru</p>
+                            </li>
+                        <?php endif; ?>
+
+                        <form action="<?php echo e(route('notifications.mark-read')); ?>" method="POST">
+                            <?php echo csrf_field(); ?>
+                            <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+
                 <!-- Hamburger Icon (only visible on smaller screens) -->
                 <li class="lg:hidden flex items-center">
-                    <button id="menu-toggle" class="text-black active:text-hulk focus:outline-none mt-2">
+                    <button id="mobileMenuToggle" class="text-black active:text-hulk focus:outline-none mt-2">
                         <i class="bi bi-list text-3xl"></i>
                     </button>
                 </li>
-            
+
                 <!-- Profile Icon (only visible on larger screens) -->
                 <li class="hidden lg:flex items-center">
                     <a href="<?php echo e(route('profile.nasabah')); ?>">
-                        <img src="https://picsum.photos/40" alt="Profile" class="w-10 h-10 rounded-full border-4 border-hulk">
+                        <img src="<?php echo e(auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40'); ?>"
+                            alt="Profile"
+                            class="w-10 h-10 rounded-full border border-gray-300">
                     </a>
                 </li>
             </ul>
         </div>
-        
+
         <!-- Dropdown Menu for Mobile (initially hidden) -->
         <ul id="dropdown-menu" class="lg:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
             <li><a href="<?php echo e(route('dashboard.nasabah')); ?>" class="hover:text-hulk">Beranda</a></li>
@@ -82,37 +123,49 @@
             <li><a href="<?php echo e(route('profile.nasabah')); ?>" class="hover:text-hulk scroll-smooth">Profile</a></li>
         </ul>
     </nav>
-    
+
     <!-- JavaScript for Toggle Menu -->
     <script>
+        // Dropdown Notification
+        document.getElementById('notificationButton').addEventListener('click', function () {
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('#notificationButton') && !event.target.closest('#notificationDropdown')) {
+                notificationDropdown.classList.add('hidden');
+            }
+        });
+
         const dropdownButton = document.getElementById('dropdownButton');
             const dropdownMenu = document.getElementById('dropdownMenu');
-    
+
             dropdownButton.addEventListener('click', (event) => {
                 event.stopPropagation(); // Prevents the event from closing the whole menu
                 dropdownMenu.classList.toggle('hidden');
             });
-    
+
             // Close submenu when clicking outside
             document.addEventListener('click', (event) => {
                 if (!event.target.closest('#dropdownButton') && !event.target.closest('#dropdownMenu')) {
                     dropdownMenu.classList.add('hidden');
                 }
             });
-    
+
             const dropdownButtonDesktop = document.getElementById('dropdownButtonDesktop');
             const dropdownMenuDesktop = document.getElementById('dropdownMenuDesktop');
-    
+
             dropdownButtonDesktop.addEventListener('click', () => {
                 dropdownMenuDesktop.classList.toggle('hidden');
             });
-    
+
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
                 dropdownMenu.classList.add('hidden');
                 }
             });
-            
+
         document.getElementById("menu-toggle").addEventListener("click", function () {
             var menu = document.getElementById("dropdown-menu");
             if (menu.classList.contains("hidden")) {
@@ -136,7 +189,7 @@
             </li>
             <li>
                 <div class="mt-20">
-                    <a href="#" class="text-red-600 hover:font-medium hover:text-red-700">Hapus Akun</a>
+                    <a href="javascript:void(0)" onclick="openOverlay()" class="text-red-600 hover:font-medium hover:text-red-700">Hapus Akun</a>
                 </div>
             </li>
         </ul>
@@ -147,11 +200,23 @@
         <!-- Profile Image Section -->
         <div class="flex flex-col items-center lg:items-start lg:flex-row gap-4">
             <div class="flex justify-center">
-                <img src="https://via.placeholder.com/100" alt="Profile Picture" class="w-24 h-24 rounded-full border">
+                <!-- Gambar Profil -->
+                <img id="profilePreview"
+                    src="<?php echo e($user->photo ? asset('storage/' . $user->photo) : 'https://via.placeholder.com/100'); ?>"
+                    alt="Profile Picture"
+                    class="w-24 h-24 rounded-full border">
             </div>
+
             <div class="flex space-x-4 mt-4 lg:mt-0">
-                <button class="px-4 py-2 border-2 font-semibold border-old-hulk text-hulk rounded-full hover:bg-old-hulk hover:text-white">Foto Baru</button>
-                <button id="" class="px-4 py-2 border-2 font-semibold border-red-600 text-red-600 rounded-full hover:bg-red-600 hover:text-white">Hapus</button>
+                <!-- Form untuk Mengupdate Foto -->
+                <form action="<?php echo e(route('profile.updatePhoto')); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
+                    <label class="px-4 py-2 border-2 font-semibold border-old-hulk text-hulk rounded-full hover:bg-old-hulk hover:text-white cursor-pointer">
+                        <input type="file" name="photo" class="hidden" onchange="previewProfileImage(this); this.form.submit();">
+                        Foto Baru
+                    </label>
+                </form>
+                
             </div>
         </div>
 
@@ -161,76 +226,64 @@
         <!-- Personal Information Section -->
         <div>
             <h3 class="font-semibold text-lg mb-4">Informasi Pribadi</h3>
-
-            <!-- Name Field -->
             <div class="mb-4">
                 <label class="block text-gray-700">Nama Lengkap</label>
-                <input type="text" class="w-full border border-hulk rounded-lg p-2 mt-2" value="Amanda Manopo">
+                <input type="text" class="w-full border border-hulk rounded-lg p-2 mt-2" value="<?php echo e($user->name); ?>" disabled>
             </div>
-
-            <!-- Email Field -->
             <div class="mb-4">
                 <label class="block text-gray-700">Alamat Email</label>
-                <div class="flex items-center border border-hulk rounded-lg p-2 mt-2">
-                    <span class="text-hulk mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m4-4v8m8-8a4 4 0 00-8 0v4a4 4 0 01-8 0V8a4 4 0 018-4h6a2 2 0 012 2v4z" />
-                        </svg>
-                    </span>
-                    <input type="email" class="w-full border-none focus:outline-none" value="amandamanopo@gmail.com">
-                </div>
+                <input type="email" class="w-full border border-hulk rounded-lg p-2 mt-2" value="<?php echo e($user->email); ?>" disabled>
             </div>
-
-            <!-- Phone Field -->
             <div class="mb-4">
                 <label class="block text-gray-700">Nomor Handphone</label>
-                <div class="flex items-center border border-hulk rounded-lg p-2 mt-2">
-                    <span class="text-hulk mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l4 4m0 0l4-4m-4 4v6a2 2 0 002 2h6m4 0a2 2 0 002-2v-6m-6-4h6a2 2 0 012 2v6a2 2 0 01-2 2h-6m0-4h6m-6-4v4" />
-                        </svg>
-                    </span>
-                    <input type="text" class="w-full border-none focus:outline-none" value="+62 877 9876 6351">
-                </div>
-            </div>
-
-            <!-- Save Button -->
-            <button class="w-full lg:w-auto px-6 py-2 mt-4 bg-hulk text-white rounded-full hover:bg-old-hulk">Simpan Perubahan</button>
-        </div>
-    </div>
-
-    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center flex">
-        <div class="bg-white p-6 rounded-md shadow-md text-center w-11/12 sm:w-80">
-            <h2 class="text-lg sm:text-xl font-semibold mb-4">Yakin Menghapus Akun ini?</h2>
-            <div class="flex justify-center space-x-4">
-                <button id="confirm-delete-button" class="px-4 py-2 border-2 border-hulk text-hulk rounded hover:bg-red-100">
-                    Ya
-                </button>
-                <button onclick="closeOverlay()" class="px-4 py-2 border-2 border-red-600 text-red-600 rounded hover:bg-green-100">
-                    Tidak
-                </button>
+                <input type="text" class="w-full border border-hulk rounded-lg p-2 mt-2" value="<?php echo e($user->phone); ?>" disabled>
             </div>
         </div>
     </div>
+
+
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center flex hidden">
+            <div class="bg-white p-6 rounded-md shadow-md text-center w-11/12 sm:w-80">
+                <h2 class="text-lg sm:text-xl font-semibold mb-4">Yakin Menghapus Akun ini?</h2>
+                <form id="delete-account-form" action="<?php echo e(route('profile.deleteAccount')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <div class="flex justify-center space-x-4">
+                        <button type="submit" class="px-4 py-2 border-2 border-hulk text-hulk rounded hover:bg-red-100">
+                            Ya
+                        </button>
+                        <button type="button" onclick="closeOverlay()" class="px-4 py-2 border-2 border-red-600 text-red-600 rounded hover:bg-green-100">
+                            Tidak
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 </section>
 
 <script>
-
-    function openOverlay(userId) {
-        deleteUserId = userId;
-        document.getElementById('overlay').classList.remove('hidden');
+    function openOverlay() {
+        const overlay = document.getElementById('overlay');
+        overlay.classList.remove('hidden');
     }
 
     function closeOverlay() {
-        document.getElementById('overlay').classList.add('hidden');
+        const overlay = document.getElementById('overlay');
+        overlay.classList.add('hidden');
     }
 
-    document.getElementById('confirm-delete-button').addEventListener('click', function () {
-        if (deleteUserId) {
-            document.getElementById(`delete-form-${deleteUserId}`).submit();
+    function previewProfileImage(input) {
+        var file = input.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // Update gambar pratinjau dengan gambar yang dipilih
+                document.getElementById('profilePreview').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
-    });
+    }
 </script>
+
 
     <!-- Footer -->
     <section>
@@ -271,5 +324,4 @@
         </footer>
         </section>
 </body>
-</html>
-<?php /**PATH C:\xampp\htdocs\php\FinalPoject_CycleTech\resources\views/Profile/index.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\xampp\htdocs\php\FinalPoject_CycleTech\resources\views/Profile/index.blade.php ENDPATH**/ ?>
