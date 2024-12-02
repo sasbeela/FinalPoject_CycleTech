@@ -38,13 +38,13 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+        'driver' => 'session',
+        'provider' => 'users',
         ],
 
         'nasabah' => [
-        'driver' => 'session',
-        'provider' => 'nasabah',
+            'driver' => 'session',
+            'provider' => 'nasabahs',
         ],
 
         'admin' => [
@@ -83,11 +83,11 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+        'driver' => 'eloquent',
+        'model' => App\Models\User::class,
         ],
 
-        'nasabah' => [
+        'nasabahs' => [
             'driver' => 'eloquent',
             'model' => App\Models\Nasabah::class,
         ],

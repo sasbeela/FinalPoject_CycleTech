@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Artikel;
+use App\Models\Notification; // Tambahkan model Notification
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,13 +32,20 @@ class adminArtikelController extends Controller
         }
 
         // Simpan data artikel ke database
-        Artikel::create([
+        $artikel = Artikel::create([
             'judul_artikel' => $request->input('judul'),
             'isi' => $request->input('isi'),
             'foto' => $fotoPath,
         ]);
 
-        // Redirect ke halaman utama artikel dengan pesan sukses
+        // Simpan notifikasi untuk user
+        Notification::create([
+            'user_id' => null, // Null untuk notifikasi global
+            'type' => 'artikel',
+            'message' => 'Admin telah menambahkan artikel baru berjudul: ' . $artikel->judul_artikel,
+            'read_status' => false,
+        ]);
+
         return redirect()->route('admin.artikel.index')
             ->with('success', 'Artikel berhasil ditambahkan.');
     }
@@ -47,7 +55,6 @@ class adminArtikelController extends Controller
         $artikel = Artikel::findOrFail($id);
         return view('Admin.Artikel.edit', compact('artikel'));
     }
-
 
     public function update(Request $request, $id)
     {
@@ -79,12 +86,10 @@ class adminArtikelController extends Controller
     {
         $artikel = Artikel::findOrFail($id);
 
-        // Hapus file foto jika ada
         if ($artikel->foto && Storage::exists('public/' . $artikel->foto)) {
             Storage::delete('public/' . $artikel->foto);
         }
 
-        // Hapus artikel dari database
         $artikel->delete();
 
         return response()->json(['success' => 'Artikel berhasil dihapus']);

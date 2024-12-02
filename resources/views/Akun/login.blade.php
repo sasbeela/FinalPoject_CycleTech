@@ -10,10 +10,8 @@
         function redirectToLogin() {
             const userType = document.getElementById('userType').value;
             if (userType === 'nasabah') {
-                // Redirect ke halaman login nasabah
                 window.location.href = "{{ route('login.nasabah') }}";
             } else if (userType === 'admin') {
-                // Redirect ke halaman login admin
                 window.location.href = "{{ route('login.admin') }}";
             }
         }
@@ -31,7 +29,7 @@
             <h2 class="text-2xl font-bold">Selamat Datang Kembali!</h2>
             <p class="text-gray-600">Silakan pilih jenis pengguna untuk masuk</p>
             <div class="mb-4">
-                <label for="userType" class="block text-gray-700">Masuk sebagai</label>
+                <label for="userType" class="block text-gray-700">Masuk sebagai : Nasabah</label>
                 <select id="userType" class="text-sm lg:text-lg w-1/2 px-4 py-2 border rounded-lg bg-hulk text-white focus:outline-none focus:ring-2 focus:ring-old-hulk" onchange="redirectToLogin()">
                     <option value="">Pilih Jenis Pengguna</option>
                     <option value="nasabah">Nasabah</option>
@@ -40,15 +38,26 @@
             </div>
         </div>
 
+        <!-- Tampilkan Alert Jika Ada Error -->
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form id="nasabahForm" class="block md:px-32 lg:px-0" action="{{ route('submit.nasabah') }}" method="POST">
             @csrf
             <div class="mb-4">
-                <label for="nama" class="block text-gray-700">Email</label>
-                <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk" required>
+                <label for="email" class="block text-gray-700">Email</label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk" required>
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-gray-700">Kata Sandi</label>
-                <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-huk">
+                <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-old-hulk" required>
             </div>
             <button type="submit" class="w-full bg-hulk text-white py-2 rounded-lg hover:bg-old-hulk">Masuk</button>
         </form>

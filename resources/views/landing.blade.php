@@ -148,7 +148,6 @@
         </div>
     </section>
 
-
     <!-- Call to Action Section -->
     <section class="bg-white py-8 md:py-16">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-32">
@@ -216,7 +215,7 @@
     </section>
 
     <!-- Footer -->
-    <section>
+    <section id="kontak">
     <footer class="bg-gradient-to-t from-birumuda to-krem py-10">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center md:px-32 px-24">
             <div class="md:w-1/3 mb-6 md:mb-0">
@@ -228,6 +227,7 @@
                     Cycle Tech adalah platform inovatif untuk pengelolaan sampah. Dengan fitur-fitur canggih, kami memudahkan Anda untuk memilah, mengelola, dan mendaur ulang sampah secara efektif.
                 </p>
             </div>
+
             <div class="md:w-1/3 mb-6 md:mb-0 text-center">
                 <h3 class="text-lg font-semibold mb-2">Hubungi</h3>
                 <p class="text-sm">+62 812 3456 7890</p>
