@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
+    <!-- header -->
     <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
             <!-- Logo -->
@@ -80,7 +80,7 @@
 
                             <form action="{{ route('notifications.mark-read') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                                <button type="submit" class="text-sm text-blue-700 hover:underline px-6 py-2">Tandai semua sebagai sudah dibaca</button>
                             </form>
                         </ul>
                     </div>
@@ -100,13 +100,12 @@
                                 class="w-10 h-10 rounded-full border border-gray-300">
                         </a>
                     </li>
+                    
+                    <!-- logout -->
                     <li class="hidden lg:flex items-center">
-                        <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="flex items-center">
-                            @csrf
-                            <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
-                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
-                            </button>
-                        </form>
+                        <button id="logoutButton" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                        </button>
                     </li>
                 </div>
             </div>
@@ -129,10 +128,29 @@
             </ul>
     </nav>
 
+    <!-- Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
-       // Dropdown Notification
-       document.getElementById('notificationButton').addEventListener('click', function () {
+        // Dropdown Notification
+        document.getElementById('notificationButton').addEventListener('click', function () {
             const dropdown = document.getElementById('notificationDropdown');
             dropdown.classList.toggle('hidden');
         });
@@ -158,7 +176,18 @@
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
         });
+
+        // Show Modal
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.remove('hidden');
+        });
+
+        // Hide Modal
+        document.getElementById('cancelLogout').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.add('hidden');
+        });
     </script>
+
 
     <section class="max-w-4xl mx-auto mt-20 p-8 bg-white rounded-lg shadow-lg">
         <header class="mb-6">
@@ -176,7 +205,7 @@
             <!-- Gambar Kreasi -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2" for="fileToUpload">Gambar Kreasi</label>
-                <div class="border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center h-64">
+                <div class="border-2 border-dashed border-hulk rounded-lg h-64 flex items-center justify-center mb-6">
                     @if ($kreasi->foto_kreasi)
                         <img src="{{ asset('storage/' . $kreasi->foto_kreasi) }}" alt="Foto Kreasi" class="object-cover w-24 h-24 rounded-lg">
                     @else
@@ -186,19 +215,19 @@
                         </div>
                     @endif
                 </div>
-                <input type="file" name="fileToUpload" id="fileToUpload" class="mt-4 block w-full text-sm text-gray-600 bg-gray-100 border border-gray-300 rounded-lg py-2 px-4 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-green-500 file:text-white hover:file:bg-green-600">
+                <input type="file" name="fileToUpload" id="fileToUpload" class="mt-4 block w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3">
             </div>
 
             <!-- Judul Kreasi dan Nama Penulis -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="judul" class="block text-sm font-medium text-gray-700">Judul Kreasi</label>
-                    <input type="text" name="judul" id="judul" value="{{ $kreasi->judul_kreasi }}" required class="mt-1 block w-full p-3 border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
+                    <input type="text" name="judul" id="judul" value="{{ $kreasi->judul_kreasi }}" required class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Nama Penulis</label>
-                    <input type="text" value="{{ auth('nasabah')->user()->name }}" disabled class="mt-1 block w-full p-3 border rounded-lg bg-gray-100 shadow-sm cursor-not-allowed">
+                    <input type="text" value="{{ auth('nasabah')->user()->name }}" disabled class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3 cursor-not-allowed">
                 </div>
             </div>
 
@@ -206,65 +235,65 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="kategori" class="block text-sm font-medium text-gray-700">Kategori</label>
-                    <input type="text" name="kategori" id="kategori" value="{{ $kreasi->kategori_kreasi }}" required class="mt-1 block w-full p-3 border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
+                    <input type="text" name="kategori" id="kategori" value="{{ $kreasi->kategori_kreasi }}" required class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3">
                 </div>
 
                 <div>
                     <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
-                    <input type="date" name="tanggal" id="tanggal" value="{{ $kreasi->tanggal }}" required class="mt-1 block w-full p-3 border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
+                    <input type="date" name="tanggal" id="tanggal" value="{{ $kreasi->tanggal }}" required class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3">
                 </div>
             </div>
 
             <!-- Alat dan Bahan -->
             <div>
                 <label for="alat_bahan" class="block text-sm font-medium text-gray-700">Alat dan Bahan</label>
-                <textarea name="alat_bahan" id="alat_bahan" rows="5" required class="mt-1 block w-full p-3 border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">{{ $kreasi->alat_bahan }}</textarea>
+                <textarea name="alat_bahan" id="alat_bahan" rows="5" required class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3">{{ $kreasi->alat_bahan }}</textarea>
             </div>
 
             <!-- Langkah-langkah -->
             <div>
                 <label for="langkah" class="block text-sm font-medium text-gray-700">Langkah-langkah</label>
-                <textarea name="langkah" id="langkah" rows="5" required class="mt-1 block w-full p-3 border rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">{{ $kreasi->langkah }}</textarea>
+                <textarea name="langkah" id="langkah" rows="5" required class="w-full border-2 border-hulk focus:outline-none focus:ring-2 focus:ring-old-hulk rounded-md p-3">{{ $kreasi->langkah }}</textarea>
             </div>
 
             <!-- Tombol Perbarui -->
-            <div class="flex justify-between items-center">
-                <button type="submit" class="bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-400">
+            <div class="flex justify-end items-end">
+                <button type="submit" class="w-[150px] bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-400">
                     Perbarui
-                </button>
+                </button>    
             </div>
         </form>
-
-        <!-- Form Hapus -->
-        <form action="{{ route('kreasi.destroy', $kreasi->id) }}" method="POST" class="mt-4" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kreasi ini?');">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="bg-red-500 text-white py-2 px-6 rounded-lg hover:bg-red-600 focus:ring-2 focus:ring-red-400">
-                Hapus
-            </button>
-        </form>
+        <div class="flex justify-end items-end">
+            <form action="{{ route('kreasi.destroy', $kreasi->id) }}" method="POST" class="mt-4" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kreasi ini?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="w-[150px] bg-white text-red-500 py-2 px-6 rounded-lg border-2 border-red-500 hover:text-white hover:bg-red-600 focus:ring-red-400">
+                    Hapus
+                </button>
+            </form> 
+        </div> 
     </section>
 
 
     <script>
-    function openModal() {
-        document.getElementById('deleteModal').classList.remove('hidden');
-    }
+        function openModal() {
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
 
-    function closeModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-    }
+        function closeModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
 
-    function handleDelete(event) {
-        event.preventDefault(); // Prevent form submission to handle redirection manually
+        function handleDelete(event) {
+            event.preventDefault(); // Prevent form submission to handle redirection manually
 
-        // Simulate successful deletion (replace with an actual AJAX request if needed)
-        setTimeout(() => {
-            // Redirect to the "Kreasiku" page after deletion
-            window.location.href = "{{ route('kreasiku') }}";
-        }, 500); // Simulated delay for UX
-    }
-</script>
+            // Simulate successful deletion (replace with an actual AJAX request if needed)
+            setTimeout(() => {
+                // Redirect to the "Kreasiku" page after deletion
+                window.location.href = "{{ route('kreasiku') }}";
+            }, 500); // Simulated delay for UX
+        }
+    </script>
 
     <!-- Footer -->
     <section>

@@ -11,8 +11,8 @@
 </head>
 
 <body  class="min-h-screen flex flex-col">>
-    <!-- Header -->
-    <nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
+<!-- header -->
+<nav class="bg-gradient-to-r from-birumuda to-krem shadow-lg fixed top-0 w-full h-18 z-50">
         <div class="container mx-auto flex items-center justify-between py-4 px-6 md:px-10">
             <!-- Logo -->
             <div class="flex items-center space-x-3">
@@ -82,7 +82,7 @@
 
                             <form action="{{ route('notifications.mark-read') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                                <button type="submit" class="text-sm text-blue-700 hover:underline px-6 py-2">Tandai semua sebagai sudah dibaca</button>
                             </form>
                         </ul>
                     </div>
@@ -102,13 +102,12 @@
                                 class="w-10 h-10 rounded-full border border-gray-300">
                         </a>
                     </li>
+                    
+                    <!-- logout -->
                     <li class="hidden lg:flex items-center">
-                        <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="flex items-center">
-                            @csrf
-                            <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
-                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
-                            </button>
-                        </form>
+                        <button id="logoutButton" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                        </button>
                     </li>
                 </div>
             </div>
@@ -130,6 +129,25 @@
                 </li>
             </ul>
     </nav>
+
+    <!-- Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -160,6 +178,16 @@
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
         });
+
+        // Show Modal
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.remove('hidden');
+        });
+
+        // Hide Modal
+        document.getElementById('cancelLogout').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.add('hidden');
+        });
     </script>
 
     <!-- Content -->
@@ -175,7 +203,7 @@
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
                     @foreach ($kreasiku as $kreasi)
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg">
+                        <div class="kreasi bg-gradient-to-b from-birumuda to-krem p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
                             <img src="{{ asset('storage/' . $kreasi->foto_kreasi) }}" alt="{{ $kreasi->judul_kreasi }}" class="w-full h-48 object-cover">
                             <div class="p-4">
                                 <h3 class="text-lg font-bold text-gray-800">{{ $kreasi->judul_kreasi }}</h3>
@@ -194,40 +222,6 @@
         </div>
     </section>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const moreButton = document.getElementById('moreButton');
-        const itemsContainer = document.getElementById('itemsContainer');
-        const items = itemsContainer.querySelectorAll('.item');
-        const itemsPerRow = 3; // Misalnya, 3 item per baris sesuai grid Tailwind
-        const maxVisibleRows = 2; // Maksimum 2 baris yang terlihat secara default
-
-        // Hitung jumlah item yang terlihat
-        const updateVisibility = () => {
-            items.forEach((item, index) => {
-                if (index < itemsPerRow * maxVisibleRows) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-        };
-
-        // Tampilkan lebih banyak/mengurangi item
-        moreButton.addEventListener('click', function () {
-            if (moreButton.textContent === 'Lebih Banyak') {
-                items.forEach(item => item.classList.remove('hidden'));
-                moreButton.textContent = 'Lebih Sedikit';
-            } else {
-                updateVisibility();
-                moreButton.textContent = 'Lebih Banyak';
-            }
-        });
-
-        // Set visibilitas awal
-        updateVisibility();
-    });
-    </script>
 
     <!-- Footer -->
     <section class="mt-auto">

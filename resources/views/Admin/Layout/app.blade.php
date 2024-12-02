@@ -65,18 +65,11 @@
                 <div class="flex items-center justify-between gap-4 py-4 cursor-pointer">
                     <div class="flex items-center gap-4">
                         <i class="fa-solid fa-users text-white"></i>
-                        <a href="#"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                           class="text-xl leading-6 font-normal text-white hover:font-bold">
+                        <a href="#" id="logoutButton" class="text-xl leading-6 font-normal text-white hover:font-bold">
                             Logout
                         </a>
                     </div>
                 </div>
-
-                <!-- Hidden Logout Form -->
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
             </div>
         </div>
 
@@ -86,13 +79,44 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const toggleButton = document.getElementById('toggleButton');
             const sidebar = document.getElementById('sidebar');
+            const logoutButton = document.getElementById('logoutButton');
+            const logoutModal = document.getElementById('logoutModal');
+            const cancelLogout = document.getElementById('cancelLogout');
 
-            toggleButton.addEventListener('click', function() {
+            toggleButton.addEventListener('click', function () {
                 sidebar.classList.toggle('-translate-x-full');
+            });
+
+            logoutButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default link behavior
+                logoutModal.classList.remove('hidden'); // Show modal
+            });
+
+            cancelLogout.addEventListener('click', function () {
+                logoutModal.classList.add('hidden'); // Hide modal
             });
         });
     </script>

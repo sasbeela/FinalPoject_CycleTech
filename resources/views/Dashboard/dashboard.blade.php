@@ -81,7 +81,7 @@
 
                             <form action="{{ route('notifications.mark-read') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="text-sm text-blue-700 hover:underline px-10 py-2">Tandai semua sebagai sudah dibaca</button>
+                                <button type="submit" class="text-sm text-blue-700 hover:underline px-6 py-2">Tandai semua sebagai sudah dibaca</button>
                             </form>
                         </ul>
                     </div>
@@ -101,13 +101,12 @@
                                 class="w-10 h-10 rounded-full border border-gray-300">
                         </a>
                     </li>
+
+                    <!-- logout -->
                     <li class="hidden lg:flex items-center">
-                        <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="flex items-center">
-                            @csrf
-                            <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
-                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
-                            </button>
-                        </form>
+                        <button id="logoutButton" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                        </button>
                     </li>
                 </div>
             </div>
@@ -129,6 +128,25 @@
                 </li>
             </ul>
     </nav>
+
+    <!-- Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -152,6 +170,16 @@
 
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
+        });
+
+        // Show Modal
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.remove('hidden');
+        });
+
+        // Hide Modal
+        document.getElementById('cancelLogout').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.add('hidden');
         });
     </script>
 
@@ -185,11 +213,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
                 @forelse ($articles as $article)
                     <a href="{{ route('detail.artikel', $article->id) }}" class="block">
-                        <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <div class="bg-white shadow-lg rounded-lg overflow-hidden h-[350px] hover:shadow-xl transition-shadow duration-300">
                             <img src="{{ asset('storage/' . $article->foto) }}" alt="{{ $article->judul_artikel }}" class="w-full h-48 object-cover">
                             <div class="p-4">
                                 <h3 class="font-bold text-gray-700">{{ $article->judul_artikel }}</h3>
-                                <p class="text-gray-600 mt-2">{{ Str::limit($article->isi, 50) }}</p>
+                                <p class="text-gray-600 mt-2">{{ Str::limit($article->isi, 70) }}</p>
                             </div>
                         </div>
                     </a>
@@ -201,12 +229,12 @@
     </section>
 
    <!-- Mitra Kami Section -->
-   <section class="bg-white py-16">
-    <div class="container mx-auto text-center">
-        <h2 class="text-2xl font-bold text-center text-gray-800">Rekomendasi Pengelola Sampah</h2>
-        <div class="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-2 gap-6 mt-8 px-24 lg:px-8 md:px-32">
-            <a href="https://apsiumkmsampah.id/" class="block">
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
+   <section class="bg-white py-12">
+    <div class="container mx-auto px-6 lg:px-24">
+        <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-8">Rekomendasi Pengelola Sampah</h2>
+        <div class="grid lg:grid-cols-4 sm:grid-cols-2 gap-8">
+            <a href="https://apsiumkmsampah.id/" class="block" target="_blank">
+                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-xl border border-grey hover:border-hulk">
                     <img src="{{ asset('images/apsi.png') }}" alt="APSI" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700 text-lg">APSI</h3>
@@ -214,8 +242,8 @@
                     </div>
                 </div>
             </a>
-            <a href="https://www.adupi.org/" class="block">
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
+            <a href="https://www.adupi.org/" class="block" target="_blank">
+                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-xl border border-grey hover:border-hulk">
                     <img src="{{ asset('images/adupi.png') }}" alt="ADUPI" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700 text-lg">ADUPI</h3>
@@ -223,8 +251,8 @@
                     </div>
                 </div>
             </a>
-            <a href="https://ibcsd.or.id/" class="block">
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
+            <a href="https://ibcsd.or.id/" class="block" target="_blank">
+                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-xl border border-grey hover:border-hulk">
                     <img src="{{ asset('images/ibcsd.png') }}" alt="IBCS" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700 text-lg">IBCSD</h3>
@@ -232,8 +260,8 @@
                     </div>
                 </div>
             </a>
-            <a href="https://repurpose.global/" class="block">
-                <div class="bg-white shadow-lg rounded-lg w-[240px] h-[262px] overflow-hidden">
+            <a href="https://repurpose.global/" class="block" target="_blank">
+                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-xl border border-grey hover:border-hulk">
                     <img src="{{ asset('images/repurpose.png') }}" alt="Repurpose" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700 text-lg">RePurpose Global</h3>

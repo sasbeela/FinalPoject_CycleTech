@@ -98,7 +98,7 @@
 
                             <form action="{{ route('notifications.mark-read') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                                <button type="submit" class="text-sm text-blue-700 hover:underline px-6 py-2">Tandai semua sebagai sudah dibaca</button>
                             </form>
                         </ul>
                     </div>
@@ -118,13 +118,12 @@
                                 class="w-10 h-10 rounded-full border border-gray-300">
                         </a>
                     </li>
+
+                    <!-- logout -->
                     <li class="hidden lg:flex items-center">
-                        <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="flex items-center">
-                            @csrf
-                            <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
-                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
-                            </button>
-                        </form>
+                        <button id="logoutButton" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                        </button>
                     </li>
                 </div>
             </div>
@@ -146,6 +145,25 @@
                 </li>
             </ul>
     </nav>
+    
+    <!-- Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -176,6 +194,16 @@
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
         });
+
+        // Show Modal
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.remove('hidden');
+        });
+
+        // Hide Modal
+        document.getElementById('cancelLogout').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.add('hidden');
+        });
     </script>
 
     <!-- Artikel Section -->
@@ -183,24 +211,25 @@
         <!-- Breadcrumb -->
         <nav class="text-sm text-gray-600 mb-4">
             <a href="{{ route('dashboard.nasabah') }}" class="hover:underline">Beranda</a> >
-            <a href="#" class="hover:underline">Artikel</a> >
             <span class="font-semibold text-gray-800">{{ $article->judul_artikel }}</span>
         </nav>
 
-        <!-- Artikel Image -->
-        <div class="my-8 flex justify-center">
-            <img src="{{ asset('storage/' . $article->foto) }}" alt="{{ $article->judul_artikel }}" class="rounded-lg shadow-md max-w-full">
-        </div>
+        <div class="bg-white border border-hulk rounded-lg shadow-lg overflow-hidden px-4 lg:px-8">
+            <!-- Artikel Image -->
+            <div class="my-8 flex justify-center">
+                <img src="{{ asset('storage/' . $article->foto) }}" alt="{{ $article->judul_artikel }}" class="rounded-lg shadow-md max-w-full">
+            </div>
 
-        <!-- Artikel Header -->
-        <div class="text-center">
-            <p class="text-gray-500 text-sm mb-2">{{ \Carbon\Carbon::parse($article->created_at)->format('H:i, j F Y') }}</p>
-            <h1 class="text-3xl font-bold text-gray-800">{{ $article->judul_artikel }}</h1>
-        </div>
+            <!-- Artikel Header -->
+            <div class="text-left">
+                <p class="text-gray-500 text-sm mb-2">{{ \Carbon\Carbon::parse($article->created_at)->format('H:i, j F Y') }}</p>
+                <h1 class="text-3xl font-bold text-gray-800">{{ $article->judul_artikel }}</h1>
+            </div>
 
-        <!-- Artikel Content -->
-        <div class="text-gray-700 space-y-4 leading-relaxed text-justify">
-            {!! nl2br(e($article->isi)) !!}
+            <!-- Artikel Content -->
+            <div class="text-gray-700 space-y-4 leading-relaxed text-justify mb-4">
+                {!! nl2br(e($article->isi)) !!}
+            </div>
         </div>
     </section>
 

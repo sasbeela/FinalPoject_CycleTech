@@ -79,7 +79,7 @@
 
                             <form action="{{ route('notifications.mark-read') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                                <button type="submit" class="text-sm text-blue-700 hover:underline px-6 py-2">Tandai semua sebagai sudah dibaca</button>
                             </form>
                         </ul>
                     </div>
@@ -99,13 +99,11 @@
                                 class="w-10 h-10 rounded-full border border-gray-300">
                         </a>
                     </li>
+                    <!-- logout -->
                     <li class="hidden lg:flex items-center">
-                        <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="flex items-center">
-                            @csrf
-                            <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
-                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
-                            </button>
-                        </form>
+                        <button id="logoutButton" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                        </button>
                     </li>
                 </div>
             </div>
@@ -127,6 +125,24 @@
                 </li>
             </ul>
     </nav>
+    <!-- Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -156,6 +172,16 @@
 
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
+        });
+
+        // Show Modal
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.remove('hidden');
+        });
+
+        // Hide Modal
+        document.getElementById('cancelLogout').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.add('hidden');
         });
     </script>
 
@@ -194,8 +220,8 @@
                     <p class="text-gray-700 text-justify w-full max-w-4xl">Menjadi platform digital terdepan yang menginspirasi dan memberdayakan masyarakat untuk mengelola sampah secara kreatif dan inovatif, demi menciptakan lingkungan yang bersih, sehat, dan berkelanjutan.</p>
                 </div>
                 <div class="flex flex-col items-center">
-                    <h3 class="text-2xl font-semibold text-hulk mb-4">Misi Kami</h3>
-                    <ul class="text-gray-700 space-y-2 list-decimal list-inside w-full max-w-4xl">
+                    <h3 class="text-2xl font-semibold text-hulk mb-4 mt-4">Misi Kami</h3>
+                    <ul class="text-gray-700 space-y-2 list-decimal w-full max-w-4xl text-left">
                         <li>Meningkatkan kesadaran dan edukasi masyarakat tentang pentingnya pengelolaan sampah yang ramah lingkungan dan berkelanjutan.</li>
                         <li>Mengembangkan fitur-fitur inovatif yang mendukung daur ulang dan pemanfaatan kembali sampah dengan cara yang kreatif.</li>
                         <li>Memberikan informasi terkini tentang manfaat, peluang, dan nilai ekonomi dari pengelolaan sampah yang baik.</li>
@@ -214,7 +240,7 @@
             <p class="text-gray-600 mt-4">Berikut adalah tim hebat yang bekerja di balik layar Cycle Tech.</p>
             <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 mt-12">
                 <a href="http://www.linkedin.com/in/salma-salsabila-568243269" target="_blank">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/salma.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Salma Salsabila</h3>
                     <p class="text-gray-600">Product Manager</p>
@@ -222,7 +248,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/mutiazahrausma/">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/mutia.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Mutia Zahra Usma</h3>
                     <p class="text-gray-600">UI/UX Designer</p>
@@ -230,7 +256,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/harrybonardo" target="_blank">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/harry.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Harry Bonardo</h3>
                     <p class="text-gray-600">UI/UX Designer</p>
@@ -238,15 +264,15 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/ivan-herdianto/" target="_blank">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/ivan.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Ivan Herdianto</h3>
                     <p class="text-gray-600">Front-End Developer</p>
                     <p class="text-gray-600 font-semibold">UPN "Veteran" Jawa Timur</p>
                 </div>
                 </a>
-                <a href="https://www.linkedin.com/in/aprinia-salsabila-5789b31b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <a href="https://www.linkedin.com/in/aprinia-salsabila/" target="_blank">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/aprin.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Aprinia Salsabila</h3>
                     <p class="text-gray-600">Front-End Developer</p>
@@ -254,7 +280,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/ilham-saputra26" target="_blank">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/ilham.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Ilham Saputra</h3>
                     <p class="text-gray-600">Back-End Developer</p>
@@ -262,7 +288,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/anggitaardilianzfaticha" target="_blank">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/anggita.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Anggita Adilianza</h3>
                     <p class="text-gray-600">Back-End Developer</p>
@@ -270,7 +296,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/rizmaagustin" target="_blank">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/rizma.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Rizma Agustin</h3>
                     <p class="text-gray-600">Back-End Developer</p>
@@ -278,7 +304,7 @@
                 </div>
                 </a>
                 <a href="https://id.linkedin.com/in/velizhasandy" target="_blank">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/velizha.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Velizha Sandy Kusuma</h3>
                     <p class="text-gray-600">Data Analyst</p>
@@ -286,7 +312,7 @@
                 </div>
                 </a>
                 <a href="https://id.linkedin.com/in/muhammad-danu-erlangga" target="_blank">
-                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/danu.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Muhammad Danu</h3>
                     <p class="text-gray-600">Data Analyst</p>
