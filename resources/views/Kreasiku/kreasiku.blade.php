@@ -197,6 +197,10 @@
             <h1 class="text-2xl font-semibold text-gray-800">Kreasiku</h1>
             <p class="text-gray-600">Ini adalah galeri pribadi yang berisi semua karya yang telah kamu unggah.</p>
         </header>
+        <!-- Upload Button -->
+        <a href="{{ route('unggah.kreasi') }}" class="flex my-8 w-44 py-1 border-2 font-semibold bg-hulk border-hulk text-white px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">
+            Unggah Kreasi
+        </a>
         <div class="container mx-auto text-center">
             @if($kreasiku->isEmpty())
                 <p class="text-gray-500 mt-4">Belum ada kreasi yang diunggah. Yuk, unggah kreasi pertamamu!</p>
@@ -215,10 +219,7 @@
                 </div>
             @endif
 
-            <!-- Upload Button -->
-            <a href="{{ route('unggah.kreasi') }}" class="flex my-8 w-44 py-1 border-2 font-semibold bg-hulk border-hulk text-white px-8 rounded-3xl hover:bg-gradient-to-r from-black to-old-hulk">
-                Unggah Kreasi
-            </a>
+            
         </div>
     </section>
 
