@@ -95,7 +95,7 @@
 
                             <form action="{{ route('notifications.mark-read') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                                <button type="submit" class="text-sm text-blue-700 hover:underline px-6 py-2">Tandai semua sebagai sudah dibaca</button>
                             </form>
                         </ul>
                     </div>
@@ -115,13 +115,12 @@
                                 class="w-10 h-10 rounded-full border border-gray-300">
                         </a>
                     </li>
+                    
+                    <!-- logout -->
                     <li class="hidden lg:flex items-center">
-                        <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="flex items-center">
-                            @csrf
-                            <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
-                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
-                            </button>
-                        </form>
+                        <button id="logoutButton" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                        </button>
                     </li>
                 </div>
             </div>
@@ -143,6 +142,25 @@
                 </li>
             </ul>
     </nav>
+
+    <!-- Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -173,17 +191,27 @@
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
         });
+
+        // Show Modal
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.remove('hidden');
+        });
+
+        // Hide Modal
+        document.getElementById('cancelLogout').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.add('hidden');
+        });
     </script>
 
     <!-- artikel -->
     <div class="max-w-3xl mx-auto p-4 mt-24">
+        <!-- Breadcrumb -->
+        <nav class="text-lg text-gray-600 mb-4">
+            <a href="{{ route('kreasi')}}" class="hover:underline">Kreasi</a> >
+            <span class="text-gray-800">{{ $kreasi->judul_kreasi }}</span>
+        </nav>
         <!-- Main Card -->
-        <div class="max-w-4xl mx-auto p-6 bg-white border border-hulk rounded-lg shadow-lg mt-24">
-            <!-- Breadcrumb -->
-            <nav class="text-sm text-gray-600 mb-4">
-                <a href="{{ route('artikel.kreasi', ['id' => $kreasi->id]) }}" class="hover:underline">Kreasi</a> >
-                <span class="text-gray-800">{{ $kreasi->judul_kreasi }}</span>
-            </nav>
+        <div class="max-w-4xl mx-auto p-6 bg-white border border-hulk rounded-lg shadow-lg ">
 
             <!-- Header Image -->
             <div class="flex justify-center mb-6">
@@ -227,25 +255,26 @@
                 {!! nl2br(e($kreasi->langkah)) !!}
             </ol>
         </div>
+    </div>
 
-        <!-- Similar Creations Section -->
-            @if($kreasiSerupa->isNotEmpty())
-            <h2 class="flex justify-center text-center text-lg font-semibold text-gray-800 mb-4 mt-8">Kreasi Serupa</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12 hover:outerline-old-hulk px-24 sm:px-10">
-                @foreach($kreasiSerupa as $item)
-                    <div class="bg-gradient-to-b from-birumuda to-krem p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                        <a href="{{ route('artikel.kreasi', $item->id) }}">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $item->judul_kreasi }}</h3>
-                            <img src="{{ asset('storage/' . $item->foto_kreasi) }}" alt="{{ $item->judul_kreasi }}" class="w-full h-48 object-cover rounded-t-lg">
-                            <p class="text-gray-600 mt-2">Oleh {{ $item->author }}</p>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-            @else
-            <p class="text-center text-gray-600 mt-8">Tidak ada kreasi serupa ditemukan.</p>
-            @endif
+    <!-- Similar Creations Section -->
+    <div class="px-40 mb-6">
+    @if($kreasiSerupa->isNotEmpty())
+        <h2 class="flex justify-center text-center text-2xl font-extrabold text-gray-800 mb-4 mt-8">Kreasi Serupa</h2>
+        <div class="flex flex-col lg:flex-row justify-center items-center gap-8 mt-12 hover:outerline-old-hulk ">
+            @foreach($kreasiSerupa->take(2) as $item)
+                <div class="bg-gradient-to-b from-birumuda to-krem p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 w-[300px] h-[400px]">
+                    <a href="{{ route('artikel.kreasi', $item->id) }}">
+                        <h3 class="text-md lg:text-xl font-bold text-gray-800 mb-2">{{ $item->judul_kreasi }}</h3>
+                        <img src="{{ asset('storage/' . $item->foto_kreasi) }}" alt="{{ $item->judul_kreasi }}" class="w-full h-48 object-cover rounded-t-lg overlay:hidden">
+                        <p class="text-gray-600 mt-2">Oleh {{ $item->author }}</p>
+                    </a>
+                </div>
+            @endforeach
         </div>
+        @else
+        <p class="text-center text-gray-600 mt-8">Tidak ada kreasi serupa ditemukan.</p>
+    @endif
     </div>
 
     <!-- Footer -->
