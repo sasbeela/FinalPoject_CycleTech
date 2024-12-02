@@ -240,7 +240,7 @@
             <p class="text-gray-600 mt-4">Berikut adalah tim hebat yang bekerja di balik layar Cycle Tech.</p>
             <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 mt-12">
                 <a href="http://www.linkedin.com/in/salma-salsabila-568243269" target="_blank">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/salma.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Salma Salsabila</h3>
                     <p class="text-gray-600">Product Manager</p>
@@ -248,7 +248,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/mutiazahrausma/">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/mutia.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Mutia Zahra Usma</h3>
                     <p class="text-gray-600">UI/UX Designer</p>
@@ -256,7 +256,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/harrybonardo" target="_blank">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/harry.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Harry Bonardo</h3>
                     <p class="text-gray-600">UI/UX Designer</p>
@@ -264,7 +264,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/ivan-herdianto/" target="_blank">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/ivan.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Ivan Herdianto</h3>
                     <p class="text-gray-600">Front-End Developer</p>
@@ -272,7 +272,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/aprinia-salsabila/" target="_blank">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/aprin.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Aprinia Salsabila</h3>
                     <p class="text-gray-600">Front-End Developer</p>
@@ -280,7 +280,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/ilham-saputra26" target="_blank">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/ilham.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Ilham Saputra</h3>
                     <p class="text-gray-600">Back-End Developer</p>
@@ -288,7 +288,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/anggitaardilianzfaticha" target="_blank">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/anggita.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Anggita Adilianza</h3>
                     <p class="text-gray-600">Back-End Developer</p>
@@ -296,7 +296,7 @@
                 </div>
                 </a>
                 <a href="https://www.linkedin.com/in/rizmaagustin" target="_blank">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/rizma.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Rizma Agustin</h3>
                     <p class="text-gray-600">Back-End Developer</p>
@@ -304,7 +304,7 @@
                 </div>
                 </a>
                 <a href="https://id.linkedin.com/in/velizhasandy" target="_blank">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/velizha.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Velizha Sandy Kusuma</h3>
                     <p class="text-gray-600">Data Analyst</p>
@@ -312,7 +312,7 @@
                 </div>
                 </a>
                 <a href="https://id.linkedin.com/in/muhammad-danu-erlangga" target="_blank">
-                <div class="flex flex-col items-center h-[280px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
+                <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/danu.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Muhammad Danu</h3>
                     <p class="text-gray-600">Data Analyst</p>
