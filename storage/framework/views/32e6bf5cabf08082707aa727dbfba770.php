@@ -8,38 +8,38 @@
     <link rel="icon" type="image/x-icon" href="/images/logo 2.png">
     <?php echo app('Illuminate\Foundation\Vite')('resources/css/app.css'); ?>
 </head>
-<body class="">
-    <div class="flex flex-col lg:flex-row">
+<body class="min-h-screen">
+    <div class="flex flex-col lg:flex-row h-screen">
         <!-- Admin Panel Title (clickable for mobile) -->
         <div class="lg:hidden flex justify-between items-center p-4 bg-hulk">
             <!-- Button that toggles the sidebar -->
-            <button id="toggleButton" class="text-white font-extrabold text-[20px] cursor-pointer">
+            <button id="toggleButton" class="text-white font-extrabold text-xl cursor-pointer">
                 Admin Panel
             </button>
         </div>
 
         <!-- Sidebar -->
-        <div id="sidebar" class="fixed lg:relative -translate-x-full lg:translate-x-0 transition-transform duration-300 lg:basis-[15%] h-full lg:h-screen z-10 bg-hulk w-[75%] lg:w-auto">
-            <div class="h-full px-6 lg:px-[25px] py-4">
+        <div id="sidebar" class="fixed lg:relative -translate-x-full lg:translate-x-0 transition-transform duration-300 lg:basis-[15%] z-10 bg-hulk w-[75%] lg:w-auto h-screen">
+            <div class="px-6 lg:px-6 py-4">
                 <div class="px-4 py-6 flex items-center justify-center border-b border-light-white/[0.3]">
-                    <h1 class="text-white text-[20px] leading-[24px] font-extrabold lg:cursor-default">Admin Panel</h1>
+                    <h1 class="text-white text-xl leading-6 font-extrabold lg:cursor-default">Admin Panel</h1>
                 </div>
-                <div class="flex items-center gap-4 py-4 lg:pt-[35px]">
+                <div class="flex items-center gap-4 py-4 lg:pt-8">
                     <i class="fa-solid fa-gauge text-white"></i>
-                    <a href="<?php echo e(route('admin.dashboard')); ?>" class="text-[18px] lg:text-[20px] text-white leading-[30px] hover:font-bold">Dashboard</a>
+                    <a href="<?php echo e(route('admin.dashboard')); ?>" class="text-lg lg:text-xl text-white leading-6 hover:font-bold">Dashboard</a>
                 </div>
                 <div>
                     <div class="flex items-center justify-between gap-4 py-4 cursor-pointer">
                         <div class="flex items-center gap-4">
                             <i class="fa-solid fa-layer-group text-white"></i>
-                            <a href="<?php echo e(route('admin.categories.index')); ?>" class="text-[18px] lg:text-[20px] leading-[30px] font-normal text-white hover:font-bold">Kategori Sampah</a>
+                            <a href="<?php echo e(route('admin.categories.index')); ?>" class="text-lg lg:text-xl leading-6 font-normal text-white hover:font-bold">Kategori Sampah</a>
                         </div>
                         <i class="fa-solid fa-chevron-right text-white hidden lg:block"></i>
                     </div>
                     <div class="flex items-center justify-between gap-4 py-4 cursor-pointer">
                         <div class="flex items-center gap-4">
                             <i class="fa-solid fa-newspaper text-white"></i>
-                            <a href="<?php echo e(route('admin.artikel.index')); ?>" class="text-[18px] lg:text-[20px] leading-[30px] font-normal text-white hover:font-bold">Artikel</a>
+                            <a href="<?php echo e(route('admin.artikel.index')); ?>" class="text-lg lg:text-xl leading-6 font-normal text-white hover:font-bold">Artikel</a>
                         </div>
                         <i class="fa-solid fa-chevron-right text-white hidden lg:block"></i>
                     </div>
@@ -47,33 +47,33 @@
                 <div class="flex items-center justify-between gap-4 py-4 cursor-pointer">
                     <div class="flex items-center gap-4">
                         <i class="fa-brands fa-creative-commons-share text-white"></i>
-                        <a href="<?php echo e(route('admin.kreasi.index')); ?>" class="text-[18px] lg:text-[20px] leading-[30px] font-normal text-white hover:font-bold">Kreasi</a>
+                        <a href="<?php echo e(route('admin.kreasi.index')); ?>" class="text-lg lg:text-xl leading-6 font-normal text-white hover:font-bold">Kreasi</a>
                     </div>
                 </div>
                 <div class="flex items-center justify-between gap-4 py-4 cursor-pointer">
                     <div class="flex items-center gap-4">
                         <i class="fa-solid fa-users text-white"></i>
-                        <a href="<?php echo e(route('admin.datauser.index')); ?>" class="text-[18px] lg:text-[20px] leading-[30px] font-normal text-white hover:font-bold">Data Pengguna</a>
+                        <a href="<?php echo e(route('admin.datauser.index')); ?>" class="text-lg lg:text-xl leading-6 font-normal text-white hover:font-bold">Data Pengguna</a>
                     </div>
                 </div>
-                <div class="flex items-center justify-between gap-[10px] pt-[24rem] cursor-pointer">
-                    <div class="flex items-center gap-[10px]">
-                        <i class="fa-brands fa-creative-commons-share"></i>
-                        <a href="<?php echo e(route('admin.dataadmin.index')); ?>" class="text-[20px] leading-[30px] font-normal text-white hover:font-bold">Data Admin</a>
+                <div class="flex items-center justify-between gap-4 pt-56 cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-creative-commons-share text-white"></i>
+                        <a href="<?php echo e(route('admin.dataadmin.index')); ?>" class="text-xl leading-6 font-normal text-white hover:font-bold">Data Admin</a>
                     </div>
                 </div>
-                <div class="flex items-center justify-between gap-[10px] py-[15px] cursor-pointer">
-                    <div class="flex items-center gap-[10px]">
-                        <i class="fa-solid fa-users"></i>
+                <div class="flex items-center justify-between gap-4 py-4 cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-users text-white"></i>
                         <a href="#"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                           class="text-[20px] leading-[30px] font-normal text-white hover:font-bold">
+                           class="text-xl leading-6 font-normal text-white hover:font-bold">
                             Logout
                         </a>
                     </div>
                 </div>
 
-                <!-- Form Logout Tersembunyi -->
+                <!-- Hidden Logout Form -->
                 <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
                     <?php echo csrf_field(); ?>
                 </form>
