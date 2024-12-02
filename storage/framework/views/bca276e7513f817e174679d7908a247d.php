@@ -38,6 +38,7 @@
                             <td class="px-2 sm:px-4 py-2 border border-hulk"><?php echo e($user->email); ?></td>
                             <td class="px-2 sm:px-4 py-2 border border-hulk"><?php echo e($user->phone); ?></td>
                             <td class="px-2 sm:px-4 py-2 border border-hulk"><?php echo e($user->created_at->format('d-m-Y')); ?></td>
+
                             <td class="px-2 sm:px-4 py-2 border border-hulk flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 items-center">
                                 <button onclick="openOverlay(<?php echo e($user->id); ?>)" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 w-full sm:w-auto">
                                     Hapus

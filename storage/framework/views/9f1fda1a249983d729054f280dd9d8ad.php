@@ -43,74 +43,91 @@
             ?>
 
             <!-- Notification Dropdown -->
-            <div class="relative">
-                <!-- Notification Icon -->
-                <button id="notificationButton" class="relative focus:outline-none">
-                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
-                    <?php if($notifications->where('read_status', false)->count() > 0): ?>
-                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
-                            <?php echo e($notifications->where('read_status', false)->count()); ?>
+            <div class="flex flex-row space-x-6">
+                <!-- Notification Dropdown -->
+                <div class="relative mt-2 lg:mt-0">
+                    <!-- Notification Icon -->
+                    <button id="notificationButton" class="relative focus:outline-none mt-2">
+                        <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/bell.svg" alt="Notification" class="w-6 h-6">
+                        <?php if($notifications->where('read_status', false)->count() > 0): ?>
+                            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                                <?php echo e($notifications->where('read_status', false)->count()); ?>
 
-                        </span>
-                    <?php endif; ?>
-                </button>
-
-                <!-- Dropdown -->
-                <div id="notificationDropdown" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
-                    <div class="p-4 border-b border-gray-200">
-                        <h3 class="text-lg font-semibold">Notifikasi</h3>
-                    </div>
-                    <ul class="divide-y divide-gray-200">
-                        <?php $__empty_1 = true; $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                            <li class="p-4 flex items-start">
-                                <div class="flex-1">
-                                    <p class="text-sm font-medium text-gray-900"><?php echo e($notification->message); ?></p>
-                                    <p class="mt-1 text-xs text-gray-500">
-                                        <?php echo e($notification->created_at->diffForHumans()); ?>
-
-                                    </p>
-                                </div>
-                            </li>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                            <li class="p-4">
-                                <p class="text-sm text-gray-500 text-center">Tidak ada notifikasi baru</p>
-                            </li>
+                            </span>
                         <?php endif; ?>
+                    </button>
 
-                        <form action="<?php echo e(route('notifications.mark-read')); ?>" method="POST">
+                    <!-- Dropdown -->
+                    <div id="notificationDropdown" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                        <div class="p-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold">Notifikasi</h3>
+                        </div>
+                        <ul class="divide-y divide-gray-200">
+                            <?php $__empty_1 = true; $__currentLoopData = $notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                <li class="p-4 flex items-start">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-900"><?php echo e($notification->message); ?></p>
+                                        <p class="mt-1 text-xs text-gray-500">
+                                            <?php echo e($notification->created_at->diffForHumans()); ?>
+
+                                        </p>
+                                    </div>
+                                </li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                <li class="p-4">
+                                    <p class="text-sm text-gray-500 text-center">Tidak ada notifikasi baru</p>
+                                </li>
+                            <?php endif; ?>
+
+                            <form action="<?php echo e(route('notifications.mark-read')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+                    <!-- Hamburger Icon (only visible on smaller screens) -->
+                    <li class="lg:hidden flex items-center">
+                        <button id="mobileMenuToggle" class="text-black active:text-hulk focus:outline-none mt-2">
+                            <i class="bi bi-list text-3xl"></i>
+                        </button>
+                    </li>
+
+                    <!-- Profile Icon (only visible on larger screens) -->
+                    <li class="hidden lg:flex items-center">
+                        <a href="<?php echo e(route('profile.nasabah')); ?>">
+                            <img src="<?php echo e(auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40'); ?>"
+                                alt="Profile"
+                                class="w-10 h-10 rounded-full border border-gray-300">
+                        </a>
+                    </li>
+                    <li class="hidden lg:flex items-center">
+                        <form id="logoutForm" action="<?php echo e(route('logout')); ?>" method="POST" class="flex items-center">
                             <?php echo csrf_field(); ?>
-                            <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                            <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                            </button>
                         </form>
-                    </ul>
+                    </li>
                 </div>
             </div>
 
-                <!-- Hamburger Icon (only visible on smaller screens) -->
-                <li class="lg:hidden flex items-center">
-                    <button id="mobileMenuToggle" class="text-black active:text-hulk focus:outline-none mt-2">
-                        <i class="bi bi-list text-3xl"></i>
-                    </button>
-                </li>
-
-                <!-- Profile Icon (only visible on larger screens) -->
-                <li class="hidden lg:flex items-center">
-                    <a href="<?php echo e(route('profile.nasabah')); ?>">
-                        <img src="<?php echo e(auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40'); ?>" 
-                            alt="Profile" 
-                            class="w-10 h-10 rounded-full border border-gray-300">
-                    </a>
+            <!-- Dropdown Menu for Mobile -->
+            <ul id="mobileDropdownMenu" class="lg:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
+                <li><a href="<?php echo e(route('dashboard.nasabah')); ?>" class="hover:text-hulk">Beranda</a></li>
+                <li><a href="<?php echo e(route('kelola.sampah')); ?>" class="hover:text-hulk">Kelola Sampah</a></li>
+                <li><a href="<?php echo e(route('kreasi')); ?>" class="hover:text-hulk">Kreasi</a></li>
+                <li><a href="<?php echo e(route('tentang.kami')); ?>" class="hover:text-hulk">Tentang Kami</a></li>
+                <li><a href="#" class="hover:text-hulk">Profil</a></li>
+                <li>
+                    <form id="logoutForm" action="<?php echo e(route('logout')); ?>" method="POST" class="">
+                        <?php echo csrf_field(); ?>
+                        <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                        </button>
+                    </form>
                 </li>
             </ul>
-        </div>
-
-        <!-- Dropdown Menu for Mobile -->
-        <ul id="mobileDropdownMenu" class="lg:hidden hidden flex-col px-4 items-center space-y-4 bg-white border-t border-gray-200 py-4 font-medium text-gray-700">
-            <li><a href="<?php echo e(route('dashboard.nasabah')); ?>" class="hover:text-hulk">Beranda</a></li>
-            <li><a href="<?php echo e(route('kelola.sampah')); ?>" class="hover:text-hulk">Kelola Sampah</a></li>
-            <li><a href="<?php echo e(route('kreasi')); ?>" class="hover:text-hulk">Kreasi</a></li>
-            <li><a href="<?php echo e(route('tentang.kami')); ?>" class="hover:text-hulk">Tentang Kami</a></li>
-            <li><a href="#" class="hover:text-hulk">Profil</a></li>
-        </ul>
     </nav>
 
     <!-- JavaScript -->
@@ -197,59 +214,87 @@
         <div class="container mx-auto text-center px-6 md:px-32">
             <h2 class="text-3xl font-bold text-gray-800">Tentang Tim Kami</h2>
             <p class="text-gray-600 mt-4">Berikut adalah tim hebat yang bekerja di balik layar Cycle Tech.</p>
-
-            <!-- Baris Pertama -->
-            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-8 mt-12">
-                <div class="flex flex-col items-center">
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 mt-12">
+                <a href="http://www.linkedin.com/in/salma-salsabila-568243269" target="_blank">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/salma.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Salma Salsabila</h3>
                     <p class="text-gray-600">Product Manager</p>
+                    <p class="text-gray-600 font-semibold">Universitas Singaperbangsa Karawang</p>
                 </div>
-                <div class="flex flex-col items-center">
+                </a>
+                <a href="https://www.linkedin.com/in/mutiazahrausma/">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/mutia.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Mutia Azzahra</h3>
+                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Mutia Zahra Usma</h3>
                     <p class="text-gray-600">UI/UX Designer</p>
+                    <p class="text-gray-600 font-semibold">UPN "Veteran" Jakarta</p>
                 </div>
-                <div class="flex flex-col items-center">
+                </a>
+                <a href="https://www.linkedin.com/in/harrybonardo" target="_blank">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/harry.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Harry Bonardo</h3>
                     <p class="text-gray-600">UI/UX Designer</p>
+                    <p class="text-gray-600 font-semibold">Universitas Lampung</p>
                 </div>
-                <div class="flex flex-col items-center">
+                </a>
+                <a href="https://www.linkedin.com/in/ivan-herdianto/" target="_blank">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/ivan.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Ivan Herdianto</h3>
                     <p class="text-gray-600">Front-End Developer</p>
+                    <p class="text-gray-600 font-semibold">UPN "Veteran" Jawa Timur</p>
                 </div>
-                <div class="flex flex-col items-center">
+                </a>
+                <a href="https://www.linkedin.com/in/aprinia-salsabila-5789b31b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/aprin.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Aprinia Salsabila</h3>
                     <p class="text-gray-600">Front-End Developer</p>
+                    <p class="text-gray-600 font-semibold">UPN "Veteran" Jawa Timur</p>
                 </div>
-                <div class="flex flex-col items-center">
+                </a>
+                <a href="https://www.linkedin.com/in/ilham-saputra26" target="_blank">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/ilham.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Ilham Saputra</h3>
                     <p class="text-gray-600">Back-End Developer</p>
+                    <p class="text-gray-600 font-semibold">Universitas Singaperbangsa Karawang</p>
                 </div>
-                <div class="flex flex-col items-center">
+                </a>
+                <a href="https://www.linkedin.com/in/anggitaardilianzfaticha" target="_blank">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/anggita.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Anggita Adilianza</h3>
                     <p class="text-gray-600">Back-End Developer</p>
+                    <p class="text-gray-600 font-semibold">Institut Teknologi dan Bisnis PalComTech </p>
                 </div>
-                <div class="flex flex-col items-center">
+                </a>
+                <a href="https://www.linkedin.com/in/rizmaagustin" target="_blank">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/rizma.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Rizma Agustin</h3>
                     <p class="text-gray-600">Back-End Developer</p>
+                    <p class="text-gray-600 font-semibold">Universitas Nusantara PGRI Kediri</p>
                 </div>
-                <div class="flex flex-col items-center">
+                </a>
+                <a href="https://id.linkedin.com/in/velizhasandy" target="_blank">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/velizha.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Velizha Sandy</h3>
+                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Velizha Sandy Kusuma</h3>
                     <p class="text-gray-600">Data Analyst</p>
+                    <p class="text-gray-600 font-semibold">Universitas Amikom Purwokerto</p>
                 </div>
-                <div class="flex flex-col items-center">
+                </a>
+                <a href="https://id.linkedin.com/in/muhammad-danu-erlangga" target="_blank">
+                <div class="flex flex-col items-center bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="<?php echo e(asset('images/danu.png')); ?>" alt="Member" class="w-36 h-36 rounded-lg object-cover">
                     <h3 class="mt-4 text-xl font-semibold text-gray-800">Muhammad Danu</h3>
                     <p class="text-gray-600">Data Analyst</p>
+                    <p class="text-gray-600 font-semibold">Universitas Negeri Surabaya</p>
                 </div>
+                </a>
             </div>
         </div>
     </section>
