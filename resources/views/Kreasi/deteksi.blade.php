@@ -116,7 +116,7 @@
                 <li><a href="{{ route('kelola.sampah') }}" class="hover:text-hulk">Kelola Sampah</a></li>
                 <li><a href="{{ route('kreasi') }}" class="hover:text-hulk">Kreasi</a></li>
                 <li><a href="{{ route('tentang.kami') }}" class="hover:text-hulk">Tentang Kami</a></li>
-                <li><a href="#" class="hover:text-hulk">Profil</a></li>
+                <li><a href="{{ route('profile.nasabah') }}" class="hover:text-hulk">Profil</a></li>
                 <li>
                     <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="">
                         @csrf
@@ -225,7 +225,7 @@
         </div>
     </div>
 
-    <h1 class="text-center text-2xl font-bold">Hasil Prediksi</h1>
+    <h1 class="text-center text-2xl font-bold mt-8">Hasil Prediksi</h1>
         <!-- Menampilkan Hasil Prediksi -->
         @if(isset($predictedCategory))
             <p class="text-center mt-4 text-gray-600">
@@ -238,28 +238,73 @@
                     Tidak ada kreasi yang tersedia untuk kategori ini.
                 </p>
             @else
-                <div class="mt-10">
-                    <h2 class="text-lg font-semibold mb-4">Rekomendasi Kreasi:</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        @foreach($recommendedCrafts as $craft)
-                            <div class="border rounded-lg shadow-lg p-4">
+            <div class="mt-5">
+                <h2 class="text-lg font-semibold mb-4">Rekomendasi Kreasi:</h2>
+                <div id="kreasi-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    @foreach($recommendedCrafts as $craft)
+                    <a href="{{ route('artikel.kreasi', $craft->id) }}" class="mt-2 inline-block">
+                            <div class="craft bg-gradient-to-b from-birumuda to-krem border rounded-lg hover:shadow-lg p-4 hover:border-old-hulk">
                                 <img src="{{ asset('storage/' . $craft->foto_kreasi) }}" alt="{{ $craft->judul_kreasi }}" class="w-full h-40 object-cover rounded-lg mb-4">
                                 <h3 class="text-lg font-bold">{{ $craft->judul_kreasi }}</h3>
-                                <p class="text-sm text-gray-600">Author: {{ $craft->author }}</p>
-                                <p class="text-sm text-gray-600">Category: {{ $craft->kategori_kreasi }}</p>
-                                <a href="{{ route('artikel.kreasi', $craft->id) }}" class="mt-2 inline-block text-blue-500 hover:text-blue-700">
-                                    Explore craft →
-                                </a>
-                            </div>
+                                <p class="text-sm text-gray-600">Penulis: {{ $craft->author }}</p>
+                                <p class="text-sm text-gray-600">Kategori: {{ $craft->kategori_kreasi }}</p>
+                                </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
             @endif
+            <div class="flex flex-row gap-6 justify-center items-center">
+                <button id="load-more" class="mt-8 w-[150px] bg-hulk text-white px-4 py-2 rounded-lg hover:bg-old-hulk">Lebih Banyak</button>
+            </div>  
         @else
             <p class="text-center text-red-500 mt-6">
                 Kategori prediksi tidak ditemukan. Silakan unggah gambar untuk prediksi.
             </p>
         @endif
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const loadMoreButton = document.getElementById('load-more');
+                const loadLessButton = document.getElementById('load-less');
+                const kreasiContainer = document.getElementById('kreasi-container');
+                const kreasiItems = Array.from(kreasiContainer.getElementsByClassName('craft'));
+                let visibleItems = 3;
+        
+                // Tampilkan hanya 3 kartu pertama saat memuat halaman
+                kreasiItems.slice(visibleItems).forEach(item => item.style.display = 'none');
+        
+                loadMoreButton.addEventListener('click', function() {
+                    const hiddenItems = kreasiItems.slice(visibleItems, visibleItems + 3);
+                    hiddenItems.forEach(item => item.style.display = 'block');
+                    visibleItems += hiddenItems.length;
+        
+                    // Sembunyikan tombol "Lebih Banyak" jika semua item sudah ditampilkan
+                    if (visibleItems >= kreasiItems.length) {
+                        loadMoreButton.style.display = 'none';
+                    }
+        
+                    // Tampilkan tombol "Lebih Sedikit"
+                    loadLessButton.style.display = 'block';
+                });
+        
+                loadLessButton.addEventListener('click', function() {
+                    if (visibleItems > 3) {
+                        const itemsToHide = kreasiItems.slice(visibleItems - 3, visibleItems);
+                        itemsToHide.forEach(item => item.style.display = 'none');
+                        visibleItems -= itemsToHide.length;
+        
+                        // Sembunyikan tombol "Lebih Sedikit" jika hanya 3 item yang ditampilkan
+                        if (visibleItems <= 3) {
+                            loadLessButton.style.display = 'none';
+                        }
+        
+                        // Tampilkan tombol "Lebih Banyak" kembali
+                        loadMoreButton.style.display = 'block';
+                    }
+                });
+            });
+            </script>
 
     <!-- Description Section -->
     <div class="mt-8 text-center">

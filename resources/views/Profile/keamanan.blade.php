@@ -22,17 +22,17 @@
 
             <!-- Centered Navigation Links for Desktop -->
             <ul class="hidden lg:flex items-center space-x-6 font-medium text-gray-700">
-                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black  hover:text-old-hulk px-4 py-2">Beranda</a></li>
-                <li><a href="{{ route('kelola.sampah') }}" class=" hover:text-old-hulk">Kelola Sampah</a></li>
+                <li><a href="{{ route('dashboard.nasabah') }}" class="text-black hover:text-hulk">Beranda</a></li>
+                <li><a href="{{ route('kelola.sampah') }}" class="hover:text-old-hulk">Kelola Sampah</a></li>
                 <li>
                     <div class="relative inline-block text-left">
-                        <button id="dropdownButtonDesktop" type="button" class="text-black px-4 py-2 hover:text-old-hulk">
+                        <button id="desktopKreasiButton" type="button" class="text-black hover:text-old-hulk">
                             Kreasi
                         </button>
-                        <div id="dropdownMenuDesktop" class="absolute right-0 z-10 hidden mt-2 w-20 rounded-md bg-green-200 shadow-lg" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
-                            <div class="py-1" role="none">
-                                <a href="{{ route('kreasi') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-0">Kreasi</a>
-                                <a href="{{ route('kreasiku') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300" role="menuitem" tabindex="-1" id="menu-item-2">Kreasiku</a>
+                        <div id="desktopKreasiDropdown" class="absolute right-0 z-10 hidden mt-2 w-20 rounded-md bg-green-200 shadow-lg">
+                            <div class="py-1">
+                                <a href="{{ route('kreasi') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300">Kreasi</a>
+                                <a href="{{ route('kreasiku') }}" class="block px-4 py-2 text-sm text-gray-700 bg-green-200 hover:bg-green-300">Kreasiku</a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
             </ul>
 
             @php
-            use App\Models\Notification;
+                use App\Models\Notification;
                 $notifications = Notification::latest()->take(5)->get(); // Ambil 5 notifikasi terbaru
             @endphp
 
@@ -82,7 +82,7 @@
 
                             <form action="{{ route('notifications.mark-read') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                                <button type="submit" class="text-sm text-blue-700 hover:underline px-6 py-2">Tandai semua sebagai sudah dibaca</button>
                             </form>
                         </ul>
                     </div>
@@ -99,16 +99,15 @@
                         <a href="{{ route('profile.nasabah') }}">
                             <img src="{{ auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40' }}"
                                 alt="Profile"
-                                class="w-10 h-10 rounded-full border-4 border-hulk">
+                                class="w-10 h-10 rounded-full border-2 border-hulk ">
                         </a>
                     </li>
+
+                    <!-- logout -->
                     <li class="hidden lg:flex items-center">
-                        <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="flex items-center">
-                            @csrf
-                            <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
-                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
-                            </button>
-                        </form>
+                        <button id="logoutButton" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                        </button>
                     </li>
                 </div>
             </div>
@@ -119,7 +118,7 @@
                 <li><a href="{{ route('kelola.sampah') }}" class="hover:text-hulk">Kelola Sampah</a></li>
                 <li><a href="{{ route('kreasi') }}" class="hover:text-hulk">Kreasi</a></li>
                 <li><a href="{{ route('tentang.kami') }}" class="hover:text-hulk">Tentang Kami</a></li>
-                <li><a href="#" class="hover:text-hulk">Profil</a></li>
+                <li><a href="{{ route('profile.nasabah') }}" class="hover:text-hulk">Profil</a></li>
                 <li>
                     <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="">
                         @csrf
@@ -131,7 +130,26 @@
             </ul>
     </nav>
 
-    <!-- JavaScript for Toggle Menu -->
+    <!-- Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
     <script>
         // Dropdown Notification
         document.getElementById('notificationButton').addEventListener('click', function () {
@@ -139,47 +157,30 @@
             dropdown.classList.toggle('hidden');
         });
 
-        document.addEventListener('click', (event) => {
-            if (!event.target.closest('#notificationButton') && !event.target.closest('#notificationDropdown')) {
-                notificationDropdown.classList.add('hidden');
-            }
+        // Desktop Kreasi Dropdown
+        const desktopKreasiButton = document.getElementById('desktopKreasiButton');
+        const desktopKreasiDropdown = document.getElementById('desktopKreasiDropdown');
+
+        desktopKreasiButton.addEventListener('click', () => {
+            desktopKreasiDropdown.classList.toggle('hidden');
         });
 
-        const dropdownButton = document.getElementById('dropdownButton');
-            const dropdownMenu = document.getElementById('dropdownMenu');
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
 
-            dropdownButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevents the event from closing the whole menu
-                dropdownMenu.classList.toggle('hidden');
-            });
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileDropdownMenu.classList.toggle('hidden');
+        });
 
-            // Close submenu when clicking outside
-            document.addEventListener('click', (event) => {
-                if (!event.target.closest('#dropdownButton') && !event.target.closest('#dropdownMenu')) {
-                    dropdownMenu.classList.add('hidden');
-                }
-            });
+        // Show Modal
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.remove('hidden');
+        });
 
-            const dropdownButtonDesktop = document.getElementById('dropdownButtonDesktop');
-            const dropdownMenuDesktop = document.getElementById('dropdownMenuDesktop');
-
-            dropdownButtonDesktop.addEventListener('click', () => {
-                dropdownMenuDesktop.classList.toggle('hidden');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('#dropdownButton') && !e.target.closest('#dropdownMenu')) {
-                dropdownMenu.classList.add('hidden');
-                }
-            });
-
-        document.getElementById("menu-toggle").addEventListener("click", function () {
-            var menu = document.getElementById("dropdown-menu");
-            if (menu.classList.contains("hidden")) {
-                menu.classList.remove("hidden");
-            } else {
-                menu.classList.add("hidden");
-            }
+        // Hide Modal
+        document.getElementById('cancelLogout').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.add('hidden');
         });
     </script>
 

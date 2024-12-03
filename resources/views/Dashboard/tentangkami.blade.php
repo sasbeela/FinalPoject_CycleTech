@@ -114,7 +114,7 @@
                 <li><a href="{{ route('kelola.sampah') }}" class="hover:text-hulk">Kelola Sampah</a></li>
                 <li><a href="{{ route('kreasi') }}" class="hover:text-hulk">Kreasi</a></li>
                 <li><a href="{{ route('tentang.kami') }}" class="hover:text-hulk">Tentang Kami</a></li>
-                <li><a href="#" class="hover:text-hulk">Profil</a></li>
+                <li><a href="{{ route('profile.nasabah') }}" class="hover:text-hulk">Profil</a></li>
                 <li>
                     <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="">
                         @csrf
