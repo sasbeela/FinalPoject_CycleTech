@@ -82,7 +82,7 @@
 
                             <form action="<?php echo e(route('notifications.mark-read')); ?>" method="POST">
                                 <?php echo csrf_field(); ?>
-                                <button type="submit" class="text-sm text-blue-700 hover:underline">Tandai semua sebagai sudah dibaca</button>
+                                <button type="submit" class="text-sm text-blue-700 hover:underline px-6 py-2">Tandai semua sebagai sudah dibaca</button>
                             </form>
                         </ul>
                     </div>
@@ -102,13 +102,11 @@
                                 class="w-10 h-10 rounded-full border border-gray-300">
                         </a>
                     </li>
+                    <!-- logout -->
                     <li class="hidden lg:flex items-center">
-                        <form id="logoutForm" action="<?php echo e(route('logout')); ?>" method="POST" class="flex items-center">
-                            <?php echo csrf_field(); ?>
-                            <button type="submit" class="text-gray-600 hover:text-red-600 focus:outline-none">
-                                <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
-                            </button>
-                        </form>
+                        <button id="logoutButton" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none">
+                            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/box-arrow-right.svg" alt="Logout" class="w-6 h-6">
+                        </button>
                     </li>
                 </div>
             </div>
@@ -130,6 +128,25 @@
                 </li>
             </ul>
     </nav>
+
+     <!-- Modal -->
+     <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="<?php echo e(route('logout')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script>
@@ -159,6 +176,16 @@
 
         mobileMenuToggle.addEventListener('click', () => {
             mobileDropdownMenu.classList.toggle('hidden');
+        });
+
+        // Show Modal
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.remove('hidden');
+        });
+
+        // Hide Modal
+        document.getElementById('cancelLogout').addEventListener('click', function () {
+            document.getElementById('logoutModal').classList.add('hidden');
         });
     </script>
 
@@ -202,7 +229,7 @@
 
     <!-- Cara Mengirim -->
     <section class="bg-white py-16">
-        <div class="container mx-auto text-center">
+        <div class="container mx-auto text-center px-10">
             <h2 class="text-3xl font-bold text-gray-800 mb-12">Cara Mengirim</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="space-y-4">
@@ -282,7 +309,7 @@
 </section>
 
     <!-- Lokasi -->
-    <div class="mx-auto bg-white p-6 px-6 md:px-24 lg:px-32 text-center">
+    <div class="mx-auto bg-white-50 p-6 px-6 md:px-24 lg:px-32 text-center">
         <h1 class="text-2xl font-bold mb-4">Lokasi Pengelola Sampah</h1>
         <p class="mb-4">Lokasi mitra drop point yang bisa Anda jadikan sebagai titik pengiriman sampah</p>
         <div class="flex flex-wrap justify-center items-center gap-2 mb-6">
@@ -291,10 +318,10 @@
         <div id="details" class="space-y-4 text-left hidden">
             <div class="border p-4 rounded-lg">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <div class="w-full md:w-1/2 flex justify-center items-center xl:px-24">
-                        <img src="<?php echo e(asset('images/kelola apsi.png')); ?>" class="mt-8 mb-8">
+                    <div class="w-full md:w-1/3 flex justify-center items-center xl:px-24">
+                        <img src="<?php echo e(asset('images/kelola apsi.png')); ?>" class="w-full h-48 object-contain">
                     </div>
-                    <div>
+                    <div class="w-full md:w-2/3">
                         <h2 class="text-xl font-bold mb-2">Asosiasi Pengusaha Sampah Indonesia (APSI)</h2>
                         <p>APSI merupakan perkumpulan para pengusaha yang bergerak dalam bidang persampahan diantaranya, pengumpul pengolah material daur ulang, operator jasa angkutan sampah, operator jasa pengolahan sampah, operator pengolah sampah residu waste to energy, operator transportasi L3S, konsultan pengelolaan sampah di yang tersebar diseluruh Indonesia.</p>
                     </div>
@@ -302,21 +329,21 @@
             </div>
             <div class="border p-4 rounded-lg">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <div class="w-full md:w-1/2 flex justify-center items-center xl:px-24">
-                        <img src="<?php echo e(asset('images/kelola adupi.png')); ?>" class="mt-8 mb-8">
+                    <div class="w-full md:w-1/3 flex justify-center items-center xl:px-24">
+                        <img src="<?php echo e(asset('images/kelola adupi.png')); ?>" class="w-full h-48 object-contain">
                     </div>
-                    <div>
+                    <div class="w-full md:w-2/3">
                         <h2 class="text-xl font-bold mb-2">Asosiasi Daur Ulang Plastik Indonesia (ADUPI)</h2>
-                        <p>ADUPI didirikan pada tahun 2015 dan terdaftar sebagai organisasi nirlaba dengan lebih dari 500 anggota, membentuk ekosistem rantai daur ulang plastik terbesar di Indonesia dari hulu ke hilir, seperti kelompok pengumpul plastik, bank sampah, hingga industri daur ulang. Organisasi ini juga melibatkan akademisi dan praktisi aktif daur ulang plastik di Indonesia</p>
+                        <p>ADUPI didirikan pada tahun 2015 dan terdaftar sebagai organisasi nirlaba dengan lebih dari 500 anggota, membentuk ekosistem rantai daur ulang plastik terbesar di Indonesia dari hulu ke hilir, seperti kelompok pengumpul plastik, bank sampah, hingga industri daur ulang. Organisasi ini juga melibatkan akademisi dan praktisi aktif daur ulang plastik di Indonesia.</p>
                     </div>
                 </div>
             </div>
             <div class="border p-4 rounded-lg">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <div class="w-full md:w-1/2 flex justify-center items-center xl:px-24">
-                        <img src="<?php echo e(asset('images/kelola ibcsd.png')); ?>" class="mt-8 mb-8">
+                    <div class="w-full md:w-1/3 flex justify-center items-center xl:px-24">
+                        <img src="<?php echo e(asset('images/kelola ibcsd.png')); ?>" class="w-full h-48 object-contain">
                     </div>
-                    <div>
+                    <div class="w-full md:w-2/3">
                         <h2 class="text-xl font-bold mb-2">Indonesia Business Council for Sustainable Development (IBCSD)</h2>
                         <p>IBCSD (Indonesia Business Council for Sustainable Development) adalah asosiasi perusahaan yang berkomitmen untuk mempromosikan pembangunan berkelanjutan di Indonesia melalui pertumbuhan ekonomi berkelanjutan, keseimbangan lingkungan, dan kemajuan sosial. Diresmikan pada April 2011, IBCSD merupakan mitra global dari WBCSD (World Business Council for Sustainable Development) dan telah mengumpulkan lebih dari 40 perusahaan pada 2022 untuk bersama-sama mendorong inisiatif keberlanjutan di berbagai sektor industri di Indonesia.</p>
                     </div>
@@ -324,10 +351,10 @@
             </div>
             <div class="border p-4 rounded-lg">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <div class="w-full md:w-1/2 flex justify-center items-center xl:px-24">
-                        <img src="<?php echo e(asset('images/kelola repurpose.png')); ?>" class="mt-8 mb-8">
+                    <div class="w-full md:w-1/3 flex justify-center items-center xl:px-24">
+                        <img src="<?php echo e(asset('images/kelola repurpose.png')); ?>" class="w-full h-48 object-contain">
                     </div>
-                    <div>
+                    <div class="w-full md:w-2/3">
                         <h2 class="text-xl font-bold mb-2">rePurpose Global</h2>
                         <p>rePurpose Global adalah platform aksi plastik terkemuka dunia yang menyatukan merek, konsumen, inovator, dan pembuat kebijakan untuk melawan krisis sampah plastik. Melalui solusi di ekonomi sirkular, rePurpose telah membantu lebih dari 500 perusahaan mengukur dan mengurangi jejak plastik mereka. Hingga kini, rePurpose telah mengelola 30 juta kilogram sampah plastik, memberdayakan masyarakat pesisir di Amerika, Afrika, dan Asia, serta mendukung ribuan pekerja pengelola sampah yang terpinggirkan.</p>
                     </div>

@@ -9,7 +9,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="min-h-screen">
-    <div class="flex flex-col lg:flex-row h-screen">
+    <div class="flex flex-col lg:flex-row min-h-screen">
         <!-- Admin Panel Title (clickable for mobile) -->
         <div class="lg:hidden flex justify-between items-center p-4 bg-hulk">
             <!-- Button that toggles the sidebar -->
@@ -19,11 +19,12 @@
         </div>
 
         <!-- Sidebar -->
-        <div id="sidebar" class="fixed lg:relative -translate-x-full lg:translate-x-0 transition-transform duration-300 lg:basis-[15%] z-10 bg-hulk w-[75%] lg:w-auto h-screen">
+        <div id="sidebar" class="fixed lg:relative -translate-x-full lg:translate-x-0 transition-transform duration-300 lg:basis-[15%] z-10 bg-hulk w-[75%] lg:w-auto h-auto min-h-screen">
             <div class="px-6 lg:px-6 py-4">
                 <div class="px-4 py-6 flex items-center justify-center border-b border-light-white/[0.3]">
                     <h1 class="text-white text-xl leading-6 font-extrabold lg:cursor-default">Admin Panel</h1>
                 </div>
+
                 <div class="flex items-center gap-4 py-4 lg:pt-8">
                     <i class="fa-solid fa-gauge text-white"></i>
                     <a href="{{ route('admin.dashboard') }}" class="text-lg lg:text-xl text-white leading-6 hover:font-bold">Dashboard</a>
@@ -74,7 +75,7 @@
         </div>
 
         <!-- Content -->
-        <div class="basis-full lg:basis-[85%] border p-4 lg:pl-4 lg:pt-4">
+        <div class="basis-full lg:basis-[85%] border p-4 lg:pl-4 lg:pt-4 h-auto">
             @yield('content')
         </div>
     </div>

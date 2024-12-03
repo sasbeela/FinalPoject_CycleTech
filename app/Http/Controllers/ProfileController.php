@@ -51,11 +51,8 @@ class ProfileController extends Controller
         $user = Auth::guard('nasabah')->user();
 
         // Hapus foto lama jika ada
-        if ($request->hasFile('photo')) {
-            // Simpan foto baru
-            $path = $request->file('photo')->store('photos', 'public');
-            $user->photo = $path;
-            $user->save();
+        if ($user->photo) {
+            Storage::disk('public')->delete($user->photo);
         }
 
         // Simpan foto baru
@@ -65,7 +62,6 @@ class ProfileController extends Controller
 
         return back()->with('success', 'Foto profil berhasil diperbarui.');
     }
-
 
     // Memperbarui kata sandi
     public function updatePassword(Request $request)

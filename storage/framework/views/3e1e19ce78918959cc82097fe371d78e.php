@@ -48,6 +48,12 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Navigasi Pagination -->
+        <div class="mt-4">
+            <?php echo e($kreasis->links('pagination::tailwind')); ?>
+
+        </div>
     </div>
 
     <!-- Overlay -->

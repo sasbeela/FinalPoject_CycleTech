@@ -100,7 +100,7 @@
                                 class="w-10 h-10 rounded-full border border-gray-300">
                         </a>
                     </li>
-                    
+
                     <!-- logout -->
                     <li class="hidden lg:flex items-center">
                         <button id="logoutButton" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none">
@@ -204,22 +204,68 @@
     <!-- Upload Section -->
     <div class="w-full h-auto px-4 lg:px-0">
         <div class="flex flex-col justify-center items-center">
-            <!-- Upload Box -->
-            <label class="block text-black font-semibold mb-2 w-full max-w-4xl">
-                <div class="border-2 border-dashed border-hulk rounded-xl w-full h-48 md:h-64 lg:h-[380px] flex justify-center items-center">
-                    <input type="file" id="foto" name="foto" class="hidden">
-                    <img src="{{ asset('images/upload.png') }}" alt="Kamera" class="object-cover w-12 h-12 md:w-16 md:h-16 lg:w-[197px] lg:h-[177px]">
+            <!-- Upload Form -->
+            <form id="predictionForm" method="POST" enctype="multipart/form-data" action="{{ route('predict') }}">
+                @csrf
+                <label class="block text-black font-semibold mb-2 w-full max-w-4xl">
+                    <div class="border-2 border-dashed border-hulk rounded-xl w-full h-48 md:h-64 lg:h-[380px] flex justify-center items-center">
+                        <input type="file" id="image" name="image" class="hidden" required onchange="previewImage(event)">
+                        <img id="imagePreview" src="{{ asset('images/upload.png') }}" alt="Preview Gambar" class="object-cover w-12 h-12 md:w-16 md:h-16 lg:w-[197px] lg:h-[177px]">
+                    </div>
+                </label>
+                <p class="text-sm md:text-base font-normal text-gray text-center mt-4">
+                    Petunjuk: Untuk hasil yang akurat, pastikan hanya ada satu objek yang terlihat jelas dalam foto.
+                </p>
+                <div class="flex justify-center mt-4">
+                    <button type="submit" class="border-2 px-4 py-2 border-hulk font-medium text-hulk rounded-full text-sm md:text-base lg:text-lg hover:bg-old-hulk hover:text-white">
+                        Unggah dan Prediksi
+                    </button>
                 </div>
-            </label>
-            <p class="text-sm md:text-base font-normal text-gray text-center mt-4">
-                Perunjuk: Untuk hasil yang akurat, pastikan hanya ada satu objek yang terlihat jelas dalam foto.
+            </form>
+        </div>
+    </div>
+
+    <h1 class="text-center text-2xl font-bold">Hasil Prediksi</h1>
+        <!-- Menampilkan Hasil Prediksi -->
+        @if(isset($predictedCategory))
+            <p class="text-center mt-4 text-gray-600">
+                Kategori Sampah: <strong>{{ $predictedCategory }}</strong>
             </p>
-            <div class="flex justify-center mt-4">
-            <a id="uploadBtn" class="border-2 px-4 py-2 border-hulk font-medium text-hulk rounded-full text-sm md:text-base lg:text-lg hover:bg-old-hulk hover:text-white">
-                Upload
-            </a>
-        </div>
-        </div>
+
+            <!-- Rekomendasi Kreasi -->
+            @if($recommendedCrafts->isEmpty())
+                <p class="text-center text-gray-500 mt-6">
+                    Tidak ada kreasi yang tersedia untuk kategori ini.
+                </p>
+            @else
+                <div class="mt-10">
+                    <h2 class="text-lg font-semibold mb-4">Rekomendasi Kreasi:</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        @foreach($recommendedCrafts as $craft)
+                            <div class="border rounded-lg shadow-lg p-4">
+                                <img src="{{ asset('storage/' . $craft->foto_kreasi) }}" alt="{{ $craft->judul_kreasi }}" class="w-full h-40 object-cover rounded-lg mb-4">
+                                <h3 class="text-lg font-bold">{{ $craft->judul_kreasi }}</h3>
+                                <p class="text-sm text-gray-600">Author: {{ $craft->author }}</p>
+                                <p class="text-sm text-gray-600">Category: {{ $craft->kategori_kreasi }}</p>
+                                <a href="{{ route('artikel.kreasi', $craft->id) }}" class="mt-2 inline-block text-blue-500 hover:text-blue-700">
+                                    Explore craft →
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        @else
+            <p class="text-center text-red-500 mt-6">
+                Kategori prediksi tidak ditemukan. Silakan unggah gambar untuk prediksi.
+            </p>
+        @endif
+
+    <!-- Description Section -->
+    <div class="mt-8 text-center">
+        <p class="text-gray-700">
+            Sistem ini menggunakan kecerdasan buatan untuk mendeteksi jenis sampah dari gambar. Pastikan gambar yang diunggah berkualitas baik dan hanya menampilkan satu objek.
+        </p>
     </div>
 
     <!-- Description Section -->
@@ -271,6 +317,20 @@
 
     <!-- JS -->
     <script>
+
+        // Fungsi Preview
+        function previewImage(event) {
+                const reader = new FileReader(); // Membuat FileReader untuk membaca file gambar
+                const imagePreview = document.getElementById('imagePreview'); // Elemen gambar untuk preview
+
+                reader.onload = function () {
+                    imagePreview.src = reader.result; // Menampilkan hasil file yang dibaca ke src gambar
+                    imagePreview.classList.add('w-full', 'h-full', 'rounded-md', 'object-cover'); // Tambahkan styling
+                };
+
+                reader.readAsDataURL(event.target.files[0]); // Membaca file gambar yang dipilih
+        }
+
         // Unggah Foto
         const uploadBtn = document.getElementById('uploadBtn');
         const introSection = document.getElementById('intro');

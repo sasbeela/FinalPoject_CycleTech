@@ -9,7 +9,7 @@
     <?php echo app('Illuminate\Foundation\Vite')('resources/css/app.css'); ?>
 </head>
 <body class="min-h-screen">
-    <div class="flex flex-col lg:flex-row h-screen">
+    <div class="flex flex-col lg:flex-row min-h-screen">
         <!-- Admin Panel Title (clickable for mobile) -->
         <div class="lg:hidden flex justify-between items-center p-4 bg-hulk">
             <!-- Button that toggles the sidebar -->
@@ -19,11 +19,12 @@
         </div>
 
         <!-- Sidebar -->
-        <div id="sidebar" class="fixed lg:relative -translate-x-full lg:translate-x-0 transition-transform duration-300 lg:basis-[15%] z-10 bg-hulk w-[75%] lg:w-auto h-screen">
+        <div id="sidebar" class="fixed lg:relative -translate-x-full lg:translate-x-0 transition-transform duration-300 lg:basis-[15%] z-10 bg-hulk w-[75%] lg:w-auto h-auto min-h-screen">
             <div class="px-6 lg:px-6 py-4">
                 <div class="px-4 py-6 flex items-center justify-center border-b border-light-white/[0.3]">
                     <h1 class="text-white text-xl leading-6 font-extrabold lg:cursor-default">Admin Panel</h1>
                 </div>
+
                 <div class="flex items-center gap-4 py-4 lg:pt-8">
                     <i class="fa-solid fa-gauge text-white"></i>
                     <a href="<?php echo e(route('admin.dashboard')); ?>" class="text-lg lg:text-xl text-white leading-6 hover:font-bold">Dashboard</a>
@@ -65,34 +66,58 @@
                 <div class="flex items-center justify-between gap-4 py-4 cursor-pointer">
                     <div class="flex items-center gap-4">
                         <i class="fa-solid fa-users text-white"></i>
-                        <a href="#"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                           class="text-xl leading-6 font-normal text-white hover:font-bold">
+                        <a href="#" id="logoutButton" class="text-xl leading-6 font-normal text-white hover:font-bold">
                             Logout
                         </a>
                     </div>
                 </div>
-
-                <!-- Hidden Logout Form -->
-                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-                    <?php echo csrf_field(); ?>
-                </form>
             </div>
         </div>
 
         <!-- Content -->
-        <div class="basis-full lg:basis-[85%] border p-4 lg:pl-4 lg:pt-4">
+        <div class="basis-full lg:basis-[85%] border p-4 lg:pl-4 lg:pt-4 h-auto">
             <?php echo $__env->yieldContent('content'); ?>
         </div>
     </div>
 
+    <!-- Modal -->
+    <div id="logoutModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            <p class="text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+            <div class="flex justify-end mt-4 space-x-4">
+                <button id="cancelLogout" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">
+                    Batal
+                </button>
+                <form id="logoutForm" action="<?php echo e(route('logout')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const toggleButton = document.getElementById('toggleButton');
             const sidebar = document.getElementById('sidebar');
+            const logoutButton = document.getElementById('logoutButton');
+            const logoutModal = document.getElementById('logoutModal');
+            const cancelLogout = document.getElementById('cancelLogout');
 
-            toggleButton.addEventListener('click', function() {
+            toggleButton.addEventListener('click', function () {
                 sidebar.classList.toggle('-translate-x-full');
+            });
+
+            logoutButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default link behavior
+                logoutModal.classList.remove('hidden'); // Show modal
+            });
+
+            cancelLogout.addEventListener('click', function () {
+                logoutModal.classList.add('hidden'); // Hide modal
             });
         });
     </script>

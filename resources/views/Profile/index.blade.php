@@ -209,9 +209,10 @@
             <div class="flex justify-center">
                 <!-- Gambar Profil -->
                 <img id="profilePreview"
-                    src="{{ $user->photo ? asset('storage/' . $user->photo) : 'https://via.placeholder.com/100' }}"
+                    src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('images/default-profile.png') }}"
                     alt="Profile Picture"
                     class="w-24 h-24 rounded-full border">
+
             </div>
 
             <div class="flex space-x-4 mt-4 lg:mt-0">

@@ -51,6 +51,12 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- navigasi pagination -->
+        <div class="mt-4">
+            <?php echo e($articles->links('pagination::tailwind')); ?>
+
+        </div>
     </div>
 
     <!-- Overlay -->

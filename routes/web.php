@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KreasiController;
 use App\Http\Controllers\NasabahKreasiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PredictionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Notification;
@@ -22,6 +23,8 @@ Route::get('/', function () {
     return view('landing');
 })->name('landing.page');
 
+// Route untuk Prediksi
+Route::post('/predict', [PredictionController::class, 'predict'])->name('predict');
 
 // Route untuk logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
