@@ -131,7 +131,7 @@
                 <li><a href="{{ route('kelola.sampah') }}" class="hover:text-hulk">Kelola Sampah</a></li>
                 <li><a href="{{ route('kreasi') }}" class="hover:text-hulk">Kreasi</a></li>
                 <li><a href="{{ route('tentang.kami') }}" class="hover:text-hulk">Tentang Kami</a></li>
-                <li><a href="#" class="hover:text-hulk">Profil</a></li>
+                <li><a href="{{ route('profile.nasabah') }}" class="hover:text-hulk">Profil</a></li>
                 <li>
                     <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="">
                         @csrf
@@ -263,7 +263,7 @@
         <h2 class="flex justify-center text-center text-2xl font-extrabold text-gray-800 mb-4 mt-8">Kreasi Serupa</h2>
         <div class="flex flex-col lg:flex-row justify-center items-center gap-8 mt-12 hover:outerline-old-hulk ">
             @foreach($kreasiSerupa->take(2) as $item)
-                <div class="bg-gradient-to-b from-birumuda to-krem p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 w-[300px] h-[400px]">
+                <div class="bg-gradient-to-b from-birumuda border hover:border-old-hulk to-krem p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 w-[300px] h-[400px]">
                     <a href="{{ route('artikel.kreasi', $item->id) }}">
                         <h3 class="text-md lg:text-xl font-bold text-gray-800 mb-2">{{ $item->judul_kreasi }}</h3>
                         <img src="{{ asset('storage/' . $item->foto_kreasi) }}" alt="{{ $item->judul_kreasi }}" class="w-full h-48 object-cover rounded-t-lg overlay:hidden">
