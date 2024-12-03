@@ -53,6 +53,11 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- navigasi pagination -->
+        <div class="mt-4">
+            {{ $articles->links('pagination::tailwind') }}
+        </div>
     </div>
 
     <!-- Overlay -->

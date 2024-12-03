@@ -8,8 +8,13 @@
     <link rel="icon" type="image/x-icon" href="/images/logo 2.png">
     @vite('resources/css/app.css')
 </head>
+<<<<<<< Updated upstream
 <body class="">
     <div class="flex flex-col lg:flex-row">
+=======
+<body class="min-h-screen">
+    <div class="flex flex-col lg:flex-row min-h-screen">
+>>>>>>> Stashed changes
         <!-- Admin Panel Title (clickable for mobile) -->
         <div class="lg:hidden flex justify-between items-center p-4 bg-hulk">
             <!-- Button that toggles the sidebar -->
@@ -19,12 +24,22 @@
         </div>
 
         <!-- Sidebar -->
+<<<<<<< Updated upstream
         <div id="sidebar" class="fixed lg:relative -translate-x-full lg:translate-x-0 transition-transform duration-300 lg:basis-[15%] h-full lg:h-screen z-10 bg-hulk w-[75%] lg:w-auto">
             <div class="h-full px-6 lg:px-[25px] py-4">
+=======
+        <div id="sidebar" class="fixed lg:relative -translate-x-full lg:translate-x-0 transition-transform duration-300 lg:basis-[15%] z-10 bg-hulk w-[75%] lg:w-auto h-auto min-h-screen">
+            <div class="px-6 lg:px-6 py-4">
+>>>>>>> Stashed changes
                 <div class="px-4 py-6 flex items-center justify-center border-b border-light-white/[0.3]">
                     <h1 class="text-white text-[20px] leading-[24px] font-extrabold lg:cursor-default">Admin Panel</h1>
                 </div>
+<<<<<<< Updated upstream
                 <div class="flex items-center gap-4 py-4 lg:pt-[35px]">
+=======
+
+                <div class="flex items-center gap-4 py-4 lg:pt-8">
+>>>>>>> Stashed changes
                     <i class="fa-solid fa-gauge text-white"></i>
                     <a href="{{ route('admin.dashboard') }}" class="text-[18px] lg:text-[20px] text-white leading-[30px] hover:font-bold">Dashboard</a>
                 </div>
@@ -81,7 +96,7 @@
         </div>
 
         <!-- Content -->
-        <div class="basis-full lg:basis-[85%] border p-4 lg:pl-4 lg:pt-4">
+        <div class="basis-full lg:basis-[85%] border p-4 lg:pl-4 lg:pt-4 h-auto">
             @yield('content')
         </div>
     </div>

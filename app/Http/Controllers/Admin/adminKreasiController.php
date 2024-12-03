@@ -11,9 +11,8 @@ class adminKreasiController extends Controller
     // Menampilkan daftar kreasi
     public function index()
     {
-        // Ambil data kreasi dari tabel `kreasis`
-        $kreasis = Kreasi::all();
 
+        $kreasis = Kreasi::paginate(5); // Menampilkan 5 data per halaman
         // Kirim data ke view
         return view('admin.Kreasi.index', compact('kreasis'));
     }

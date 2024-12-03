@@ -147,7 +147,16 @@
         <!-- Profile Image Section -->
         <div class="flex flex-col items-center lg:items-start lg:flex-row gap-4">
             <div class="flex justify-center">
+<<<<<<< Updated upstream
                 <img src="https://via.placeholder.com/100" alt="Profile Picture" class="w-24 h-24 rounded-full border">
+=======
+                <!-- Gambar Profil -->
+                <img id="profilePreview"
+                    src="{{ $user->photo ? asset('storage/' . $user->photo) : asset('images/default-profile.png') }}"
+                    alt="Profile Picture"
+                    class="w-24 h-24 rounded-full border">
+
+>>>>>>> Stashed changes
             </div>
             <div class="flex space-x-4 mt-4 lg:mt-0">
                 <button class="px-4 py-2 border-2 font-semibold border-old-hulk text-hulk rounded-full hover:bg-old-hulk hover:text-white">Foto Baru</button>
