@@ -33,7 +33,6 @@ class ArtikelSeeder extends Seeder
             Menurut Yudi Hidayat, Manager Product Development di PLN Indonesia Power, bahan bakar biomassa seperti Bahan Bakar Jumputan Padat (BBJP) berasal dari sampah yang telah dipilah dan diolah menjadi butiran homogen. Biomassa ini dapat digunakan sebagai substitusi batubara hingga 5% dari total konsumsi, yang setara dengan 2.000 ton/hari.
 
             Manfaat cofiring meliputi:
-
             -   Reduksi Sampah: Mengurangi volume sampah sebesar 30 ton/hari di Cilegon.
             -   Penciptaan Lapangan Kerja: Memberikan pekerjaan bagi masyarakat lokal di sekitar TPA.
             -   Tambahan Pendapatan: Meningkatkan pendapatan untuk TPA melalui pengolahan sampah menjadi biomassa.
@@ -47,7 +46,6 @@ class ArtikelSeeder extends Seeder
             Rencana pemerintah untuk pensiun dini PLTU berbasis batubara pada 2030 memberikan peluang besar untuk transisi ke energi hijau. Sampah yang selama ini menjadi masalah dapat diolah menjadi energi terbarukan (EBT) dengan teknologi seperti Refuse-Derived Fuel (RDF) atau BBJP.
 
             Namun, keberhasilan transisi ini memerlukan:
-
             -   Regulasi dan Insentif: Kebijakan yang mendukung harga kompetitif untuk BBJP dan RDF.
             -   Infrastruktur Modern: Investasi dalam fasilitas pengolahan sampah yang ramah lingkungan.
             -   Kesadaran Masyarakat: Edukasi tentang pentingnya pemilahan dan pengelolaan sampah di tingkat rumah tangga.
@@ -173,7 +171,7 @@ class ArtikelSeeder extends Seeder
 
             Manfaat Pengelolaan Sampah Berbasis 3R
             - Lingkungan Lebih Bersih: Mengurangi polusi dan meningkatkan kualitas kesehatan masyarakat.
-             - Penghematan Biaya: Mengurangi biaya operasional pengangkutan sampah.
+            - Penghematan Biaya: Mengurangi biaya operasional pengangkutan sampah.
             - Perpanjangan Umur TPA: Menurunkan volume sampah yang dibuang ke Tempat Pembuangan Akhir (TPA).
             - Keuntungan Ekonomi: Pendapatan dari penjualan kompos dan barang daur ulang dapat meningkatkan ekonomi masyarakat.
             - Dampak Sosial Positif: Meningkatkan kesadaran dan partisipasi masyarakat dalam menjaga kebersihan lingkungan.

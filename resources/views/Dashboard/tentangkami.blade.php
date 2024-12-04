@@ -94,9 +94,10 @@
                     <!-- Profile Icon (only visible on larger screens) -->
                     <li class="hidden lg:flex items-center">
                         <a href="{{ route('profile.nasabah') }}">
-                            <img src="{{ auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40' }}"
-                                alt="Profile"
-                                class="w-10 h-10 rounded-full border border-gray-300">
+                            <img src="{{ auth('nasabah')->check() && auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40' }}"
+                            alt="Profile"
+                            class="w-10 h-10 rounded-full border border-gray-300">
+
                         </a>
                     </li>
                     <!-- logout -->
@@ -290,7 +291,7 @@
                 <a href="https://www.linkedin.com/in/anggitaardilianzfaticha" target="_blank">
                 <div class="flex flex-col items-center h-[300px] bg-gradient-to-b from-krem to-birumuda border-none shadow-lg p-3 rounded hover:shadow-2xl">
                     <img src="{{ asset('images/anggita.png') }}" alt="Member" class="w-36 h-36 rounded-lg object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Anggita Adilianza</h3>
+                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Anggita Ardilianz</h3>
                     <p class="text-gray-600">Back-End Developer</p>
                     <p class="text-gray-600 font-semibold">Institut Teknologi dan Bisnis PalComTech </p>
                 </div>

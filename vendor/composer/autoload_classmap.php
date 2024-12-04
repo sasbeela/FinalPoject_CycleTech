@@ -22,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\DashboardController' => $baseDir . '/app/Http/Controllers/DashboardController.php',
     'App\\Http\\Controllers\\KreasiController' => $baseDir . '/app/Http/Controllers/KreasiController.php',
     'App\\Http\\Controllers\\NasabahKreasiController' => $baseDir . '/app/Http/Controllers/NasabahKreasiController.php',
+    'App\\Http\\Controllers\\PredictionController' => $baseDir . '/app/Http/Controllers/PredictionController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Artikel' => $baseDir . '/app/Models/Artikel.php',

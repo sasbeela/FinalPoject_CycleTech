@@ -19,8 +19,8 @@
 </head>
 <body class="bg-gradient-to-b from-birumuda to-krem flex min-h-screen">
     <!-- Left Side -->
-    <div class="w-2/3 h-screen overflow-hidden relative hidden lg:block">
-        <img src="{{ asset('images/login.png') }}" alt="Recycle Symbol" class="object-cover w-full h-full">
+    <div class="w-2/3 relative hidden lg:block">
+        <img src="{{ asset('images/login.png') }}" alt="Recycle Symbol" class="object-cover w-full h-[700px]">
     </div>
     <!-- Right Side -->
     <div class="lg:w-1/3 w-full p-8 flex flex-col justify-center relative">
@@ -31,7 +31,6 @@
             <div class="mb-4">
                 <label for="userType" class="block text-gray-700">Masuk sebagai : Nasabah</label>
                 <select id="userType" class="text-sm lg:text-lg w-1/2 px-4 py-2 border rounded-lg bg-hulk text-white focus:outline-none focus:ring-2 focus:ring-old-hulk" onchange="redirectToLogin()">
-                    <option value="">Pilih Jenis Pengguna</option>
                     <option value="nasabah">Nasabah</option>
                     <option value="admin">Admin</option>
                 </select>

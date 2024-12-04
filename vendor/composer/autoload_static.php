@@ -525,6 +525,7 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\KreasiController' => __DIR__ . '/../..' . '/app/Http/Controllers/KreasiController.php',
         'App\\Http\\Controllers\\NasabahKreasiController' => __DIR__ . '/../..' . '/app/Http/Controllers/NasabahKreasiController.php',
+        'App\\Http\\Controllers\\PredictionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PredictionController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Artikel' => __DIR__ . '/../..' . '/app/Models/Artikel.php',

@@ -10,8 +10,8 @@
 <body class="bg-gradient-to-b from-birumuda to-krem flex min-h-screen">
 
     <!-- Left Side -->
-    <div class="w-2/3 h-screen overflow-hidden relative hidden lg:block">
-        <img src="{{ asset('images/signin.png') }}" alt="Recycle Symbol" class="object-cover w-full h-full">
+    <div class="w-2/3 relative hidden lg:block flex flex-col fixed">
+        <img src="{{ asset('images/signin.png') }}" alt="Recycle Symbol" class="object-cover w-full h-[850px]">
     </div>
 
     <!-- Right Side -->
@@ -68,6 +68,10 @@
             </div>
             <button type="submit" class="w-full bg-hulk text-white py-2 rounded-lg hover:bg-old-hulk">Daftar</button>
         </form>
+
+        <div class="text-center mt-4">
+            <p>Sudah memiliki Akun? <a href="{{ route('login.nasabah') }}" class="text-hulk">Masuk</a></p>
+        </div>
 
 
 

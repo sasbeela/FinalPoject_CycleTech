@@ -95,9 +95,10 @@
                     <!-- Profile Icon (only visible on larger screens) -->
                     <li class="hidden lg:flex items-center">
                         <a href="{{ route('profile.nasabah') }}">
-                            <img src="{{ auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40' }}"
-                                alt="Profile"
-                                class="w-10 h-10 rounded-full border border-gray-300">
+                            <img src="{{ auth('nasabah')->check() && auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40' }}"
+                            alt="Profile"
+                            class="w-10 h-10 rounded-full border border-gray-300">
+
                         </a>
                     </li>
 
