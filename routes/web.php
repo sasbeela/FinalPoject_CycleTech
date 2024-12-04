@@ -29,7 +29,6 @@ Route::post('/predict', [PredictionController::class, 'predict'])->name('predict
 // Route untuk logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
 // Route Check Email Signin
 Route::get('/check-email', function (Request $request) {
     $email = $request->query('email');

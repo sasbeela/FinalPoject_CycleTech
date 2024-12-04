@@ -237,7 +237,7 @@
         <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-8">Rekomendasi Pengelola Sampah</h2>
         <div class="grid lg:grid-cols-4 sm:grid-cols-2 gap-8">
             <a href="https://apsiumkmsampah.id/" class="block" target="_blank">
-                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-xl border border-grey hover:border-hulk">
+                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-2xl border border-grey hover:border-hulk transition-shadow duration-300">
                     <img src="<?php echo e(asset('images/apsi.png')); ?>" alt="APSI" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700 text-lg">APSI</h3>
@@ -246,7 +246,7 @@
                 </div>
             </a>
             <a href="https://www.adupi.org/" class="block" target="_blank">
-                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-xl border border-grey hover:border-hulk">
+                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-2xl border border-grey hover:border-hulk transition-shadow duration-300">
                     <img src="<?php echo e(asset('images/adupi.png')); ?>" alt="ADUPI" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700 text-lg">ADUPI</h3>
@@ -255,7 +255,7 @@
                 </div>
             </a>
             <a href="https://ibcsd.or.id/" class="block" target="_blank">
-                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-xl border border-grey hover:border-hulk">
+                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-2xl border border-grey hover:border-hulk transition-shadow duration-300">
                     <img src="<?php echo e(asset('images/ibcsd.png')); ?>" alt="IBCS" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700 text-lg">IBCSD</h3>
@@ -264,7 +264,7 @@
                 </div>
             </a>
             <a href="https://repurpose.global/" class="block" target="_blank">
-                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-xl border border-grey hover:border-hulk">
+                <div class="bg-white shadow-lg rounded-lg h-[240px] overflow-hidden hover:shadow-2xl border border-grey hover:border-hulk transition-shadow duration-300">
                     <img src="<?php echo e(asset('images/repurpose.png')); ?>" alt="Repurpose" class="w-[240px] h-[133px]">
                     <div class="p-4">
                         <h3 class="font-bold text-gray-700 text-lg">RePurpose Global</h3>

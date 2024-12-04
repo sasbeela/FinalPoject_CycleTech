@@ -102,7 +102,6 @@
                             <img src="<?php echo e(auth('nasabah')->check() && auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40'); ?>"
                             alt="Profile"
                             class="w-10 h-10 rounded-full border border-gray-300">
-
                         </a>
                     </li>
 

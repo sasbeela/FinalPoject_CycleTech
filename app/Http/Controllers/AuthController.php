@@ -33,9 +33,20 @@ class AuthController extends Controller
         // Validasi input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
-            'email' => 'required|email|unique:nasabah,email', // Pastikan tabel 'nasabah'
+            'phone' => 'required|string|min:10',
+            'email' => 'required|email|unique:nasabah,email',
             'password' => 'required|string|min:8|confirmed',
+        ], [
+            // Pesan validasi dalam bahasa Indonesia
+            'name.required' => 'Kolom nama wajib diisi.',
+            'phone.required' => 'Kolom nomor telepon wajib diisi.',
+            'phone.min' => 'Kolom nomor telepon harus terdiri dari minimal 10 karakter.',
+            'email.required' => 'Kolom email wajib diisi.',
+            'email.email' => 'Kolom email harus berupa alamat email yang valid.',
+            'email.unique' => 'Email ini sudah digunakan. Gunakan email lain.',
+            'password.required' => 'Kolom kata sandi wajib diisi.',
+            'password.min' => 'Kolom kata sandi harus terdiri dari minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi kata sandi tidak sesuai.',
         ]);
 
         try {
@@ -45,14 +56,14 @@ class AuthController extends Controller
                 'phone' => $validated['phone'],
                 'email' => $validated['email'],
                 'password' => bcrypt($validated['password']), // Enkripsi password
-                'password_plaintext' => $validated['password'], // Simpan plaintext password
+                'password_plaintext' => $validated['password'], // Simpan password dalam plaintext
             ]);
 
             // Redirect ke halaman login dengan pesan sukses
-            return redirect()->route('login.nasabah')->with('success', 'Akun berhasil dibuat. Silakan login.');
+            return redirect()->route('login.nasabah')->with('success', 'Akun berhasil dibuat. Silakan login menggunakan email dan password Anda.');
         } catch (\Exception $e) {
-            // Jika terjadi kesalahan, kembalikan ke halaman sebelumnya dengan error
-            return back()->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()])->withInput();
+            // Jika terjadi kesalahan, kembalikan ke halaman sebelumnya dengan pesan error
+            return back()->withErrors(['error' => 'Maaf, terjadi kesalahan: ' . $e->getMessage()])->withInput();
         }
     }
 

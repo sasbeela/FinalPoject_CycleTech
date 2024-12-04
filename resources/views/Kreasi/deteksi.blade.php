@@ -198,7 +198,7 @@
     </div>
     <div class="mb-16">
         <p class="text-base md:text-lg lg:text-xl px-6 md:px-12 lg:px-24">
-            Yuk, kenali kategori sampahmu! Seret dan lepas fotonya ke kotak yang telah disediakan di bawah ini atau pilih foto dari penyimpananmu. Tunggu beberapa saat dan hasilnya akan muncul.
+            Yuk, kenali kategori sampahmu! Pilih dan unggah foto sampah dari penyimpananmu. Tunggu beberapa saat dan hasilnya akan muncul.
         </p>
     </div>
 
@@ -257,13 +257,13 @@
             @endif
             <div class="flex flex-row gap-6 justify-center items-center">
                 <button id="load-more" class="mt-8 w-[150px] bg-hulk text-white px-4 py-2 rounded-lg hover:bg-old-hulk">Lebih Banyak</button>
-            </div>  
+            </div>
         @else
             <p class="text-center text-red-500 mt-6">
                 Kategori prediksi tidak ditemukan. Silakan unggah gambar untuk prediksi.
             </p>
         @endif
-    
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const loadMoreButton = document.getElementById('load-more');
@@ -271,35 +271,35 @@
                 const kreasiContainer = document.getElementById('kreasi-container');
                 const kreasiItems = Array.from(kreasiContainer.getElementsByClassName('craft'));
                 let visibleItems = 3;
-        
+
                 // Tampilkan hanya 3 kartu pertama saat memuat halaman
                 kreasiItems.slice(visibleItems).forEach(item => item.style.display = 'none');
-        
+
                 loadMoreButton.addEventListener('click', function() {
                     const hiddenItems = kreasiItems.slice(visibleItems, visibleItems + 3);
                     hiddenItems.forEach(item => item.style.display = 'block');
                     visibleItems += hiddenItems.length;
-        
+
                     // Sembunyikan tombol "Lebih Banyak" jika semua item sudah ditampilkan
                     if (visibleItems >= kreasiItems.length) {
                         loadMoreButton.style.display = 'none';
                     }
-        
+
                     // Tampilkan tombol "Lebih Sedikit"
                     loadLessButton.style.display = 'block';
                 });
-        
+
                 loadLessButton.addEventListener('click', function() {
                     if (visibleItems > 3) {
                         const itemsToHide = kreasiItems.slice(visibleItems - 3, visibleItems);
                         itemsToHide.forEach(item => item.style.display = 'none');
                         visibleItems -= itemsToHide.length;
-        
+
                         // Sembunyikan tombol "Lebih Sedikit" jika hanya 3 item yang ditampilkan
                         if (visibleItems <= 3) {
                             loadLessButton.style.display = 'none';
                         }
-        
+
                         // Tampilkan tombol "Lebih Banyak" kembali
                         loadMoreButton.style.display = 'block';
                     }

@@ -10,9 +10,9 @@
 <body class="bg-gradient-to-b from-birumuda to-krem flex min-h-screen">
 
     <!-- Left Side -->
-    <div class="w-2/3 relative hidden lg:block flex flex-col fixed">
-        <img src="{{ asset('images/signin.png') }}" alt="Recycle Symbol" class="object-cover w-full h-[850px]">
-    </div>
+    <div class="w-2/3 hidden lg:block overflow-hidden h-screen">
+        <img src="{{ asset('images/signin.png') }}" alt="Recycle Symbol" class="object-cover w-full h-full">
+    </div>
 
     <!-- Right Side -->
     <div class="lg:w-1/3 w-full p-8 flex flex-col justify-center relative">

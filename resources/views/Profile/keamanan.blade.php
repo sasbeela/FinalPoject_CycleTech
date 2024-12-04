@@ -99,8 +99,8 @@
                         <a href="{{ route('profile.nasabah') }}">
                             <img src="{{ auth('nasabah')->check() && auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40' }}"
                             alt="Profile"
-                            class="w-10 h-10 rounded-full border border-gray-300">
-                        
+                            class="w-10 h-10 rounded-full border-2 border-hulk">
+
                         </a>
                     </li>
 
@@ -219,16 +219,12 @@
             <label class="block text-gray-700 font-medium">Kata Sandi</label>
             <div class="flex items-center border border-old-hulk rounded-lg p-2 mt-2">
                 <span class="text-hulk mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
-                    </svg>
+                    <i class="bi bi-lock-fill"></i>
                 </span>
                 <input id="password-field" type="password" class="w-full border-none focus:outline-none" value="{{ $user->password_plaintext }}" disabled>
-                <button type="button" id="toggle-password" class="text-gray-500 hover:text-hulk focus:outline-none ml-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" id="eye-icon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path id="eye-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h.01M12 12h.01M9 12h.01M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-.567 1.822-1.729 3.43-3.298 4.598A9.994 9.994 0 0112 19c-4.477 0-8.268-2.943-9.542-7z" />
-                        <path id="eye-closed" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18M10.24 10.24a3 3 0 004.243 4.243M17.657 17.657A8.987 8.987 0 0112 21a8.987 8.987 0 01-7.071-3.343M6.343 6.343A8.987 8.987 0 0112 3c2.116 0 4.065.737 5.657 1.964" />
-                    </svg>
+                <button type="button" id="toggle-password" class="text-hulk hover:text-hulk focus:outline-none ml-2">
+                    <i id="eye-closed" class="bi bi-eye-slash-fill hidden"></i>
+                    <i id="eye-open" class="bi bi-eye-fill"></i>
                 </button>
             </div>
         </div>
