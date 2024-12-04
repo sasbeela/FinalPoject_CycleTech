@@ -19,9 +19,10 @@
 </head>
 <body class="bg-gradient-to-b from-birumuda to-krem flex min-h-screen">
     <!-- Left Side -->
-    <div class="w-2/3 relative hidden lg:block">
-        <img src="{{ asset('images/login.png') }}" alt="Recycle Symbol" class="object-cover w-full h-[700px]">
+    <div class="w-2/3 h-screen overflow-hidden relative hidden lg:block">
+        <img src="{{ asset('images/login.png') }}" alt="Recycle Symbol" class="object-cover w-full h-full">
     </div>
+
     <!-- Right Side -->
     <div class="lg:w-1/3 w-full p-8 flex flex-col justify-center relative">
         <div class="text-center mb-8">

@@ -98,9 +98,10 @@
                     <!-- Profile Icon (only visible on larger screens) -->
                     <li class="hidden lg:flex items-center">
                         <a href="<?php echo e(route('profile.nasabah')); ?>">
-                            <img src="<?php echo e(auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40'); ?>"
-                                alt="Profile"
-                                class="w-10 h-10 rounded-full border border-gray-300">
+                            <img src="<?php echo e(auth('nasabah')->check() && auth('nasabah')->user()->photo ? asset('storage/' . auth('nasabah')->user()->photo) : 'https://via.placeholder.com/40'); ?>"
+                            alt="Profile"
+                            class="w-10 h-10 rounded-full border border-gray-300">
+
                         </a>
                     </li>
 
@@ -119,7 +120,7 @@
                 <li><a href="<?php echo e(route('kelola.sampah')); ?>" class="hover:text-hulk">Kelola Sampah</a></li>
                 <li><a href="<?php echo e(route('kreasi')); ?>" class="hover:text-hulk">Kreasi</a></li>
                 <li><a href="<?php echo e(route('tentang.kami')); ?>" class="hover:text-hulk">Tentang Kami</a></li>
-                <li><a href="#" class="hover:text-hulk">Profil</a></li>
+                <li><a href="<?php echo e(route('profile.nasabah')); ?>" class="hover:text-hulk">Profil</a></li>
                 <li>
                     <form id="logoutForm" action="<?php echo e(route('logout')); ?>" method="POST" class="">
                         <?php echo csrf_field(); ?>

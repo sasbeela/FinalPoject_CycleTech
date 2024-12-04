@@ -195,7 +195,7 @@
                 </div>
                 <div class="flex flex-col items-center">
                     <img src="<?php echo e(asset('images/anggita.png')); ?>" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">
-                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Anggita Adilianza</h3>
+                    <h3 class="mt-4 text-xl font-semibold text-gray-800">Anggita Ardilianz</h3>
                 </div>
                 <div class="flex flex-col items-center">
                     <img src="<?php echo e(asset('images/rizma.png')); ?>" alt="Member" class="rounded-full w-[200px] h-[200px] object-cover">

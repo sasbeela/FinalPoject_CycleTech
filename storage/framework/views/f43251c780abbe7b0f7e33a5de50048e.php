@@ -30,9 +30,8 @@
             <div class="mb-4">
                 <label for="userType" class="block text-gray-700">Masuk sebagai : Admin</label>
                 <select id="userType" class="text-sm lg:text-lg w-1/2 px-4 py-2 border rounded-lg bg-hulk text-white focus:outline-none focus:ring-2 focus:ring-old-hulk" onchange="redirectToLogin()">
-                    <option value="">Pilih Jenis Pengguna</option>
-                    <option value="nasabah">Nasabah</option>
                     <option value="admin">Admin</option>
+                    <option value="nasabah">Nasabah</option>
                 </select>
             </div>
         </div>
