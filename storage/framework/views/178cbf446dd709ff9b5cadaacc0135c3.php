@@ -6,7 +6,7 @@
 
         <!-- Tombol Tambah -->
         <div class="flex justify-end mb-4">
-            <a href="<?php echo e(route('admin.categories.create')); ?>" class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600">
+            <a href="<?php echo e(route('admin.categories.create')); ?>" class="bg-hulk text-white px-3 py-2 rounded hover:bg-old-hulk">
                 Tambah Kategori
             </a>
         </div>
@@ -92,7 +92,7 @@
         // Konfirmasi Hapus
         document.getElementById('confirm-delete-button').addEventListener('click', function () {
             if (deleteCategoryId) {
-                document.getElementById(`delete-form-${deleteCategoryId}`).submit();
+                document.getElementById(delete-form-${deleteCategoryId}).submit();
             }
         });
     </script>

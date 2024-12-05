@@ -216,9 +216,7 @@
                     <label class="block text-gray-700 font-medium mb-2">Kata sandi saat ini</label>
                     <div class="flex items-center border border-hulk rounded-lg p-2">
                         <span class="text-hulk mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
-                            </svg>
+                            <i class="bi bi-lock-fill"></i>
                         </span>
                         <input type="password" name="current_password" class="w-full border-none focus:outline-none" placeholder="Kata sandi saat ini" required>
                     </div>
@@ -229,9 +227,7 @@
                     <label class="block text-gray-700 font-medium mb-2">Kata sandi baru</label>
                     <div class="flex items-center border border-hulk rounded-lg p-2">
                         <span class="text-hulk mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
-                            </svg>
+                            <i class="bi bi-lock-fill"></i>
                         </span>
                         <input type="password" name="new_password" class="w-full border-none focus:outline-none" placeholder="Kata sandi baru" required>
                     </div>
@@ -242,9 +238,7 @@
                     <label class="block text-gray-700 font-medium mb-2">Konfirmasi kata sandi baru</label>
                     <div class="flex items-center border border-hulk rounded-lg p-2">
                         <span class="text-hulk mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 2a6 6 0 016 6v1.586l1.707 1.707a1 1 0 01-1.414 1.414l-1.379-1.379a1 1 0 01-.293-.707V8a4 4 0 10-8 0v1.621a1 1 0 01-.293.707l-1.379 1.379a1 1 0 11-1.414-1.414L4 9.586V8a6 6 0 016-6zm-3 14a3 3 0 106 0h-6z" clip-rule="evenodd" />
-                            </svg>
+                            <i class="bi bi-lock-fill"></i>
                         </span>
                         <input type="password" name="new_password_confirmation" class="w-full border-none focus:outline-none" placeholder="Konfirmasi kata sandi baru" required>
                     </div>
