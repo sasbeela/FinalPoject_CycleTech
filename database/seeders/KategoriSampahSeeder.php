@@ -19,6 +19,7 @@ class KategoriSampahSeeder extends Seeder
             ['kategori' => 'paper', 'created_at' => now(), 'updated_at' => now()],
             ['kategori' => 'plastic', 'created_at' => now(), 'updated_at' => now()],
             ['kategori' => 'plastic sachet', 'created_at' => now(), 'updated_at' => now()],
+            ['kategori' => 'trash', 'created_at' => now(), 'updated_at' => now()],
         ];
 
         DB::table('kategori_sampah')->insert($kategoris);

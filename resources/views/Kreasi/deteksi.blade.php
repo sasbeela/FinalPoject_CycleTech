@@ -366,27 +366,28 @@
 
         // Fungsi Preview
         function previewImage(event) {
-                const reader = new FileReader(); // Membuat FileReader untuk membaca file gambar
-                const imagePreview = document.getElementById('imagePreview'); // Elemen gambar untuk preview
+            const fileInput = event.target.files[0]; // Ambil file dari input
+            const allowedExtensions = ['image/jpeg', 'image/jpg']; // Format yang diizinkan
+            const imagePreview = document.getElementById('imagePreview'); // Elemen gambar untuk preview
 
-                reader.onload = function () {
-                    imagePreview.src = reader.result; // Menampilkan hasil file yang dibaca ke src gambar
-                    imagePreview.classList.add('w-full', 'h-full', 'rounded-md', 'object-cover'); // Tambahkan styling
-                };
+            // Validasi format file
+            if (!allowedExtensions.includes(fileInput.type)) {
+                alert('Hanya file dengan format JPG atau JPEG yang diizinkan!');
+                event.target.value = ''; // Reset input jika format tidak valid
+                imagePreview.src = "{{ asset('images/upload.png') }}"; // Kembalikan gambar default
+                imagePreview.classList.remove('w-full', 'h-full', 'rounded-md', 'object-cover'); // Hapus styling
+                return;
+            }
 
-                reader.readAsDataURL(event.target.files[0]); // Membaca file gambar yang dipilih
+            const reader = new FileReader(); // Membuat FileReader untuk membaca file gambar
+
+            reader.onload = function () {
+                imagePreview.src = reader.result; // Menampilkan hasil file yang dibaca ke src gambar
+                imagePreview.classList.add('w-full', 'h-full', 'rounded-md', 'object-cover'); // Tambahkan styling
+            };
+
+            reader.readAsDataURL(fileInput); // Membaca file gambar yang dipilih
         }
-
-        // Unggah Foto
-        const uploadBtn = document.getElementById('uploadBtn');
-        const introSection = document.getElementById('intro');
-        const uploadFormSection = document.getElementById('uploadForm');
-
-        // When the upload button is clicked
-        uploadBtn.addEventListener('click', function() {
-            introSection.classList.add('hidden');  // Hide the intro section
-            uploadFormSection.classList.remove('hidden');  // Show the upload form
-        });
 
         // AJAX agar tidak ter-reload
         // Event Listener untuk Tombol Upload
